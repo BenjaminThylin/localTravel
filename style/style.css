@@ -5,3 +5,21 @@
     --white-color: #978E93;
     --black-color: #0A0A0A;
 }
+
+.wrapper {
+
+}
+
+#sidebar {
+    background-color: var(--primary-color);
+    width: max-content;
+    height: 100vh;
+    padding: 0 2rem;
+    color: var(--black-color);
+    font-family: sans-serif;
+}
+
+.sidebar-header {
+    padding: 1rem 1rem;
+    font-weight: 700;
+}
