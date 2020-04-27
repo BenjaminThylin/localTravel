@@ -68,6 +68,79 @@ $(document).ready(function(){
 
     });
     $("#input-from").trigger("change");
+    let ticketCount = 1;
+    /*let tickets = ['\
+    <div id="ticket-nr-1" class="form-group row">\
+        <div class="col-md-2">\
+            <label for="ticket-type">Biljettyp:</label>\
+            <select class="form-control" id="ticket-type-1">\
+                <option value="once">Enkelbiljett</option>\
+                <option value="10-times">10-gångs kort</option>\
+                <option value="month">Månadskort</option>\
+            </select>\
+        </div class="col-2">\
+        <div class="col-md-2">\
+            <label for="discount-type">Rabattyp:</label>\
+            <select class="form-control" id="discount-type-1">\
+                <option value="none">Vuxen</option>\
+                <option value="child">Barn</option>\
+                <option value="student">Studerande</option>\
+                <option value="senior">Pensionär</option>\
+                <option value="unemployed">Arbetslös</option>\
+            </select>\
+        </div>\
+        <div class="col-md-2">\
+            <div>\
+                Pris:\
+            </div>\
+        </div>\
+        <div class="col-md-2">\
+            <button class="btn" id="remove-1" type="button">Ta bort</button>\
+        </div>\
+    </div>\
+    '];*/
+    //adds new tickets
+    $("#new-ticket").click(function(){
+        ticketCount++;
+        $("#ticket-div").append('\
+    <div id="ticket-nr-' + ticketCount + '" class="form-group row">\
+        <div class="col-md-2">\
+            <label for="ticket-type">Biljettyp:</label>\
+            <select class="form-control" id="ticket-type-' + ticketCount + '">\
+                <option value="once">Enkelbiljett</option>\
+                <option value="10-times">10-gångs kort</option>\
+                <option value="month">Månadskort</option>\
+            </select>\
+        </div class="col-2">\
+        <div class="col-md-2">\
+            <label for="discount-type">Rabattyp:</label>\
+            <select class="form-control" id="discount-type-' + ticketCount + '">\
+                <option value="none">Vuxen</option>\
+                <option value="child">Barn</option>\
+                <option value="student">Studerande</option>\
+                <option value="senior">Pensionär</option>\
+                <option value="unemployed">Arbetslös</option>\
+            </select>\
+        </div>\
+        <div class="col-md-2">\
+            <div>\
+                Pris:\
+            </div>\
+        </div>\
+        <div class="col-md-2">\
+            <button class="btn" id="remove-' + ticketCount + '" type="button">Ta bort</button>\
+        </div>\
+    </div>');
+    });
+    //removes the ticket
+    $("#remove-1").click(function(){
+        //$("#ticket-nr-" + ticketCount).remove();
+        //ticketCount--;
+    });
+    /*/displays the tickets in the array
+    $.each(tickets, function(index, value){
+        $("#ticket-div").append(value);
+    });*/
 });
 
 function hideDataOption(select, option){

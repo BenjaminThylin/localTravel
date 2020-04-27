@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="input-from">Från:</label>
                     <input type="text" class="form-control" id="input-from" list="data-from">
-                    <div id="error-from" class="text-danger" error>Hållplats fins ej</div>
+                    <div id="error-from" class="text-danger" error>Hållplats finns ej</div>
                     <datalist id="data-from">
                     </datalist>
                         
@@ -53,23 +53,43 @@
                 Ticket 2 
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <form>
-                    <div class="form-group">
-                        <label for="input-ticket-count">Antal biljetter:</label>
-                        <input type="number" class="form-control" id="input-ticket-count">
-                        <label for="input-discount">Rabatt:</label>
-                        <input type="text" class="form-control" id="input-discount">
+            <form>
+                <div id="ticket-div">
+                    <div id="ticket-nr-1" class="form-group row">
+                        <div class="col-md-2">
+                            <label for="ticket-type">Biljettyp:</label>
+                            <select class="form-control" id="ticket-type-1">
+                                <option value="once">Enkelbiljett</option>
+                                <option value="10-times">10-gångs kort</option>
+                                <option value="month">Månadskort</option>
+                            </select>
+                        </div class="col-2">
+                        <div class="col-md-2">
+                            <label for="discount-type">Rabattyp:</label>
+                            <select class="form-control" id="discount-type-1">
+                                <option value="none">Vuxen</option>
+                                <option value="child">Barn</option>
+                                <option value="student">Studerande</option>
+                                <option value="senior">Pensionär</option>
+                                <option value="unemployed">Arbetslös</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                Pris:
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn" id="remove-1" type="button">Ta bort</button>
+                        </div>
                     </div>
-                </form>
-            </div>
-            <div class="col-6">
-                <label> Totalkostnad: 5 </label>
-                <br>
-                <label> Totalkostnad: 5</label>
-                <br>
-            </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn" id="new-ticket" type="button">Lägg till ny biljett</button>
+                </div>
+            </form>
+        <div class="row">
+            <label> Totalkostnad: 5 </label>
         </div>
     </div>
 </body>
