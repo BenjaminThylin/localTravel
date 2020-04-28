@@ -29,6 +29,8 @@ $(document).ready(function(){
     $("[error]").each(function(){
         $(this).hide();
     });
+    //stops selection of old dates
+    setDateRestrictions($("#input-departure-date"));
     //populates to and from with valid stops
     let dataFrom = $("#data-from");
     let dataTo = $("#data-to");
@@ -118,7 +120,26 @@ $(document).ready(function(){
         $("#ticket-div").append(value);
     });*/
 });
+function setDateRestrictions(dateInput){
+    let date = new Date();
+    dateInput.attr("min", getShortDate(date))
+             .attr("value", getShortDate(date));
 
+    dateInput.on("focusout", function(){
+        let error = $("#error-date")
+        let selectedDate = new Date($(this).val().toString());
+        let dateLimit = new Date();
+        dateLimit.setDate(dateLimit.getDate() - 1);
+        if(selectedDate <= dateLimit)
+        {
+            let d = getShortDate(new Date())
+            $(this).val(d);
+            error.show().text("datum måste vara större än " + d);
+        }
+        else
+            error.hide();
+    });
+}
 function hideDataOption(select, option){
     select.each(function(){
         if($(this).val() == option)
@@ -126,4 +147,11 @@ function hideDataOption(select, option){
         else 
             $(this).prop("disabled", false);
     })
+}
+function getShortDate(date){
+    let day = (date.getDate() >= 10) ? date.getDate() : "0" + date.getDate().toString();
+    let month = (date.getMonth() + 1 >= 10) ? date.getMonth() + 1 : "0" + (date.getMonth() + 1).toString()
+    let year = date.getFullYear();
+    let dateString = year + "-" + month + "-" + day;
+    return dateString;
 }

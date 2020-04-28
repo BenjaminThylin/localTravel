@@ -5,7 +5,10 @@
     --white-color: #978E93;
     --black-color: #0A0A0A;
 }
-
+input[type="date"]::-webkit-inner-spin-button{
+    display: none;
+    -webkit-appearance: none;
+}
 .wrapper {
 
 }
