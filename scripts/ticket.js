@@ -36,6 +36,7 @@ $(document).ready(function(){
     });
     $("#input-from").val(stops[0]);
     $("#input-to").val(stops[1]);
+
     //makes sure that from and to inputs cant be the same
     $("#input-from").on("change", function(){
         let toInput = $("#input-to");
@@ -56,7 +57,7 @@ $(document).ready(function(){
         else
             error.hide();
     });
-    $("#input-to").on("focusout", function(){
+    $("#input-to").on("focusout", function(){ //cehcks that the to station exists
         let error = $("#error-to");
         if($(this).val() == $("#input-from").val())
         {
@@ -131,12 +132,13 @@ $(document).ready(function(){
             <button class="btn" id="remove-' + ticketCount + '" type="button">Ta bort</button>\
         </div>\
     </div>');
+        //removes ticket
+        $("#remove-" + ticketCount).click(function(){
+            let ticketIndex = $(this)[0].id.split("-")[1];
+            $("#ticket-nr-" + ticketIndex).remove();
+        });
     });
-    //removes the ticket
-    $("#remove-1").click(function(){
-        //$("#ticket-nr-" + ticketCount).remove();
-        //ticketCount--;
-    });
+   
     /*/displays the tickets in the array
     $.each(tickets, function(index, value){
         $("#ticket-div").append(value);
