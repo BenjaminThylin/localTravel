@@ -1,3 +1,12 @@
+// var oldSearchData = null;
+var searchData = {
+    dateIsValid:    false,
+    fromIsValid:    false,
+    toIsValid:      false,
+    from:           "",
+    to:             "",
+    departureData:  ""
+};
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
 var timeTable = [
     {
@@ -7,6 +16,14 @@ var timeTable = [
         price: 25,
         days: [true,true,true,true,true,true,false],
         times: ["08:00", "16:00", "18:00", "21:00"]
+    },
+    {
+        id: 1,
+        from: "Vasa",
+        to: "Jakobstad",
+        price: 25,
+        days: [true,true,true,true,true,true,false],
+        times: ["06:00", "16:00", "18:00", "22:15"]
     },
     {
         id: 2,
@@ -63,23 +80,38 @@ $(document).ready(function(){
         hideDataOption($("#data-to option"), $(this).val());
     }).on("focusout", function(){ //checks that the station exists
         let error = $("#error-from");
-        if(!stops.includes($(this).val()))
+        if(!stops.includes($(this).val())){
             error.show();
-        else
+            searchData.fromIsValid = false;
+        }
+        else{
             error.hide();
-    });
+            searchData.fromIsValid = true;
+            searchData.from = $(this).val();
+            getSearchResults();
+        }
+    }).trigger("change").trigger("focusout");
     $("#input-to").on("focusout", function(){ //cehcks that the to station exists
         let error = $("#error-to");
         if($(this).val() == $("#input-from").val())
         {
             $(this).val("");
             error.show();
+            searchData.toIsValid = false;
         }
-        else
+        else if(!stops.includes($(this).val()))
+        {
+            $(this).val("");
+            error.show();
+            searchData.toIsValid = false;
+        }
+        else{
             error.hide();
-
-    });
-    $("#input-from").trigger("change");
+            searchData.toIsValid = true;
+            searchData.to = $(this).val();
+            getSearchResults();
+        }
+    }).trigger("focusout");
     /*let tickets = ['\
     <div id="ticket-nr-1" class="form-group row">\
         <div class="col-md-2">\
@@ -121,12 +153,39 @@ $(document).ready(function(){
             $("#ticket-nr-" + ticketIndex).remove();
         });
     });
-   
-    /*/displays the tickets in the array
-    $.each(tickets, function(index, value){
-        $("#ticket-div").append(value);
-    });*/
 });
+function getSearchResults(){
+    // TODO: some way of stopping unnecessary searches of old data
+    // if(oldSearchData === null || oldSearchData != searchData){// checks if any search params changed
+        if(searchData.dateIsValid === true &&
+            searchData.toIsValid === true &&
+            searchData.fromIsValid === true)
+            {
+                let serachResults = [];
+                timeTable.forEach(function(item){
+                    if(item.from == searchData.from && item.to == searchData.to){
+                        let departureDate = new Date(searchData.departureData);
+                        if(item.days[departureDate.getDay() - 1])//check if buss active on that week day
+                            serachResults.push(item);
+                    }
+                });
+                console.log("populating search");
+                populateSearchOutput(serachResults);
+            }
+    // }
+}
+
+function populateSearchOutput(results){
+    let searchOutput = $("#output-search-results");
+    searchOutput.html('\
+        <div class="row" id="output-search-results">\
+            <h1>Tidtabell:</h1>\
+        </div>'
+    );
+    results.forEach(function(ticket){
+        searchOutput.append(getSearchResultTemplate(ticket));
+    });
+}
 function setDateRestrictions(dateInput){
     let date = new Date();
     dateInput.attr("min", getShortDate(date))
@@ -142,10 +201,16 @@ function setDateRestrictions(dateInput){
             let d = getShortDate(new Date())
             $(this).val(d);
             error.show().text("datum måste vara större än " + d);
+            searchData.dateIsValid = false;
         }
         else
+        {
             error.hide();
-    });
+            searchData.departureData = $(this).val();
+            searchData.dateIsValid = true;
+            getSearchResults();
+        }
+    }).trigger("focusout");
 }
 function hideDataOption(select, option){
     select.each(function(){
