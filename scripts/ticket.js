@@ -19,6 +19,14 @@ var timeTable = [
     },
     {
         id: 1,
+        from: "Jakobstad",
+        to: "Vasa",
+        price: 15,
+        days: [true,true,true,true,true,true,false],
+        times: ["05:00", "19:00", "21:00", "23:00"]
+    },
+    {
+        id: 1,
         from: "Vasa",
         to: "Jakobstad",
         price: 25,

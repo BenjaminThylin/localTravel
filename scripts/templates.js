@@ -40,7 +40,7 @@ function getTicketTemplate(ticketIndex){
  */
 function getSearchResultTemplate(data)
 {
-    let selectOutput = '<select id="input-ticket-time-'+ data.id +'" class="form-control"';
+    let selectOutput = '<select id="input-ticket-time-'+ data.id +'" class="form-control">';
     data.times.forEach(function(time){
         selectOutput += '<option value="'+ time +'">'+ time +'</option>';
     });
