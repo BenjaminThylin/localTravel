@@ -7,6 +7,16 @@ var searchData = {
     to:             "",
     departureData:  ""
 };
+var discount = [
+    {
+        id: "old person",
+        procentage: 0.34
+    },
+    {
+        id: "old person",
+        procentage: 0.34
+    },
+];
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
 var timeTable = [
     {
@@ -18,7 +28,7 @@ var timeTable = [
         times: ["08:00", "16:00", "18:00", "21:00"]
     },
     {
-        id: 1,
+        id: 2,
         from: "Jakobstad",
         to: "Vasa",
         price: 15,
@@ -26,7 +36,7 @@ var timeTable = [
         times: ["05:00", "19:00", "21:00", "23:00"]
     },
     {
-        id: 1,
+        id: 3,
         from: "Vasa",
         to: "Jakobstad",
         price: 25,
@@ -34,7 +44,7 @@ var timeTable = [
         times: ["06:00", "16:00", "18:00", "22:15"]
     },
     {
-        id: 2,
+        id: 4,
         from: "Vasa",
         to: "Karleby",
         price: 25,
@@ -42,7 +52,7 @@ var timeTable = [
         times: ["08:00", "16:00", "18:00", "21:00"]
     },
     {
-        id: 3,
+        id: 5,
         from: "Vasa",
         to: "Åbo",
         price: 25,
@@ -120,36 +130,6 @@ $(document).ready(function(){
             getSearchResults();
         }
     }).trigger("focusout");
-    /*let tickets = ['\
-    <div id="ticket-nr-1" class="form-group row">\
-        <div class="col-md-2">\
-            <label for="ticket-type">Biljettyp:</label>\
-            <select class="form-control" id="ticket-type-1">\
-                <option value="once">Enkelbiljett</option>\
-                <option value="10-times">10-gångs kort</option>\
-                <option value="month">Månadskort</option>\
-            </select>\
-        </div class="col-2">\
-        <div class="col-md-2">\
-            <label for="discount-type">Rabattyp:</label>\
-            <select class="form-control" id="discount-type-1">\
-                <option value="none">Vuxen</option>\
-                <option value="child">Barn</option>\
-                <option value="student">Studerande</option>\
-                <option value="senior">Pensionär</option>\
-                <option value="unemployed">Arbetslös</option>\
-            </select>\
-        </div>\
-        <div class="col-md-2">\
-            <div>\
-                Pris:\
-            </div>\
-        </div>\
-        <div class="col-md-2">\
-            <button class="btn" id="remove-1" type="button">Ta bort</button>\
-        </div>\
-    </div>\
-    '];*/
     //adds new tickets
     $("#new-ticket").click(function(){
         ticketCount++;
@@ -235,3 +215,4 @@ function getShortDate(date){
     let dateString = year + "-" + month + "-" + day;
     return dateString;
 }
+

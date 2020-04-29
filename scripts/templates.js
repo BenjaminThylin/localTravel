@@ -51,8 +51,35 @@ function getSearchResultTemplate(data)
                     <div class="form-group">\
                         <label for="input-ticket-departure">avgångstid:</label>\
                         '+ selectOutput +'\
-                        <lalbe>Pirs: '+ data.price +'€</lalbe>\
+                        <label>Pirs: '+ data.price +'€</label>\
                     </div>\
                 </form>\
-            </div>';
+                <div id="ticket-nr-' + data.id + '" class="form-group row">\
+        <div class="col-md-2">\
+            <label for="ticket-type">Biljettyp:</label>\
+            <select class="form-control" id="ticket-type-' + data.id + '">\
+                <option value="once">Enkelbiljett</option>\
+                <option value="10-times">10-gångs kort</option>\
+                <option value="month">Månadskort</option>\
+            </select>\
+        </div class="col-2">\
+        <div class="col-md-2">\
+            <label for="discount-type">Rabattyp:</label>\
+            <select class="form-control" id="discount-type-' + data.id + '">\
+                <option value="none">Vuxen</option>\
+                <option value="child">Barn</option>\
+                <option value="student">Studerande</option>\
+                <option value="senior">Pensionär</option>\
+                <option value="unemployed">Arbetslös</option>\
+            </select>\
+        </div>\
+        <div class="col-md-2">\
+            <div>\
+                Pris:\
+            </div>\
+        </div>\
+        <div class="text-center">\
+                    <button class="btn" id="new-ticket-'+ data.id +'" type="button">'+ data.price +'€</button>\
+                </div>\
+        </div>';
 }
