@@ -1,3 +1,7 @@
+/**
+ * 
+ * @param {*} ticketIndex takes the ticket counter number as input
+ */
 function getTicketTemplate(ticketIndex){
     return '\
     <div id="ticket-nr-' + ticketIndex + '" class="form-group row">\
@@ -27,5 +31,28 @@ function getTicketTemplate(ticketIndex){
         <div class="col-md-2">\
             <button class="btn" id="remove-' + ticketIndex + '" type="button">Ta bort</button>\
         </div>\
-    </div>'
+    </div>';
+}
+
+/**
+ * 
+ * @param {*} data takes a timeTable object as input 
+ */
+function getSearchResultTemplate(data)
+{
+    let selectOutput = '<select id="input-ticket-time-'+ data.id +'" class="form-control"';
+    data.times.forEach(function(time){
+        selectOutput += '<option value="'+ time +'">'+ time +'</option>';
+    });
+    selectOutput += "</select>"
+    return  '<div class="col-12 m-4 border" id="searhc-item-'+data.id+'">\
+                <div class="display-1 mb-2">'+ data.from +' --> '+ data.to +'</div>\
+                <form>\
+                    <div class="form-group">\
+                        <label for="input-ticket-departure">avgångstid:</label>\
+                        '+ selectOutput +'\
+                        <lalbe>Pirs: '+ data.price +'€</lalbe>\
+                    </div>\
+                </form>\
+            </div>';
 }

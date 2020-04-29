@@ -1,30 +1,37 @@
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
-var tickets = [
+var timeTable = [
     {
+        id: 1,
         from: "Jakobstad",
         to: "Vasa",
         price: 25,
         days: [true,true,true,true,true,true,false],
-        time: ["08:00", "16:00", "18:00", "21:00"]
+        times: ["08:00", "16:00", "18:00", "21:00"]
     },
     {
+        id: 2,
         from: "Vasa",
-        to: "Vasa",
+        to: "Karleby",
         price: 25,
         days: [true,true,true,true,true,true,false],
-        time: ["08:00", "16:00", "18:00", "21:00"]
+        times: ["08:00", "16:00", "18:00", "21:00"]
     },
     {
+        id: 3,
         from: "Vasa",
         to: "Åbo",
         price: 25,
         days: [false,true,false,true,false,true,false],
-        time: ["08:00", "16:00", "18:00", "21:00"]
+        times: ["08:00", "16:00", "18:00", "21:00"]
     }
 ];
 $(document).ready(function(){
     let ticketCount = 1;
-    
+    //populates the search field with timetables: just for testing
+    let searchOutput = $("#output-search-results");
+    timeTable.forEach(function(ticket){
+        searchOutput.append(getSearchResultTemplate(ticket));
+    });
     //hides all error outputs
     $("[error]").each(function(){
         $(this).hide();
