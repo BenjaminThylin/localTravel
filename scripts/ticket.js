@@ -109,7 +109,7 @@ $(document).ready(function(){
             getSearchResults();
         }
     }).trigger("change").trigger("focusout");
-    $("#input-to").on("focusout", function(){ //cehcks that the to station exists
+    $("#input-to").on("focusout", function(){ //checks that the to station exists
         let error = $("#error-to");
         if($(this).val() == $("#input-from").val())
         {
@@ -131,8 +131,9 @@ $(document).ready(function(){
         }
     }).trigger("focusout");
     //adds new tickets
-    $("#new-ticket").click(function(){
+    $("#add-ticket").click(function(){
         ticketCount++;
+        // TODO: pass the selected ticket as a parameter to get price and time information in the shopping cart
         $("#ticket-div").append(getTicketTemplate(ticketCount));
         
         //remove ticket
@@ -149,16 +150,16 @@ function getSearchResults(){
             searchData.toIsValid === true &&
             searchData.fromIsValid === true)
             {
-                let serachResults = [];
+                let searchResults = [];
                 timeTable.forEach(function(item){
                     if(item.from == searchData.from && item.to == searchData.to){
                         let departureDate = new Date(searchData.departureData);
                         if(item.days[departureDate.getDay() - 1])//check if buss active on that week day
-                            serachResults.push(item);
+                            searchResults.push(item);
                     }
                 });
                 console.log("populating search");
-                populateSearchOutput(serachResults);
+                populateSearchOutput(searchResults);
             }
     // }
 }
@@ -177,7 +178,7 @@ function populateSearchOutput(results){
 function setDateRestrictions(dateInput){
     let date = new Date();
     dateInput.attr("min", getShortDate(date))
-             .attr("value", getShortDate(date));
+            .attr("value", getShortDate(date));
 
     dateInput.on("focusout", function(){
         let error = $("#error-date")

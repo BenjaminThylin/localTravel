@@ -1,8 +1,9 @@
 /**
  * 
  * @param {*} ticketIndex takes the ticket counter number as input
+ * @param {*} data takes a timeTable object as input 
  */
-function getTicketTemplate(ticketIndex){
+function getTicketTemplate(ticketIndex, data){
     return '\
     <div id="ticket-nr-' + ticketIndex + '" class="form-group row">\
         <div class="col-md-2">\
@@ -51,10 +52,10 @@ function getSearchResultTemplate(data)
                     <div class="form-group">\
                         <label for="input-ticket-departure">avgångstid:</label>\
                         '+ selectOutput +'\
-                        <label>Pirs: '+ data.price +'€</label>\
+                        <label>Pris: '+ data.price +'€</label>\
                     </div>\
                 </form>\
-                <div id="ticket-nr-' + data.id + '" class="form-group row">\
+                <div id="ticket-id-' + data.id + '" class="form-group row">\
         <div class="col-md-2">\
             <label for="ticket-type">Biljettyp:</label>\
             <select class="form-control" id="ticket-type-' + data.id + '">\
@@ -62,7 +63,7 @@ function getSearchResultTemplate(data)
                 <option value="10-times">10-gångs kort</option>\
                 <option value="month">Månadskort</option>\
             </select>\
-        </div class="col-2">\
+        </div>\
         <div class="col-md-2">\
             <label for="discount-type">Rabattyp:</label>\
             <select class="form-control" id="discount-type-' + data.id + '">\
@@ -79,7 +80,7 @@ function getSearchResultTemplate(data)
             </div>\
         </div>\
         <div class="text-center">\
-                    <button class="btn" id="new-ticket-'+ data.id +'" type="button">'+ data.price +'€</button>\
-                </div>\
-        </div>';
+            <button class="btn" id="new-ticket-'+ data.id +'" type="button">'+ data.price +'€</button>\
+        </div>\
+    </div>';
 }
