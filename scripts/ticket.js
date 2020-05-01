@@ -7,9 +7,7 @@ $(document).ready(function(){
     let ticketCount = 1;
     //populates the search field with timetables: just for testing
     let searchOutput = $("#output-search-results");
-    timeTable.forEach(function(ticket){
-        searchOutput.append(getSearchResultTemplate(ticket));
-    });
+    
     //hides all error outputs
     $("[error]").each(function(){
         $(this).hide();
@@ -116,6 +114,16 @@ function populateSearchOutput(results){
     );
     results.forEach(function(ticket){
         searchOutput.append(getSearchResultTemplate(ticket));
+        ticket.times.forEach(function(item){
+            let elementID = ticket.id + "-" + item.time.departure;
+            $(document.getElementById("ticket-info-id-" + elementID)).on("click", function(){
+                let options = $(document.getElementById("input-ticket-options-id-" + elementID));
+                if(options.is(":visible"))
+                    options.hide();
+                else
+                    options.show();
+            });
+        });
     });
 }
 function setDateRestrictions(dateInput){

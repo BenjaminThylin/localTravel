@@ -26,3 +26,6 @@ input[type="date"]::-webkit-inner-spin-button{
     padding: 1rem 1rem;
     font-weight: 700;
 }
+.no-display{
+    display: none;
+}
