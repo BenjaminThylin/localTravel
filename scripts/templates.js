@@ -74,6 +74,9 @@ function getSearchResultTemplate(data)
                                 Pris:\
                             </div>\
                         </div>\
+                        <div class="col-md-2">\
+                            <button class="btn" id="ticket-add-to-cart'+ data.id +'-'+ time.time.departure +' type="button">Lägg till biljät i köpkårg</button>\
+                        </div>\
                     </div>\
                     <div class="text-center">\
                         <button class="btn" id="ticket-info-id-'+ data.id +'-'+ time.time.departure +'" type="button">'+ time.price +'€</button>\
