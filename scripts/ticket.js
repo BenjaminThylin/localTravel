@@ -1,10 +1,10 @@
 /*
  *  This files refrenses data defined in 
- *      - scripts/data.js
+ *      - scripts/ticket_data.js
  *      - scripts/templates.js
  */
 $(document).ready(function(){
-    let ticketCount = 1;
+    let ticketCount = 0;
     //populates the search field with timetables: just for testing
     let searchOutput = $("#output-search-results");
     
@@ -71,13 +71,14 @@ $(document).ready(function(){
             getSearchResults();
         }
     }).trigger("focusout");
-    //adds new tickets
-    $("#add-ticket").click(function(){
+    //adds new tickets to the shopping cart
+    $(document).on("click", ".ticket-add-to-cart", function() {
         ticketCount++;
         // TODO: pass the selected ticket as a parameter to get price and time information in the shopping cart
-        $("#ticket-div").append(getTicketTemplate(ticketCount));
+        let ticket = {};
         
-        //remove ticket
+        $("#shopping-cart").append(getTicketTemplate(ticketCount, ticket));
+        //removes a ticket
         $("#remove-" + ticketCount).click(function(){
             let ticketIndex = $(this)[0].id.split("-")[1];
             $("#ticket-nr-" + ticketIndex).remove();
@@ -123,6 +124,7 @@ function populateSearchOutput(results){
                 else
                     options.show();
             });
+            displayedTickets.push(elementID);
         });
     });
 }

@@ -8,11 +8,11 @@ var searchData = {
 };
 var discount = [
     {
-        id: "old person",
+        id: "senior",
         procentage: 0.34
     },
     {
-        id: "old person",
+        id: "senior",
         procentage: 0.34
     },
 ];
@@ -147,4 +147,5 @@ var timeTable = [
         ] 
     }
 ];
+var displayedTickets = [];
 var shopingCart = [];
