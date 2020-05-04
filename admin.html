@@ -20,7 +20,7 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="wrapper d-flex">
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header display-1">
@@ -28,47 +28,34 @@
             </div>
     
             <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
+                    <button id="stats" class="btn btn-link font-weight-bold text-dark">Statistik</button>
                 </li>
                 <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <button id="tickets" class="btn btn-link font-weight-bold text-dark">Uppdatera biljetter</button>
                 </li>
             </ul>
         </nav>
-    
+        <div class="page-content-wrapper p-4">
+            <div class="stats-wrapper">
+                <h2 class="display-4">Statistik</h2>
+                <h4>Antal sålda biljetter: <span id="totalSoldTickets"></span></h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Biljett id:</th><th scope="col">Avgångsdatum</th><th scope="col">Avgångstid</th><th scope="col">Biljett typ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="tickets-wrapper">
+                    <h2 class="display-4">Uppdatera biljetter</h2>
+                    <h4>Välj biljett:</h4>
+            </div>
+        </div>
     </div>
     
 
@@ -78,6 +65,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="scripts/admin/soldTickets.js"></script>
+    <script src="scripts/admin/admin.js"></script>
+    <script src="scripts/admin/stats.js"></script>
 </body>
 
 </html>

@@ -47,3 +47,15 @@ input[type="date"]::-webkit-inner-spin-button{
     color: var(--black-color);
     font-family: sans-serif;
 }
+
+.stats-wrapper {
+    display: none;
+}
+
+.tickets-wrapper {
+    display: none;
+}
+
+.show {
+    display: block !important;
+}

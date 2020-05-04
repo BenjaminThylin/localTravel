@@ -8,12 +8,16 @@ var searchData = {
 };
 var discount = [
     {
-        id: "senior",
-        procentage: 0.34
+        id: "regular",
+        procentage: 1
     },
     {
         id: "senior",
-        procentage: 0.34
+        procentage: 0.75
+    },
+    {
+        id: "student",
+        procentage: 0.85
     },
 ];
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
