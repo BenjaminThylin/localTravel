@@ -5,10 +5,20 @@
     --white-color: #978E93;
     --black-color: #0A0A0A;
 }
+
 input[type="date"]::-webkit-inner-spin-button{
     display: none;
     -webkit-appearance: none;
 }
+
+.header {
+    background-color: var(--primary-color);
+    height: 10rem;
+    padding: 3rem;
+    color: var(--black-color);
+    font-family: sans-serif;
+}
+
 .wrapper {
 
 }
@@ -28,4 +38,12 @@ input[type="date"]::-webkit-inner-spin-button{
 }
 .no-display{
     display: none;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    height: 10rem;
+    padding: 3rem;
+    color: var(--black-color);
+    font-family: sans-serif;
 }
