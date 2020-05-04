@@ -13,11 +13,19 @@ var discount = [
     },
     {
         id: "senior",
-        procentage: 0.75
+        procentage: 0.85
     },
     {
         id: "student",
-        procentage: 0.85
+        procentage: 0.75
+    },
+    {
+        id: "child",
+        procentage: 0.65
+    },
+    {
+        id: "unemployed",
+        procentage: 0.75
     },
 ];
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
