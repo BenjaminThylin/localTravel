@@ -40,10 +40,10 @@ function getSearchResultTemplate(data)
     data.times.forEach(function(time){
         output += '<div class="col-md-12 m-4 border" id="search-item-' + data.id + '-' + time.time.departure + '">\
                     <div class="col-md-12">\
-                        <div class="display-1 mb-2">'+ data.from +' --> '+ data.to +'</div>\
+                        <div class="display-4 mb-2">'+ data.from +' --> '+ data.to +'</div>\
                     </div>\
                     <div class="col-md-12">\
-                        <div class="display-4 mb-2">'+ time.time.departure +' --> ' + time.time.arival + '</div>\
+                        <div class="display-5 mb-2">'+ time.time.departure +' --> ' + time.time.arival + '</div>\
                     </div>\
                     <div id="input-ticket-options-id-'+ data.id +'-'+ time.time.departure +'" class="form-group row no-display">\
                         <div class="col-md-2">\
