@@ -6,7 +6,6 @@
 $(document).ready(function(){
     let ticketCount = 0;
     //populates the search field with timetables: just for testing
-    let searchOutput = $("#output-search-results");
     
     //hides all error outputs
     $("[error]").each(function(){
