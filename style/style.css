@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #F64C72;
+    --primary-color: rgb(230, 39, 80);
     --secondary-color: #2F2FA2;
     --tertiary-color: #553D67;
     --white-color: #978E93;
@@ -17,10 +17,6 @@ input[type="date"]::-webkit-inner-spin-button{
     padding: 3rem;
     color: var(--black-color);
     font-family: sans-serif;
-}
-
-.wrapper {
-
 }
 
 #sidebar {

@@ -44,7 +44,6 @@ var timeTable = [
                 price: 15
             }, 
             {
-                time: "19:00",
                 time: {
                     departure: "05:00", 
                     arival: "6:30"
@@ -52,7 +51,6 @@ var timeTable = [
                 price: 15
             }, 
             {
-                time:"21:00",
                 time: {
                     departure: "05:00", 
                     arival: "6:30"
@@ -60,7 +58,6 @@ var timeTable = [
                 price: 16
             }, 
             {
-                time: "23:00",
                 time: {
                     departure: "05:00", 
                     arival: "6:30"
@@ -106,7 +103,7 @@ var timeTable = [
         ]
     },
     {
-        id: 4,
+        id: 3,
         from: "Vasa",
         to: "Karleby",
         days: [true,true,true,true,true,true,false],
@@ -115,7 +112,6 @@ var timeTable = [
                 time: {
                     departure: "08:00", 
                     arival: "08:45"
-
                 },
                 price: 25
             }, 
@@ -136,7 +132,7 @@ var timeTable = [
         ]
     },
     {
-        id: 5,
+        id: 4,
         from: "Vasa",
         to: "Åbo",
         price: 25,

@@ -57,18 +57,14 @@ function getSearchResultTemplate(data)
                         <div class="col-md-2">\
                             <label for="discount-type">Rabattyp:</label>\
                             <select class="form-control" id="discount-type-'+ data.id +'-'+ time.time.departure +'">\
-                                <option value="none">Vuxen</option>\
+                                <option value="regular">Vuxen</option>\
                                 <option value="child">Barn</option>\
                                 <option value="student">Studerande</option>\
                                 <option value="senior">Pensionär</option>\
                                 <option value="unemployed">Arbetslös</option>\
                             </select>\
                         </div>\
-                        <div class="col-md-2">\
-                            <div>\
-                                Pris:\
-                            </div>\
-                        </div>\
+                        <br>\
                         <div class="col-md-2">\
                             <button class="btn ticket-add-to-cart" id="add-to-cart-id-'+ data.id +'-'+ time.time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
                         </div>\
