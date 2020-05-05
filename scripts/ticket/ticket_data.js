@@ -26,7 +26,7 @@ var discount = [
     {
         id: "unemployed",
         procentage: 0.75
-    },
+    }
 ];
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
 var timeTable = [
@@ -40,7 +40,7 @@ var timeTable = [
                 time: {
                     departure: "05:00", 
                     arival: "6:30"
-            },
+                },
                 price: 15
             }, 
             {
@@ -48,7 +48,7 @@ var timeTable = [
                 time: {
                     departure: "05:00", 
                     arival: "6:30"
-            },
+                },
                 price: 15
             }, 
             {
@@ -56,7 +56,7 @@ var timeTable = [
                 time: {
                     departure: "05:00", 
                     arival: "6:30"
-            },
+                },
                 price: 16
             }, 
             {
@@ -64,7 +64,7 @@ var timeTable = [
                 time: {
                     departure: "05:00", 
                     arival: "6:30"
-            },
+                },
                 price: 14
             }
         ]
@@ -160,4 +160,25 @@ var timeTable = [
     }
 ];
 var displayedTickets = [];
+/**
+ * An array of ticket object. A ticket object is an object that is created when the user adds a ticket to the shopping cart.
+ * -structure-
+ *                      {
+ *                          id: elementID + "-" + departureDate,
+ *                          to: ticket.to
+ *                          from: ticket.from
+ *                          date: departureDate,
+ *                          time:
+ *                          {
+ *                               departure:  item.time.departure,
+ *                               arival:     item.time.arival
+ *                          },
+ *                          price: ticket.price * getDiscount(discountType),
+ *                          discount: discountType,
+ *                          tikcetType: titcketType
+ *                      }
+ */
 var shopingCart = [];
+
+
+

@@ -1,30 +1,30 @@
 /**
- * 
- * @param {*} ticketIndex takes the ticket counter number as input
+ * returns a ticket element
+ * @param {*} ticket takes a ticket object as data
  */
-function getTicketTemplate(ticketIndex, ticket){
+function getTicketTemplate(ticket){
     return '\
-    <div class="border" id="ticket-nr-' + ticketIndex + '">\
+    <div class="border" id="ticket-id-' + ticket.id + '">\
         <div class="row">\
             <div class="col-md">\
-                <h4>Rutt: ' + ticket.route + '</h4>\
+                <h4>Rutt: ' + ticket.from + '--->' + ticket.to + '</h4>\
             </div>\
             <div class="col-md">\
-                <h4>Tid: ' + ticket.time + '</h4>\
+                <h4>Tid: ' + ticket.time.departure + ' ---> '+ ticket.time.arival +'</h4>\
             </div>\
         </div>\
         <div class="row">\
             <div class="col-md-2">\
-                <div>Biljettyp: ' + ticket.type + '</div>\
+                <div>Biljettyp: ' + ticket.tikcetType + '</div>\
             </div class="col-2">\
             <div class="col-md-2">\
-                <div>Resenär: ' + ticket.passenger + '</div>\
+                <div>Resenär: ' + ticket.discount + '</div>\
             </div>\
             <div class="col-md-2">\
                 <div>Pris: ' + ticket.price + '</div>\
             </div>\
             <div class="col-md-2">\
-                <button class="btn" id="remove-' + ticketIndex + '" type="button">Ta bort</button>\
+                <button class="btn" id="remove-ticket-' + ticket.id + '" type="button">Ta bort</button>\
             </div>\
         </div>\
     </div>';
@@ -70,7 +70,7 @@ function getSearchResultTemplate(data)
                             </div>\
                         </div>\
                         <div class="col-md-2">\
-                            <button class="btn ticket-add-to-cart" id="ticket-add-to-cart-'+ data.id +'-'+ time.time.departure +' type="button">Lägg till biljett i köpkorg</button>\
+                            <button class="btn ticket-add-to-cart" id="add-to-cart-id-'+ data.id +'-'+ time.time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
                         </div>\
                     </div>\
                     <div class="text-center">\

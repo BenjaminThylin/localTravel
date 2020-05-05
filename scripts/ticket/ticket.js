@@ -71,19 +71,6 @@ $(document).ready(function(){
             getSearchResults();
         }
     }).trigger("focusout");
-    //adds new tickets to the shopping cart
-    $(document).on("click", ".ticket-add-to-cart", function() {
-        ticketCount++;
-        // TODO: pass the selected ticket as a parameter to get price and time information in the shopping cart
-        let ticket = {};
-        
-        $("#shopping-cart").append(getTicketTemplate(ticketCount, ticket));
-        //removes a ticket
-        $("#remove-" + ticketCount).click(function(){
-            let ticketIndex = $(this)[0].id.split("-")[1];
-            $("#ticket-nr-" + ticketIndex).remove();
-        });
-    });
 });
 function getSearchResults(){
     // TODO: some way of stopping unnecessary searches of old data
@@ -100,7 +87,6 @@ function getSearchResults(){
                             searchResults.push(item);
                     }
                 });
-                console.log("populating search");
                 populateSearchOutput(searchResults);
             }
     // }
@@ -116,17 +102,78 @@ function populateSearchOutput(results){
     results.forEach(function(ticket){
         searchOutput.append(getSearchResultTemplate(ticket));
         ticket.times.forEach(function(item){
-            let elementID = ticket.id + "-" + item.time.departure;
-            $(document.getElementById("ticket-info-id-" + elementID)).on("click", function(){
+            let elementID = ticket.id + "-" + item.time.departure; 
+            $(document.getElementById("ticket-info-id-" + elementID)).on("click", function(){ // sets the hide and unhide button for ticket details
                 let options = $(document.getElementById("input-ticket-options-id-" + elementID));
                 if(options.is(":visible"))
                     options.hide();
                 else
                     options.show();
             });
+            //sets functionallity for adding new tickets
+            $(document.getElementById("add-to-cart-id-" + elementID)).on("click",function(){
+                let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
+                let titcketType = $(document.getElementById("ticket-type-" + elementID)).val();
+                let departureDate = $("#input-departure-date").val()
+                addTicketToCart(
+                    {
+                        id: elementID + "-" + departureDate + "-" + shopingCart.length,
+                        date: departureDate,
+                        to: ticket.to,
+                        from: ticket.from,
+                        time:
+                        {
+                            departure:  item.time.departure,
+                            arival:     item.time.arival
+                        },
+                        price: item.price * getDiscount(discountType),
+                        discount: discountType,
+                        tikcetType: titcketType
+                    }
+                );
+            });
             displayedTickets.push(elementID);
         });
     });
+}
+/**
+ * creates and appends a ticket element to the shoppingcart
+ * @param {*} ticket takes a ticket object as input
+ */
+function addTicketToCart(ticket){
+        shopingCart.push(ticket);
+        $("#shopping-cart").append(getTicketTemplate(ticket));
+        //removes a ticket
+        $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
+            removeTikcetFromCart(ticket)
+            $(document.getElementById("ticket-id-" + ticket.id)).remove();
+        });
+}
+/**
+ * @param {*} type string representing the type of discount
+ */
+function getDiscount(type){
+    let returnVal = 1;
+    discount.forEach(function(disc){
+        if(disc.id == type)
+            returnVal = disc.procentage;
+    });
+
+    return returnVal;
+}
+/**
+ * removes a specific ticket object fomr the shoppingCart array
+ * @param {*} ticket a ticket object
+ */
+function removeTikcetFromCart(ticket){
+    for(let i = 0; i < shopingCart.length; i++)
+    {
+        if(ticket.id == shopingCart[i].id)
+        {
+            shopingCart.splice(i, 1);
+            break;
+        }
+    }
 }
 function setDateRestrictions(dateInput){
     let date = new Date();
