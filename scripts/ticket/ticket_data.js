@@ -39,28 +39,28 @@ var timeTable = [
             {
                 time: {
                     departure: "05:00", 
-                    arival: "6:30"
+                    arrival: "6:30"
                 },
                 price: 15
             }, 
             {
                 time: {
-                    departure: "05:00", 
-                    arival: "6:30"
+                    departure: "10:00", 
+                    arrival: "11:30"
                 },
                 price: 15
             }, 
             {
                 time: {
-                    departure: "05:00", 
-                    arival: "6:30"
+                    departure: "14:20", 
+                    arrival: "15:50"
                 },
                 price: 16
             }, 
             {
                 time: {
-                    departure: "05:00", 
-                    arival: "6:30"
+                    departure: "21:00", 
+                    arrival: "22:30"
                 },
                 price: 14
             }
@@ -68,6 +68,42 @@ var timeTable = [
     },
     {
         id: 2,
+        from: "Jakobstad",
+        to: "Nykarleby",
+        days: [true,true,true,true,true,true,false],
+        times: [
+            {
+                time: {
+                    departure: "05:00", 
+                    arrival: "05:20"
+                },
+                price: 7
+            }, 
+            {
+                time: {
+                    departure: "10:00", 
+                    arrival: "10:20"
+                },
+                price: 7
+            }, 
+            {
+                time: {
+                    departure: "14:20", 
+                    arrival: "14:40"
+                },
+                price: 7
+            }, 
+            {
+                time: {
+                    departure: "21:00", 
+                    arrival: "21:20"
+                },
+                price: 7
+            }
+        ]
+    },
+    {
+        id: 3,
         from: "Vasa",
         to: "Jakobstad",
         days: [true,true,false,true,true,false,false],
@@ -75,57 +111,28 @@ var timeTable = [
             {
                 time: {
                     departure: "06:00", 
-                    arival: "07:30"
+                    arrival: "07:30"
                 },
                 price: 25
             }, 
             {
                 time: {
                     departure: "16:00", 
-                    arival: "17:30"
+                    arrival: "17:30"
                 },
                 price: 25
             }, 
             {
                 time: {
                     departure: "18:00", 
-                    arival: "19:30"
+                    arrival: "19:30"
                 },
                 price: 25
             }, 
             {
                 time: {
                     departure: "22:15", 
-                    arival: "23:45"
-                },
-                price: 25
-            }
-        ]
-    },
-    {
-        id: 3,
-        from: "Vasa",
-        to: "Karleby",
-        days: [true,true,true,true,true,true,false],
-        times: [
-            {
-                time: {
-                    departure: "08:00", 
-                    arival: "08:45"
-                },
-                price: 25
-            }, 
-            {
-                time: {
-                    departure: "16:00", 
-                    arival: "16:45"
-                },
-                price: 25
-            }, 
-            {
-                time: {
-                    departure: "21:00", 
-                    arival: "21:45"
+                    arrival: "23:45"
                 },
                 price: 25
             }
@@ -134,6 +141,35 @@ var timeTable = [
     {
         id: 4,
         from: "Vasa",
+        to: "Karleby",
+        days: [true,true,true,true,true,true,false],
+        times: [
+            {
+                time: {
+                    departure: "08:00", 
+                    arrival: "08:45"
+                },
+                price: 25
+            }, 
+            {
+                time: {
+                    departure: "16:00", 
+                    arrival: "16:45"
+                },
+                price: 25
+            }, 
+            {
+                time: {
+                    departure: "21:00", 
+                    arrival: "21:45"
+                },
+                price: 25
+            }
+        ]
+    },
+    {
+        id: 5,
+        from: "Vasa",
         to: "Åbo",
         price: 25,
         days: [false,true,false,true,false,true,false],
@@ -141,18 +177,76 @@ var timeTable = [
             {
                 time: {
                     departure: "08:00", 
-                    arival: "20:00"
+                    arrival: "20:00"
                 },
                 price: 35
             }, 
             {
                 time: {
                     departure: "21:00", 
-                    arival: "09:00"
+                    arrival: "09:00"
                 },
                 price: 20
             }
         ] 
+    },
+    {
+        id: 6,
+        from: "Karleby",
+        to: "Vasa",
+        days: [true,true,true,true,true,false,false],
+        times: [
+            {
+                time: {
+                    departure: "05:00", 
+                    arrival: "7:25"
+                },
+                price: 22
+            }, 
+            {
+                time: {
+                    departure: "09:00", 
+                    arrival: "11:10"
+                },
+                price: 20
+            }, 
+            {
+                time: {
+                    departure: "13:30", 
+                    arrival: "15:55"
+                },
+                price: 22
+            }
+        ]
+    },
+    {
+        id: 6,
+        from: "Åbo",
+        to: "Vasa",
+        days: [true,true,true,true,true,false,false],
+        times: [
+            {
+                time: {
+                    departure: "05:00", 
+                    arrival: "17:00"
+                },
+                price: 32
+            }, 
+            {
+                time: {
+                    departure: "11:00", 
+                    arrival: "23:00"
+                },
+                price: 35
+            }, 
+            {
+                time: {
+                    departure: "22:00", 
+                    arrival: "10:00"
+                },
+                price: 22
+            }
+        ]
     }
 ];
 var displayedTickets = [];
@@ -167,14 +261,14 @@ var displayedTickets = [];
  *                          time:
  *                          {
  *                               departure:  item.time.departure,
- *                               arival:     item.time.arival
+ *                               arrival:     item.time.arrival
  *                          },
  *                          price: ticket.price * getDiscount(discountType),
  *                          discount: discountType,
  *                          tikcetType: titcketType
  *                      }
  */
-var shopingCart = [];
+var shoppingCart = [];
 
 
 

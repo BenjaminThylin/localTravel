@@ -10,7 +10,7 @@ function getTicketTemplate(ticket){
                 <h4>Rutt: ' + ticket.from + '--->' + ticket.to + '</h4>\
             </div>\
             <div class="col-md">\
-                <h4>Tid: ' + ticket.time.departure + ' ---> '+ ticket.time.arival +'</h4>\
+                <h4>Tid: ' + ticket.time.departure + ' ---> '+ ticket.time.arrival +'</h4>\
             </div>\
         </div>\
         <div class="row">\
@@ -43,7 +43,7 @@ function getSearchResultTemplate(data)
                         <div class="display-4 mb-2">'+ data.from +' --> '+ data.to +'</div>\
                     </div>\
                     <div class="col-md-12">\
-                        <div class="display-5 mb-2">'+ time.time.departure +' --> ' + time.time.arival + '</div>\
+                        <div class="display-5 mb-2">'+ time.time.departure +' --> ' + time.time.arrival + '</div>\
                     </div>\
                     <div id="input-ticket-options-id-'+ data.id +'-'+ time.time.departure +'" class="form-group row no-display">\
                         <div class="col-md-2">\

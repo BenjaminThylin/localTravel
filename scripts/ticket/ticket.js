@@ -116,14 +116,14 @@ function populateSearchOutput(results){
                 let departureDate = $("#input-departure-date").val()
                 addTicketToCart(
                     {
-                        id: elementID + "-" + departureDate + "-" + shopingCart.length,
+                        id: elementID + "-" + departureDate + "-" + shoppingCart.length,
                         date: departureDate,
                         to: ticket.to,
                         from: ticket.from,
                         time:
                         {
                             departure:  item.time.departure,
-                            arival:     item.time.arival
+                            arrival:     item.time.arrival
                         },
                         price: item.price * getDiscount(discountType),
                         discount: discountType,
@@ -140,7 +140,7 @@ function populateSearchOutput(results){
  * @param {*} ticket takes a ticket object as input
  */
 function addTicketToCart(ticket){
-        shopingCart.push(ticket);
+        shoppingCart.push(ticket);
         $("#shopping-cart").append(getTicketTemplate(ticket));
         //removes a ticket
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
@@ -165,11 +165,11 @@ function getDiscount(type){
  * @param {*} ticket a ticket object
  */
 function removeTikcetFromCart(ticket){
-    for(let i = 0; i < shopingCart.length; i++)
+    for(let i = 0; i < shoppingCart.length; i++)
     {
-        if(ticket.id == shopingCart[i].id)
+        if(ticket.id == shoppingCart[i].id)
         {
-            shopingCart.splice(i, 1);
+            shoppingCart.splice(i, 1);
             break;
         }
     }
