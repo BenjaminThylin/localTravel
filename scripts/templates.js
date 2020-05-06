@@ -4,7 +4,7 @@
  */
 function getTicketTemplate(ticket){
     return '\
-    <div class="border" id="ticket-id-' + ticket.id + '">\
+    <div class="border p-2" id="ticket-id-' + ticket.id + '">\
         <div class="row">\
             <div class="col-md">\
                 <h4>Rutt: ' + ticket.from + '--->' + ticket.to + '</h4>\

@@ -269,6 +269,31 @@ var displayedTickets = [];
  *                      }
  */
 var shoppingCart = [];
+var totalCost = 0;
+/**
+ * Saves provided array shoppingCart to localStorage
+ * @param {*} key the name of the session storage item
+ * @param {*} collection the array to push to
+ * @param {*} item object to push to the array before saving, if not set the function just saves the passed array 
+ */
+function pushToSessionStorage(key, collection, item = null){
+    if(item !== null)
+        collection.push(item);
+    sessionStorage.setItem(key, JSON.stringify(collection));
+    return collection;
+}
+/**
+ * returns an array from sessionstorage
+ * @param {*} key the name of the sessionstorage item
+ */
+function loadFromSessionStorage(key){
+    let collection = [];
+    let storageString = sessionStorage.getItem(key); 
+    if(storageString !== null || storageString !== undefined)
+        collection = JSON.parse(storageString);
+    
+    return collection;
+}
 
 
 

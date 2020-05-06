@@ -4,15 +4,17 @@
  *      - scripts/templates.js
  */
 $(document).ready(function(){
-    let ticketCount = 0;
-    //populates the search field with timetables: just for testing
-    
     //hides all error outputs
     $("[error]").each(function(){
         $(this).hide();
     });
     //stops selection of old dates
     setDateRestrictions($("#input-departure-date"));
+    //populates the cart with sessionStorage data
+    shoppingCart = loadFromSessionStorage("shoppingCart"); 
+    shoppingCart.forEach(function(ticket){
+        addTicketToCart(ticket);
+    });
     //populates to and from with valid stops
     let dataFrom = $("#data-from");
     let dataTo = $("#data-to");
@@ -22,7 +24,22 @@ $(document).ready(function(){
     });
     $("#input-from").val(stops[0]);
     $("#input-to").val(stops[1]);
-
+    //sets functionality for payment form
+    let paymentElement = $("#payment-details"); 
+    let cartElement = $("#shopping-cart");
+    $("#input-go-to-payment").on("click", function(){
+        if(!paymentElement.is(":visible")){
+            paymentElement.show();
+            cartElement.hide();
+        }
+    });
+    $("#input-payment-regret").on("click",function(){
+        if(!cartElement.is(":visible")){
+            paymentElement.hide();
+            cartElement.show();
+        }
+    });
+    $("#input-payment-confirm")//TODO: functionallity
     //makes sure that from and to inputs cant be the same
     $("#input-from").on("change", function(){
         let toInput = $("#input-to");
@@ -114,22 +131,23 @@ function populateSearchOutput(results){
                 let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
                 let titcketType = $(document.getElementById("ticket-type-" + elementID)).val();
                 let departureDate = $("#input-departure-date").val()
-                addTicketToCart(
+                let newTicket =
+                {
+                    id: elementID + "-" + departureDate + "-" + shoppingCart.length,
+                    date: departureDate,
+                    to: ticket.to,
+                    from: ticket.from,
+                    time:
                     {
-                        id: elementID + "-" + departureDate + "-" + shoppingCart.length,
-                        date: departureDate,
-                        to: ticket.to,
-                        from: ticket.from,
-                        time:
-                        {
-                            departure:  item.time.departure,
-                            arrival:     item.time.arrival
-                        },
-                        price: item.price * getDiscount(discountType),
-                        discount: discountType,
-                        tikcetType: titcketType
-                    }
-                );
+                        departure:  item.time.departure,
+                        arrival:     item.time.arrival
+                    },
+                    price: item.price * getDiscount(discountType),
+                    discount: discountType,
+                    tikcetType: titcketType
+                }
+                addTicketToCart(newTicket);
+                shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, newTicket);
             });
             displayedTickets.push(elementID);
         });
@@ -140,11 +158,16 @@ function populateSearchOutput(results){
  * @param {*} ticket takes a ticket object as input
  */
 function addTicketToCart(ticket){
-        shoppingCart.push(ticket);
-        $("#shopping-cart").append(getTicketTemplate(ticket));
-        //removes a ticket
+    totalCost += ticket.price;
+    let paymentCostElement = $("#output-payment-cost"); 
+    paymentCostElement.html("Kostnad: " + totalCost + " €");
+    $("#shopping-cart").prepend(getTicketTemplate(ticket));
+        //removes a ticketf
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
-            removeTikcetFromCart(ticket)
+            removeTikcetFromCart(ticket);
+            shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart);
+            totalCost -= ticket.price;
+            paymentCostElement.html("Kostnad: " + totalCost + " €");
             $(document.getElementById("ticket-id-" + ticket.id)).remove();
         });
 }
@@ -215,4 +238,3 @@ function getShortDate(date){
     let dateString = year + "-" + month + "-" + day;
     return dateString;
 }
-

@@ -71,10 +71,20 @@
         </div>
         <h1>köpkorg</h1>
         <div id="shopping-cart">
-            
+            <div class="col-12 text-center mt-2">
+                <button class="btn" id="input-go-to-payment">Betala</button>
+            </div>
         </div>
-        <div class="row">
-            <label> Totalkostnad: </label>
+        <div class="form-group no-display" id="payment-details">
+            <label for="input-payment-option">Betalnings metod: </label>
+            <select class="form-control" id="input-payment-option">
+                <option value="cash">Kontant</option>
+                <option value="cashApp">Cashapp</option>
+                <option value="Visa">Visa</option>
+            </select>
+            <h4 id="output-payment-cost">hello</h4>
+            <button class="btn" id="input-payment-regret">Ångra</button>
+            <button class="btn" id="input-payment-confirm">Bekräfta</button>
         </div>
     </div>
     <div class="container-fluid footer">
