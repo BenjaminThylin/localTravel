@@ -13,7 +13,7 @@ $(document).ready(function(){
             }
             statsWrapper.addClass("show")
         }
-    })
+    });
     
     ticketsButton.click(function() {
         ticketsButton.addClass("active");
@@ -24,5 +24,5 @@ $(document).ready(function(){
             }
             ticketsWrapper.addClass("show")
         }
-    })
+    });
 });

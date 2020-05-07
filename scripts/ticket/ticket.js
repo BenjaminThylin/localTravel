@@ -12,15 +12,14 @@ $(document).ready(function(){
     setDateRestrictions($("#input-departure-date"));
     //populates the cart with sessionStorage data
     shoppingCart = loadFromSessionStorage("shoppingCart"); 
-    shoppingCart.forEach(function(ticket){
-        addTicketToCart(ticket);
-    });
+    initCart();
     //populates to and from with valid stops
     let dataFrom = $("#data-from");
     let dataTo = $("#data-to");
     stops.forEach(function(stop){
-        dataFrom.append('<option value="'+stop+'">'+stop+'</option>');
-        dataTo.append('<option value="'+stop+'">'+stop+'</option>');
+        let optionElement = getOptionTemplate(stop);
+        dataFrom.append(optionElement);
+        dataTo.append(optionElement);
     });
     $("#input-from").val(stops[0]);
     $("#input-to").val(stops[1]);
@@ -39,7 +38,24 @@ $(document).ready(function(){
             cartElement.show();
         }
     });
-    $("#input-payment-confirm")//TODO: functionallity
+    let paymentSuccessElement = $("#output-payment-success");
+    $("#input-payment-confirm").on("click", function(){
+        pushToLocalStorage("boughtTickets", commitTickets(shoppingCart));
+        shoppingCart = []; // clears the current shopping cart
+        sessionStorage.clear("shoppingCart");
+        initCart();
+        if(!paymentSuccessElement.is(":visible"))
+            paymentSuccessElement.show();
+    });
+    //hides output-ppayment-success element when body is clicked
+    $("#payment-success-confirm").on("click", function(){
+        if(paymentSuccessElement.is(":visible"))
+        {
+            paymentSuccessElement.hide();
+            paymentElement.hide();
+            cartElement.show();
+        }
+    });
     //makes sure that from and to inputs cant be the same
     $("#input-from").on("change", function(){
         let toInput = $("#input-to");
@@ -172,18 +188,6 @@ function addTicketToCart(ticket){
         });
 }
 /**
- * @param {*} type string representing the type of discount
- */
-function getDiscount(type){
-    let returnVal = 1;
-    discount.forEach(function(disc){
-        if(disc.id == type)
-            returnVal = disc.procentage;
-    });
-
-    return returnVal;
-}
-/**
  * removes a specific ticket object fomr the shoppingCart array
  * @param {*} ticket a ticket object
  */
@@ -237,4 +241,13 @@ function getShortDate(date){
     let year = date.getFullYear();
     let dateString = year + "-" + month + "-" + day;
     return dateString;
+}
+function initCart(){
+    if(shoppingCart.length === 0){
+        $('div[name="cart-item"]').remove(); // removes all items from the shopping cart
+        totalCost = 0;
+    }
+    shoppingCart.forEach(function(ticket){
+        addTicketToCart(ticket);
+    });
 }

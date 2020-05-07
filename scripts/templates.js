@@ -1,10 +1,18 @@
 /**
+ * returns an option element with passed value and text
+ * @param {*} option the value and name of the option
+ */
+function getOptionTemplate(option)
+{
+    return '<option value="'+option+'">'+option+'</option>';
+}
+/**
  * returns a ticket element
  * @param {*} ticket takes a ticket object as data
  */
 function getTicketTemplate(ticket){
     return '\
-    <div class="border p-2" id="ticket-id-' + ticket.id + '">\
+    <div class="border p-2" id="ticket-id-' + ticket.id + '" name="cart-item">\
         <div class="row">\
             <div class="col-md">\
                 <h4>Rutt: ' + ticket.from + '--->' + ticket.to + '</h4>\

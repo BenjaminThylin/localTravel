@@ -271,7 +271,7 @@ var displayedTickets = [];
 var shoppingCart = [];
 var totalCost = 0;
 /**
- * Saves provided array shoppingCart to localStorage
+ * Saves provided array shoppingCart to sessionStorage and returns the saved array
  * @param {*} key the name of the session storage item
  * @param {*} collection the array to push to
  * @param {*} item object to push to the array before saving, if not set the function just saves the passed array 
@@ -289,11 +289,82 @@ function pushToSessionStorage(key, collection, item = null){
 function loadFromSessionStorage(key){
     let collection = [];
     let storageString = sessionStorage.getItem(key); 
-    if(storageString !== null || storageString !== undefined)
+    if(storageString !== null && storageString !== undefined)
         collection = JSON.parse(storageString);
     
     return collection;
 }
 
-
+/**
+ * Saves provided array to localStorage
+ * @param {*} key the name of the local storage item
+ * @param {*} collection the array to push to
+ * @param {*} item object to push to the array before saving, if not set the function just saves the passed array 
+ */
+function pushToLocalStorage(key, collection, item = null){
+    if(item !== null)
+        collection.push(item);
+    localStorage.setItem(key, JSON.stringify(collection));
+}
+/**
+ * returns a array of ticket objects that have been modified to fit the requierments of admin status page
+ * @param {*} tickets collection of ticket objects from the shoppingCart
+ */
+function commitTickets(tickets)
+{
+    let boughtTickets = [];
+    let date;
+    tickets.forEach(function(ticket){
+        date = ticket.id.split("-"); // eeeewww
+        boughtTickets.push({
+            id: ticket.id,
+            from: ticket.from,
+            to: ticket.to,
+            date: date[date.length - 2], // supper ugly code needs change
+            departureTime: ticket.time.departure,
+            type: ticket.tikcetType,
+            regularPrice: ticket.price / getDiscount(ticket.ticketType),
+            soldPrice: ticket.price,
+        });
+    });
+    /*
+    {
+        id: elementID + "-" + departureDate + "-" + shoppingCart.length,
+        date: departureDate,
+        to: ticket.to,
+        from: ticket.from,
+        time:
+        {
+            departure:      item.time.departure,
+            arrival:        item.time.arrival
+        },
+        price: item.price * getDiscount(discountType),
+        discount: discountType,
+        tikcetType: titcketType
+    }
+    */
+    /* bought
+    {
+        id: 4,
+        from: "Vasa",
+        to: "Karleby",
+        date: "14/5/2020",
+        departureTime: "08:00",
+        type: "senior",
+        regularPrice: 25
+    }
+    */
+   return tickets;
+}
+/**
+ * @param {*} type string representing the type of discount
+ */
+function getDiscount(type){
+    let returnVal = 1;
+    discount.forEach(function(disc){
+        if(disc.id == type)
+            returnVal = disc.procentage;
+    });
+    return returnVal;
+}
 
