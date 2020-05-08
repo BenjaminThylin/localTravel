@@ -354,7 +354,7 @@ function commitTickets(tickets)
         regularPrice: 25
     }
     */
-   return tickets;
+    return tickets;
 }
 /**
  * @param {*} type string representing the type of discount
