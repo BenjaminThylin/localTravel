@@ -47,7 +47,7 @@ $(document).ready(function(){
         if(!paymentSuccessElement.is(":visible"))
             paymentSuccessElement.show();
     });
-    //hides output-ppayment-success element when body is clicked
+    //hides output-payment-success element when body is clicked
     $("#payment-success-confirm").on("click", function(){
         if(paymentSuccessElement.is(":visible"))
         {
@@ -145,7 +145,7 @@ function populateSearchOutput(results){
             //sets functionallity for adding new tickets
             $(document.getElementById("add-to-cart-id-" + elementID)).on("click",function(){
                 let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
-                let titcketType = $(document.getElementById("ticket-type-" + elementID)).val();
+                let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
                 let departureDate = $("#input-departure-date").val()
                 let newTicket =
                 {
@@ -160,7 +160,7 @@ function populateSearchOutput(results){
                     },
                     price: item.price * getDiscount(discountType),
                     discount: discountType,
-                    tikcetType: titcketType
+                    ticketType: ticketType
                 }
                 addTicketToCart(newTicket);
                 shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, newTicket);
@@ -175,15 +175,15 @@ function populateSearchOutput(results){
  */
 function addTicketToCart(ticket){
     totalCost += ticket.price;
-    let paymentCostElement = $("#output-payment-cost"); 
-    paymentCostElement.html("Kostnad: " + totalCost + " €");
+    let paymentCostElement = $(".output-payment-cost"); 
+    paymentCostElement.html("Totalpris: " + totalCost + " €");
     $("#shopping-cart").prepend(getTicketTemplate(ticket));
         //removes a ticketf
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
             removeTikcetFromCart(ticket);
             shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart);
             totalCost -= ticket.price;
-            paymentCostElement.html("Kostnad: " + totalCost + " €");
+            paymentCostElement.html("Totalpris: " + totalCost + " €");
             $(document.getElementById("ticket-id-" + ticket.id)).remove();
         });
 }

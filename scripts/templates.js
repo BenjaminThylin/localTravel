@@ -11,27 +11,56 @@ function getOptionTemplate(option)
  * @param {*} ticket takes a ticket object as data
  */
 function getTicketTemplate(ticket){
+    let discountType, ticketType;
+    switch (ticket.ticketType) {
+        case "once":
+            ticketType = "Engångsbiljett";
+            break;
+        case "10-times":
+            ticketType = "10-gångskort";
+            break;
+        case "month":
+            ticketType = "Månadskort";
+            break;
+    }
+    switch (ticket.discount) {
+        case "regular":
+            discountType = "Vuxen";
+            break;
+        case "child":
+            discountType = "Barn";
+            break;
+        case "student":
+            discountType = "Studerande";
+            break;
+        case "senior":
+            discountType = "Pensionär";
+            break;
+        case "unemployed":
+            discountType = "Arbetslös";
+            break;
+    }
     return '\
-    <div class="border p-2" id="ticket-id-' + ticket.id + '" name="cart-item">\
+    <div class="border p-2 mb-2" id="ticket-id-' + ticket.id + '" name="cart-item">\
         <div class="row">\
-            <div class="col-md">\
+            <div class="col-md-7">\
                 <h4>Rutt: ' + ticket.from + '--->' + ticket.to + '</h4>\
             </div>\
-            <div class="col-md">\
+            <div class="col-md-5">\
                 <h4>Tid: ' + ticket.time.departure + ' ---> '+ ticket.time.arrival +'</h4>\
             </div>\
         </div>\
         <div class="row">\
+            <div class="col-md-3">\
+                <div>Biljettyp: ' + ticketType + '</div>\
+            </div>\
             <div class="col-md-2">\
-                <div>Biljettyp: ' + ticket.tikcetType + '</div>\
-            </div class="col-2">\
-            <div class="col-md-2">\
-                <div>Resenär: ' + ticket.discount + '</div>\
+                <div>Resenär: ' + discountType + '</div>\
             </div>\
             <div class="col-md-2">\
                 <div>Pris: ' + ticket.price + '</div>\
             </div>\
-            <div class="col-md-2">\
+            <div class="col-md-5 text-right">\
                 <button class="btn" id="remove-ticket-' + ticket.id + '" type="button">Ta bort</button>\
             </div>\
         </div>\

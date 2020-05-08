@@ -220,7 +220,7 @@ var timeTable = [
         ]
     },
     {
-        id: 6,
+        id: 7,
         from: "Åbo",
         to: "Vasa",
         days: [true,true,true,true,true,false,false],
@@ -265,7 +265,7 @@ var displayedTickets = [];
  *                          },
  *                          price: ticket.price * getDiscount(discountType),
  *                          discount: discountType,
- *                          tikcetType: titcketType
+ *                          ticketType: ticketType
  *                      }
  */
 var shoppingCart = [];
@@ -322,7 +322,7 @@ function commitTickets(tickets)
             to: ticket.to,
             date: date[date.length - 2], // supper ugly code needs change
             departureTime: ticket.time.departure,
-            type: ticket.tikcetType,
+            type: ticket.ticketType,
             regularPrice: ticket.price / getDiscount(ticket.ticketType),
             soldPrice: ticket.price,
         });
@@ -340,7 +340,7 @@ function commitTickets(tickets)
         },
         price: item.price * getDiscount(discountType),
         discount: discountType,
-        tikcetType: titcketType
+        ticketType: ticketType
     }
     */
     /* bought
