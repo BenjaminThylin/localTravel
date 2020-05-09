@@ -11,7 +11,7 @@ $(document).ready(function(){
     //stops selection of old dates
     setDateRestrictions($("#input-departure-date"));
     //populates the cart with sessionStorage data
-    shoppingCart = loadFromSessionStorage("shoppingCart"); 
+    shoppingCart.set(loadFromSessionStorage("shoppingCart")); 
     initCart();
     //populates to and from with valid stops
     let dataFrom = $("#data-from");
@@ -40,8 +40,8 @@ $(document).ready(function(){
     });
     let paymentSuccessElement = $("#output-payment-success");
     $("#input-payment-confirm").on("click", function(){
-        pushToLocalStorage("boughtTickets", shoppingCart);
-        shoppingCart = []; // clears the current shopping cart
+        pushToLocalStorage("boughtTickets", shoppingCart.cart);
+        shoppingCart.clear() // emptys the current shopping cart
         sessionStorage.clear("shoppingCart");
         initCart();
         if(!paymentSuccessElement.is(":visible"))
@@ -147,12 +147,12 @@ function populateSearchOutput(results){
                 let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
                 let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
                 let departureDate = $("#input-departure-date").val();
-                let ticketId = elementID + "-" + departureDate + "-" + shoppingCart.length;
+                let ticketId = elementID + "-" + departureDate + "-" + shoppingCart.index();
                 let price = time.price * getDiscount(discountType);
                 let newTicket = new Ticket(ticketId, departureDate, ticket.to, ticket.from, time.departure, time.arrival, price, discountType, ticketType);
-                addTicketToCart(newTicket);
                 shoppingCart.push(newTicket);
-                shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, false);
+                shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
+                addTicketToCart(newTicket);
             });
             displayedTickets.push(elementID);
         });
@@ -163,32 +163,16 @@ function populateSearchOutput(results){
  * @param {*} ticket takes a ticket object as input
  */
 function addTicketToCart(ticket){
-    totalCost += ticket.price;
-    let paymentCostElement = $(".output-payment-cost"); 
-    paymentCostElement.html("Totalpris: " + totalCost + " €");
+    let paymentCostElement = $("#output-payment-cost"); 
+    paymentCostElement.html("Totalpris: " + shoppingCart.totalCost + " €");
     $("#shopping-cart").prepend(getTicketTemplate(ticket));
         //removes a ticketf
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
-            removeTicketFromCart(ticket);
-            shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, false);
-            totalCost -= ticket.price;
-            paymentCostElement.html("Totalpris: " + totalCost + " €");
+            shoppingCart.remove(ticket);
+            shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
+            paymentCostElement.html("Totalpris: " + shoppingCart.totalCost + " €");
             $(document.getElementById("ticket-id-" + ticket.id)).remove();
         });
-}
-/**
- * removes a specific ticket object fomr the shoppingCart array
- * @param {*} ticket a ticket object
- */
-function removeTicketFromCart(ticket){
-    for(let i = 0; i < shoppingCart.length; i++)
-    {
-        if(ticket.id == shoppingCart[i].id)
-        {
-            shoppingCart.splice(i, 1);
-            break;
-        }
-    }
 }
 function setDateRestrictions(dateInput){
     let date = new Date();
@@ -232,11 +216,12 @@ function getShortDate(date){
     return dateString;
 }
 function initCart(){
-    if(shoppingCart.length === 0){
-        $('div[name="cart-item"]').remove(); // removes all items from the shopping cart
-        totalCost = 0;
+    if(shoppingCart.cart.length === 0){
+        $('div[name="cart-item"]').remove(); // removes all items from the shopping cart div
+        $("#output-payment-cost").html("Totalpris: " + shoppingCart.totalCost + "€");
     }
-    shoppingCart.forEach(function(ticket){
+    
+    shoppingCart.cart.forEach(function(ticket){
         addTicketToCart(ticket);
     });
 }
