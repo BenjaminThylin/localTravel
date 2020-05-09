@@ -251,27 +251,12 @@ var timeTable = [
 ];
 var displayedTickets = [];
 /**
- * An array of ticket object. A ticket object is an object that is created when the user adds a ticket to the shopping cart.
- * -structure-
- *                      {
- *                          id: elementID + "-" + departureDate,
- *                          to: ticket.to
- *                          from: ticket.from
- *                          date: departureDate,
- *                          time:
- *                          {
- *                               departure:  item.time.departure,
- *                               arrival:     item.time.arrival
- *                          },
- *                          price: ticket.price * getDiscount(discountType),
- *                          discount: discountType,
- *                          ticketType: ticketType
- *                      }
+ * An array of ticket objects
  */
 var shoppingCart = [];
 var totalCost = 0;
 /**
- * Creates a ticket object
+ * ticket object
  */
 class Ticket {
     constructor(id, date, to, from, departure, arrival, price, discount, type) {
@@ -286,11 +271,10 @@ class Ticket {
         this.type = type;
     }
 }
-
 /**
  * Saves provided array shoppingCart to sessionStorage and returns the saved array
  * @param {*} key the name of the session storage item
- * @param {*} collection the array to push to
+ * @param {*} collection the array to push
  * @param {*} item object to push to the array before saving, if not set the function just saves the passed array 
  */
 function pushToSessionStorage(key, collection, item = null){
@@ -314,12 +298,19 @@ function loadFromSessionStorage(key){
 /**
  * Saves provided array to localStorage
  * @param {*} key the name of the local storage item
- * @param {*} collection the array to push to
- * @param {*} item object to push to the array before saving, if not set the function just saves the passed array 
+ * @param {*} collection the array to push
+ * @param {*} append set to true as default, if set to false it will overwrite whatever is currently store in the localstorage item. 
  */
-function pushToLocalStorage(key, collection, item = null){
-    if(item !== null)
-        collection.push(item);
+function pushToLocalStorage(key, collection, append = true){
+    if(append){
+        let prevItems = [];
+        let storageString = localStorage.getItem(key);
+        if(storageString !== null && storageString !== undefined)
+            prevItems = JSON.parse(storageString);
+
+        collection = prevItems.concat(collection);
+    }
+    
     localStorage.setItem(key, JSON.stringify(collection));
 }
 /**
