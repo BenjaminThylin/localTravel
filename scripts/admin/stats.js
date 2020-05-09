@@ -16,9 +16,9 @@ $(".stats-wrapper").ready(function(){
             <td>`+ ticket.from + `</td>
             <td>`+ ticket.to + `</td>
             <td>` + ticket.date + `</td>
-            <td>` + ticket.departureTime + `</td>
+            <td>` + ticket.departure + `</td>
             <td>` + ticket.type + `</td>
-            <td>` + (ticket.regularPrice * getDiscount(ticket.type)) + `</td>
+            <td>` + ticket.price + `</td>
             </tr>`
         )
     });
@@ -26,19 +26,8 @@ $(".stats-wrapper").ready(function(){
 
 function getTotalIncome() {
     let totalIncome = 0;
-
     soldTickets.forEach(ticket => {
-        totalIncome = totalIncome + (ticket.regularPrice * getDiscount(ticket.type));
+        totalIncome += ticket.price;
     });
     return totalIncome;
-}
-
-function getDiscount(discountType) {
-    var type = "";
-    discount.forEach(discount => {
-        if (discount.id == discountType) {
-            type = discount.procentage;
-        }
-    });
-    return type;
 }

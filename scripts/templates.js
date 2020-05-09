@@ -12,7 +12,7 @@ function getOptionTemplate(option)
  */
 function getTicketTemplate(ticket){
     let discountType, ticketType;
-    switch (ticket.ticketType) {
+    switch (ticket.type) {
         case "once":
             ticketType = "Engångsbiljett";
             break;
@@ -47,7 +47,7 @@ function getTicketTemplate(ticket){
                 <h4>Rutt: ' + ticket.from + '--->' + ticket.to + '</h4>\
             </div>\
             <div class="col-md-5">\
-                <h4>Tid: ' + ticket.time.departure + ' ---> '+ ticket.time.arrival +'</h4>\
+                <h4>Tid: ' + ticket.departure + ' ---> '+ ticket.arrival +'</h4>\
             </div>\
         </div>\
         <div class="row">\

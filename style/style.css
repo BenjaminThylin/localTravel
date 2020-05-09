@@ -1,5 +1,5 @@
 :root {
-    --primary-color: rgb(230, 39, 80);
+    --primary-color: rgb(235, 117, 6);
     --secondary-color: #2F2FA2;
     --tertiary-color: #553D67;
     --white-color: #978E93;
@@ -57,7 +57,7 @@ input[type="date"]::-webkit-inner-spin-button{
 }
 .dimmer {
     display: none;
-    background: #000;
+    background-color: var(--black-color);
     opacity: 0.9;
     position: fixed;
     padding-left: auto;

@@ -271,6 +271,23 @@ var displayedTickets = [];
 var shoppingCart = [];
 var totalCost = 0;
 /**
+ * Creates a ticket object
+ */
+class Ticket {
+    constructor(id, date, to, from, departure, arrival, price, discount, type) {
+        this.id = id;
+        this.date = date;
+        this.to = to;
+        this.from = from;
+        this.departure = departure;
+        this.arrival = arrival;
+        this.price = price;
+        this.discount = discount;
+        this.type = type;
+    }
+}
+
+/**
  * Saves provided array shoppingCart to sessionStorage and returns the saved array
  * @param {*} key the name of the session storage item
  * @param {*} collection the array to push to
@@ -294,7 +311,6 @@ function loadFromSessionStorage(key){
     
     return collection;
 }
-
 /**
  * Saves provided array to localStorage
  * @param {*} key the name of the local storage item
@@ -307,56 +323,6 @@ function pushToLocalStorage(key, collection, item = null){
     localStorage.setItem(key, JSON.stringify(collection));
 }
 /**
- * returns a array of ticket objects that have been modified to fit the requierments of admin status page
- * @param {*} tickets collection of ticket objects from the shoppingCart
- */
-function commitTickets(tickets)
-{
-    let boughtTickets = [];
-    let date;
-    tickets.forEach(function(ticket){
-        date = ticket.id.split("-"); // eeeewww
-        boughtTickets.push({
-            id: ticket.id,
-            from: ticket.from,
-            to: ticket.to,
-            date: date[date.length - 2], // supper ugly code needs change
-            departureTime: ticket.time.departure,
-            type: ticket.ticketType,
-            regularPrice: ticket.price / getDiscount(ticket.ticketType),
-            soldPrice: ticket.price,
-        });
-    });
-    /*
-    {
-        id: elementID + "-" + departureDate + "-" + shoppingCart.length,
-        date: departureDate,
-        to: ticket.to,
-        from: ticket.from,
-        time:
-        {
-            departure:      item.time.departure,
-            arrival:        item.time.arrival
-        },
-        price: item.price * getDiscount(discountType),
-        discount: discountType,
-        ticketType: ticketType
-    }
-    */
-    /* bought
-    {
-        id: 4,
-        from: "Vasa",
-        to: "Karleby",
-        date: "14/5/2020",
-        departureTime: "08:00",
-        type: "senior",
-        regularPrice: 25
-    }
-    */
-    return tickets;
-}
-/**
  * @param {*} type string representing the type of discount
  */
 function getDiscount(type){
@@ -367,4 +333,3 @@ function getDiscount(type){
     });
     return returnVal;
 }
-

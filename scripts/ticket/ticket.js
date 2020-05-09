@@ -40,7 +40,7 @@ $(document).ready(function(){
     });
     let paymentSuccessElement = $("#output-payment-success");
     $("#input-payment-confirm").on("click", function(){
-        pushToLocalStorage("boughtTickets", commitTickets(shoppingCart));
+        pushToLocalStorage("boughtTickets", shoppingCart);
         shoppingCart = []; // clears the current shopping cart
         sessionStorage.clear("shoppingCart");
         initCart();
@@ -146,22 +146,10 @@ function populateSearchOutput(results){
             $(document.getElementById("add-to-cart-id-" + elementID)).on("click",function(){
                 let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
                 let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
-                let departureDate = $("#input-departure-date").val()
-                let newTicket =
-                {
-                    id: elementID + "-" + departureDate + "-" + shoppingCart.length,
-                    date: departureDate,
-                    to: ticket.to,
-                    from: ticket.from,
-                    time:
-                    {
-                        departure:  item.time.departure,
-                        arrival:     item.time.arrival
-                    },
-                    price: item.price * getDiscount(discountType),
-                    discount: discountType,
-                    ticketType: ticketType
-                }
+                let departureDate = $("#input-departure-date").val();
+                let ticketId = elementID + "-" + departureDate + "-" + shoppingCart.length;
+                let price = item.price * getDiscount(discountType);
+                let newTicket = new Ticket(ticketId, departureDate, ticket.to, ticket.from, item.time.departure, item.time.arrival, price, discountType, ticketType);
                 addTicketToCart(newTicket);
                 shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, newTicket);
             });
@@ -180,7 +168,7 @@ function addTicketToCart(ticket){
     $("#shopping-cart").prepend(getTicketTemplate(ticket));
         //removes a ticketf
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
-            removeTikcetFromCart(ticket);
+            removeTicketFromCart(ticket);
             shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart);
             totalCost -= ticket.price;
             paymentCostElement.html("Totalpris: " + totalCost + " €");
@@ -191,7 +179,7 @@ function addTicketToCart(ticket){
  * removes a specific ticket object fomr the shoppingCart array
  * @param {*} ticket a ticket object
  */
-function removeTikcetFromCart(ticket){
+function removeTicketFromCart(ticket){
     for(let i = 0; i < shoppingCart.length; i++)
     {
         if(ticket.id == shoppingCart[i].id)
