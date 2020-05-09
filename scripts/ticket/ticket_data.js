@@ -1,3 +1,116 @@
+/**
+ * ticket object
+ */
+class Ticket {
+    constructor(id, date, to, from, departure, arrival, price, discount, type) {
+        this.id = id;
+        this.date = date;
+        this.to = to;
+        this.from = from;
+        this.departure = departure;
+        this.arrival = arrival;
+        this.price = price;
+        this.discount = discount;
+        this.type = type;
+    }
+}
+class Time{
+    /**
+     * Creates a Time object
+     * @param {string} departure a string representing the departure time in MT
+     * @param {string} arrival a string representing the arrival  time in MT
+     * @param {number} price default price for this item
+     */
+    constructor(departure, arrival, price){
+        this.departure = departure;
+        this.arrival = arrival;
+        this.price = price;
+    }
+}
+class TimeTalbeItem {
+    /**
+     * Creates a timeTable object
+     * @param {number} id 
+     * @param {string} from name of departure station 
+     * @param {string} to name of arrival station
+     * @param {bool[]} days a 7 element long array of bools representing days of a week that the rout runs  
+     * @param {time[]} times an array of Time objects 
+     */
+    constructor(id, from, to, days, times){
+        this.id = id;
+        this.from = from;
+        this.to = to;
+        this.days = days;
+        this.times = times
+    }
+}
+var timeTable = [
+    new TimeTalbeItem(
+        1, "Jakobstad", "Vasa",
+        [true,true,true,true,true,true,false],
+        [
+            new Time("05:00", "6:30", 15),
+            new Time("10:00", "11:30", 15),
+            new Time("14:20", "15:50", 16),
+            new Time("21:00", "22:30", 14)
+        ]
+    ),
+    new TimeTalbeItem(
+        2, "Jakobstad", "Nykarleby",
+        [true,true,true,true,true,true,false],
+        [
+            new Time("05:00", "05:20", 7),
+            new Time("10:00", "10:20", 7),
+            new Time("14:20", "14:40", 7),
+            new Time("21:00", "21:20", 7)
+        ]
+    ),
+    new TimeTalbeItem(
+        3, "Vasa", "Jakobstad",
+        [true,true,false,true,true,false,false],
+        [
+            new Time("06:00", "07:30", 25),
+            new Time("16:00", "17:30", 25),
+            new Time("18:00", "19:30", 25),
+            new Time("22:15", "23:45", 25)
+        ]
+    ),
+    new TimeTalbeItem(
+        4, "Vasa", "Karleby",
+        [true,true,true,true,true,true,false],
+        [
+            new Time("08:00", "09:45", 25),
+            new Time("16:00", "17:45", 25),
+            new Time("21:00", "22:45", 25),
+        ]
+    ),
+    new TimeTalbeItem(
+        5, "Vasa", "Åbo",
+        [false,true,false,true,false,true,false],
+        [
+            new Time("08:00", "20:00", 35),
+            new Time("21:00", "09:00", 20),
+        ]
+    ),
+    new TimeTalbeItem(
+        6, "Karleby", "Vasa",
+        [true,true,true,true,true,false,false],
+        [
+            new Time("05:00", "7:25", 22),
+            new Time("09:00", "11:10", 20),
+            new Time("13:30", "15:55", 22),
+        ]
+    ),
+    new TimeTalbeItem(
+        7, "Åbo", "Vasa",
+        [true,true,true,true,true,false,false],
+        [
+            new Time("05:00", "17:00", 32),
+            new Time("11:00", "23:00", 35),
+            new Time("22:00", "10:00", 22),
+        ]
+    )
+];
 var searchData = {
     dateIsValid:    false,
     fromIsValid:    false,
@@ -29,257 +142,25 @@ var discount = [
     }
 ];
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
-var timeTable = [
-    {
-        id: 1,
-        from: "Jakobstad",
-        to: "Vasa",
-        days: [true,true,true,true,true,true,false],
-        times: [
-            {
-                time: {
-                    departure: "05:00", 
-                    arrival: "6:30"
-                },
-                price: 15
-            }, 
-            {
-                time: {
-                    departure: "10:00", 
-                    arrival: "11:30"
-                },
-                price: 15
-            }, 
-            {
-                time: {
-                    departure: "14:20", 
-                    arrival: "15:50"
-                },
-                price: 16
-            }, 
-            {
-                time: {
-                    departure: "21:00", 
-                    arrival: "22:30"
-                },
-                price: 14
-            }
-        ]
-    },
-    {
-        id: 2,
-        from: "Jakobstad",
-        to: "Nykarleby",
-        days: [true,true,true,true,true,true,false],
-        times: [
-            {
-                time: {
-                    departure: "05:00", 
-                    arrival: "05:20"
-                },
-                price: 7
-            }, 
-            {
-                time: {
-                    departure: "10:00", 
-                    arrival: "10:20"
-                },
-                price: 7
-            }, 
-            {
-                time: {
-                    departure: "14:20", 
-                    arrival: "14:40"
-                },
-                price: 7
-            }, 
-            {
-                time: {
-                    departure: "21:00", 
-                    arrival: "21:20"
-                },
-                price: 7
-            }
-        ]
-    },
-    {
-        id: 3,
-        from: "Vasa",
-        to: "Jakobstad",
-        days: [true,true,false,true,true,false,false],
-        times: [
-            {
-                time: {
-                    departure: "06:00", 
-                    arrival: "07:30"
-                },
-                price: 25
-            }, 
-            {
-                time: {
-                    departure: "16:00", 
-                    arrival: "17:30"
-                },
-                price: 25
-            }, 
-            {
-                time: {
-                    departure: "18:00", 
-                    arrival: "19:30"
-                },
-                price: 25
-            }, 
-            {
-                time: {
-                    departure: "22:15", 
-                    arrival: "23:45"
-                },
-                price: 25
-            }
-        ]
-    },
-    {
-        id: 4,
-        from: "Vasa",
-        to: "Karleby",
-        days: [true,true,true,true,true,true,false],
-        times: [
-            {
-                time: {
-                    departure: "08:00", 
-                    arrival: "08:45"
-                },
-                price: 25
-            }, 
-            {
-                time: {
-                    departure: "16:00", 
-                    arrival: "16:45"
-                },
-                price: 25
-            }, 
-            {
-                time: {
-                    departure: "21:00", 
-                    arrival: "21:45"
-                },
-                price: 25
-            }
-        ]
-    },
-    {
-        id: 5,
-        from: "Vasa",
-        to: "Åbo",
-        price: 25,
-        days: [false,true,false,true,false,true,false],
-        times: [
-            {
-                time: {
-                    departure: "08:00", 
-                    arrival: "20:00"
-                },
-                price: 35
-            }, 
-            {
-                time: {
-                    departure: "21:00", 
-                    arrival: "09:00"
-                },
-                price: 20
-            }
-        ] 
-    },
-    {
-        id: 6,
-        from: "Karleby",
-        to: "Vasa",
-        days: [true,true,true,true,true,false,false],
-        times: [
-            {
-                time: {
-                    departure: "05:00", 
-                    arrival: "7:25"
-                },
-                price: 22
-            }, 
-            {
-                time: {
-                    departure: "09:00", 
-                    arrival: "11:10"
-                },
-                price: 20
-            }, 
-            {
-                time: {
-                    departure: "13:30", 
-                    arrival: "15:55"
-                },
-                price: 22
-            }
-        ]
-    },
-    {
-        id: 7,
-        from: "Åbo",
-        to: "Vasa",
-        days: [true,true,true,true,true,false,false],
-        times: [
-            {
-                time: {
-                    departure: "05:00", 
-                    arrival: "17:00"
-                },
-                price: 32
-            }, 
-            {
-                time: {
-                    departure: "11:00", 
-                    arrival: "23:00"
-                },
-                price: 35
-            }, 
-            {
-                time: {
-                    departure: "22:00", 
-                    arrival: "10:00"
-                },
-                price: 22
-            }
-        ]
-    }
-];
 var displayedTickets = [];
 /**
  * An array of ticket objects
  */
 var shoppingCart = [];
 var totalCost = 0;
-/**
- * ticket object
- */
-class Ticket {
-    constructor(id, date, to, from, departure, arrival, price, discount, type) {
-        this.id = id;
-        this.date = date;
-        this.to = to;
-        this.from = from;
-        this.departure = departure;
-        this.arrival = arrival;
-        this.price = price;
-        this.discount = discount;
-        this.type = type;
-    }
-}
+
 /**
  * Saves provided array shoppingCart to sessionStorage and returns the saved array
  * @param {*} key the name of the session storage item
  * @param {*} collection the array to push
- * @param {*} item object to push to the array before saving, if not set the function just saves the passed array 
+ * @param {*} append set to true as default, if set to false it will overwrite whatever is currently stored in the sessionstorage item. 
  */
-function pushToSessionStorage(key, collection, item = null){
-    if(item !== null)
-        collection.push(item);
+function pushToSessionStorage(key, collection, append = true){
+    if(append)
+    {
+        let prevItems = loadFromSessionStorage(key);
+        collection = prevItems.concat(prevItems);
+    }
     sessionStorage.setItem(key, JSON.stringify(collection));
     return collection;
 }
@@ -299,7 +180,7 @@ function loadFromSessionStorage(key){
  * Saves provided array to localStorage
  * @param {*} key the name of the local storage item
  * @param {*} collection the array to push
- * @param {*} append set to true as default, if set to false it will overwrite whatever is currently store in the localstorage item. 
+ * @param {*} append set to true as default, if set to false it will overwrite whatever is currently stored in the localstorage item. 
  */
 function pushToLocalStorage(key, collection, append = true){
     if(append){
@@ -310,7 +191,6 @@ function pushToLocalStorage(key, collection, append = true){
 
         collection = prevItems.concat(collection);
     }
-    
     localStorage.setItem(key, JSON.stringify(collection));
 }
 /**

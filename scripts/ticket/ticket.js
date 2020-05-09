@@ -133,8 +133,8 @@ function populateSearchOutput(results){
     );
     results.forEach(function(ticket){
         searchOutput.append(getSearchResultTemplate(ticket));
-        ticket.times.forEach(function(item){
-            let elementID = ticket.id + "-" + item.time.departure; 
+        ticket.times.forEach(function(time){
+            let elementID = ticket.id + "-" + time.departure; 
             $(document.getElementById("ticket-info-id-" + elementID)).on("click", function(){ // sets the hide and unhide button for ticket details
                 let options = $(document.getElementById("input-ticket-options-id-" + elementID));
                 if(options.is(":visible"))
@@ -142,16 +142,17 @@ function populateSearchOutput(results){
                 else
                     options.show();
             });
-            //sets functionallity for adding new tickets
+            //sets functionallity for adding new tickets to cart
             $(document.getElementById("add-to-cart-id-" + elementID)).on("click",function(){
                 let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
                 let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
                 let departureDate = $("#input-departure-date").val();
                 let ticketId = elementID + "-" + departureDate + "-" + shoppingCart.length;
-                let price = item.price * getDiscount(discountType);
-                let newTicket = new Ticket(ticketId, departureDate, ticket.to, ticket.from, item.time.departure, item.time.arrival, price, discountType, ticketType);
+                let price = time.price * getDiscount(discountType);
+                let newTicket = new Ticket(ticketId, departureDate, ticket.to, ticket.from, time.departure, time.arrival, price, discountType, ticketType);
                 addTicketToCart(newTicket);
-                shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, newTicket);
+                shoppingCart.push(newTicket);
+                shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, false);
             });
             displayedTickets.push(elementID);
         });
@@ -169,7 +170,7 @@ function addTicketToCart(ticket){
         //removes a ticketf
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
             removeTicketFromCart(ticket);
-            shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart);
+            shoppingCart = pushToSessionStorage("shoppingCart", shoppingCart, false);
             totalCost -= ticket.price;
             paymentCostElement.html("Totalpris: " + totalCost + " €");
             $(document.getElementById("ticket-id-" + ticket.id)).remove();

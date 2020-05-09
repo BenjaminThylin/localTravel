@@ -75,17 +75,17 @@ function getSearchResultTemplate(data)
 {
     let output = "";
     data.times.forEach(function(time){
-        output += '<div class="col-md-12 m-4 border" id="search-item-' + data.id + '-' + time.time.departure + '">\
+        output += '<div class="col-md-12 m-4 border" id="search-item-' + data.id + '-' + time.departure + '">\
                     <div class="col-md-12">\
                         <div class="display-4 mb-2">'+ data.from +' --> '+ data.to +'</div>\
                     </div>\
                     <div class="col-md-12">\
-                        <div class="display-5 mb-2">'+ time.time.departure +' --> ' + time.time.arrival + '</div>\
+                        <div class="display-5 mb-2">'+ time.departure +' --> ' + time.arrival + '</div>\
                     </div>\
-                    <div id="input-ticket-options-id-'+ data.id +'-'+ time.time.departure +'" class="form-group row no-display">\
+                    <div id="input-ticket-options-id-'+ data.id +'-'+ time.departure +'" class="form-group row no-display">\
                         <div class="col-md-2">\
                             <label for="ticket-type">Biljettyp:</label>\
-                            <select class="form-control" id="ticket-type-'+ data.id +'-'+ time.time.departure +'">\
+                            <select class="form-control" id="ticket-type-'+ data.id +'-'+ time.departure +'">\
                                 <option value="once">Enkelbiljett</option>\
                                 <option value="10-times">10-gångs kort</option>\
                                 <option value="month">Månadskort</option>\
@@ -93,7 +93,7 @@ function getSearchResultTemplate(data)
                         </div>\
                         <div class="col-md-2">\
                             <label for="discount-type">Rabattyp:</label>\
-                            <select class="form-control" id="discount-type-'+ data.id +'-'+ time.time.departure +'">\
+                            <select class="form-control" id="discount-type-'+ data.id +'-'+ time.departure +'">\
                                 <option value="regular">Vuxen</option>\
                                 <option value="child">Barn</option>\
                                 <option value="student">Studerande</option>\
@@ -103,11 +103,11 @@ function getSearchResultTemplate(data)
                         </div>\
                         <br>\
                         <div class="col-md-2">\
-                            <button class="btn ticket-add-to-cart" id="add-to-cart-id-'+ data.id +'-'+ time.time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
+                            <button class="btn ticket-add-to-cart" id="add-to-cart-id-'+ data.id +'-'+ time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
                         </div>\
                     </div>\
                     <div class="text-center">\
-                        <button class="btn pricetag" id="ticket-info-id-'+ data.id +'-'+ time.time.departure +'" type="button">'+ time.price +'€</button>\
+                        <button class="btn pricetag" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">'+ time.price +'€</button>\
                     </div>\
                 </div>';
     });
