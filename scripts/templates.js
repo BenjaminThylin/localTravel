@@ -115,94 +115,110 @@ function getSearchResultTemplate(data)
 }
 /**
  * returns alteration form element for a ticket
- * @param {TimeTalbeItem} ticket 
+ * @param {TimeTalbeItem} ticket null by default, if left as null it will return a empty alteration form for a new ticket 
  */
-function getTicketAlterationForm(ticket)
+function getTicketAlterationTemplate(ticket = null)
 {
-    return '<div class="col-md-12 m-4 border" id="search-item- + data.id + - + time.departure + ">\
-                        <div class="col-md-12">\
-                            <div class="display-4 mb-2">data.from -> data.to </div>\
-                        </div>\
-                        <div id="" class="form-group row">\
-                            <div class="col-12 font-weight-bold">\
-                                Dagar:\
+
+    if(ticket != null){
+        let times = "";
+        ticket.times.forEach(function(time){
+            times += getTicketTimeAlterationElements(time);
+        });
+        return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'">\
+                            <div class="col-md-12">\
+                                <div class="display-4 mb-2">' + ticket.from + '->' + ticket.to + '</div>\
                             </div>\
-                            <div class="col-12 p-4">\
-                                <div class="row border-bottom">\
-                                    <div class="col-lg-1 col-md-12">\
-                                        <div class="custom-control custom-checkbox">\
-                                            <input type="checkbox" class="custom-control-input" id="input-edit-monday">\
-                                            <label class="custom-control-label" for="input-edit-monday">mon</label>\
+                            <div id="ticket-options-' + ticket.id + '" class="form-group row no-display">\
+                                <div class="col-12 font-weight-bold">\
+                                    Dagar:\
+                                </div>\
+                                <div class="col-12 p-4">\
+                                    <div class="row border-bottom">\
+                                        <div class="col-lg-1 col-md-12">\
+                                            <div class="custom-control custom-checkbox">\
+                                                <input type="checkbox" class="custom-control-input" id="input-edit-monday-' + ticket.id + '">\
+                                                <label class="custom-control-label" for="input-edit-monday">mon</label>\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-lg-1 col-md-12">\
+                                            <div class="custom-control custom-checkbox">\
+                                                <input type="checkbox" class="custom-control-input" id="input-edit-thusday-' + ticket.id + '">\
+                                                <label class="custom-control-label" for="input-edit-thusday">tis</label>\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-lg-1 col-md-12">\
+                                            <div class="custom-control custom-checkbox">\
+                                                <input type="checkbox" class="custom-control-input" id="input-edit-wednesday-' + ticket.id + '">\
+                                                <label class="custom-control-label" for="input-edit-wednesday">ons</label>\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-lg-1 col-md-12">\
+                                            <div class="custom-control custom-checkbox">\
+                                                <input type="checkbox" class="custom-control-input" id="input-edit-thursday-' + ticket.id + '">\
+                                                <label class="custom-control-label" for="input-edit-thursday">tors</label>\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-lg-1 col-md-12">\
+                                            <div class="custom-control custom-checkbox">\
+                                                <input type="checkbox" class="custom-control-input" id="input-edit-friday-' + ticket.id + '">\
+                                                <label class="custom-control-label" for="input-edit-friday">fre</label>\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-lg-1 col-md-12">\
+                                            <div class="custom-control custom-checkbox">\
+                                                <input type="checkbox" class="custom-control-input" id="input-edit-saturday-' + ticket.id + '">\
+                                                <label class="custom-control-label" for="input-edit-saturday">lör</label>\
+                                            </div>\
+                                        </div>\
+                                        <div class="col-lg-1 col-md-12">\
+                                            <div class="custom-control custom-checkbox">\
+                                                <input type="checkbox" class="custom-control-input" id="input-edit-sunday-' + ticket.id + '">\
+                                                <label class="custom-control-label" for="input-edit-sunday">sön</label>\
+                                            </div>\
                                         </div>\
                                     </div>\
-                                    <div class="col-lg-1 col-md-12">\
-                                        <div class="custom-control custom-checkbox">\
-                                            <input type="checkbox" class="custom-control-input" id="input-edit-thusday">\
-                                            <label class="custom-control-label" for="input-edit-thusday">tis</label>\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-lg-1 col-md-12">\
-                                        <div class="custom-control custom-checkbox">\
-                                            <input type="checkbox" class="custom-control-input" id="input-edit-wednesday">\
-                                            <label class="custom-control-label" for="input-edit-wednesday">ons</label>\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-lg-1 col-md-12">\
-                                        <div class="custom-control custom-checkbox">\
-                                            <input type="checkbox" class="custom-control-input" id="input-edit-thursday">\
-                                            <label class="custom-control-label" for="input-edit-thursday">tors</label>\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-lg-1 col-md-12">\
-                                        <div class="custom-control custom-checkbox">\
-                                            <input type="checkbox" class="custom-control-input" id="input-edit-friday">\
-                                            <label class="custom-control-label" for="input-edit-friday">fre</label>\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-lg-1 col-md-12">\
-                                        <div class="custom-control custom-checkbox">\
-                                            <input type="checkbox" class="custom-control-input" id="input-edit-saturday">\
-                                            <label class="custom-control-label" for="input-edit-saturday">lör</label>\
-                                        </div>\
-                                    </div>\
-                                    <div class="col-lg-1 col-md-12">\
-                                        <div class="custom-control custom-checkbox">\
-                                            <input type="checkbox" class="custom-control-input" id="input-edit-sunday">\
-                                            <label class="custom-control-label" for="input-edit-sunday">sön</label>\
-                                        </div>\
-                                    </div>\
+                                </div>'
+                                + times +
+                                '<div class="col-12 text-center mt-2">\
+                                    <button class="btn ticket-add-to-cart" id="add-to-cart-id-+ data.id +-+ time.departure +" type="button">Spara biljett</button>\
                                 </div>\
                             </div>\
-                            <div class="col-12">\
-                                <form>\
-                                <div class="form-row">\
-                                        <div class="col-6 form-group">\
-                                            <label for="input-time">Avfärdstid</label>\
-                                            <input type="text" class="form-control" id="input-time1">\
-                                        </div>\
-                                        <div class="col-6 form-group">\
-                                            <label for="input-time">ankomstid</label>\
-                                            <input type="text" class="form-control" id="input-time1">\
-                                        </div>\
-                                </div>\
-                                <div class="form-row border-bottom">\
-                                        <div class="col-6 form-group">\
-                                            <label for="input-time">price</label>\
-                                            <input type="text" class="form-control" id="input-price1">\
-                                        </div>\
-                                        <div class="col-6 form-group">\
-                                            <br>\
-                                            <button type="submit" class="btn btn-primary mb-2">Submit</button>\
-                                        </div>\
-                                </div>\
-                                </form>\
+                            <div class="text-center">\
+                                <button class="btn pricetag" id="" type="button">EDIT</button>\
                             </div>\
-                            <div class="col-12 text-center mt-2">\
-                                <button class="btn ticket-add-to-cart" id="add-to-cart-id-+ data.id +-+ time.departure +" type="button">Spara biljett</button>\
+                        </div>';
+    }
+
+    function getTicketTimeAlterationElements(time)
+    {
+        return '<div class="col-12">\
+                    <form>\
+                    <div class="form-row">\
+                            <div class="col-6 form-group">\
+                                <label for="input-time">Avfärdstid</label>\
+                                <input type="text" class="form-control" value="' + ticket.departure + '" id="input-time-'+ time.id +'">\
                             </div>\
-                        </div>\
-                        <div class="text-center">\
-                            <button class="btn pricetag" id="" type="button">EDIT</button>\
-                        </div>\
-                    </div>';
+                            <div class="col-6 form-group">\
+                                <label for="input-time">ankomstid</label>\
+                                <input type="text" class="form-control" value="' + ticket.arrival + '" id="input-time-'+ time.id +'">\
+                            </div>\
+                    </div>\
+                    <div class="form-row border-bottom">\
+                            <div class="col-6 form-group">\
+                                <label for="input-time">price</label>\
+                                <input type="text" class="form-control" value="' + ticket.price + '"id="input-price-'+ time.id +'">\
+                            </div>\
+                            <div class="col-3 form-group">\
+                                <br>\
+                                <button type="submit" class="btn mb-2" id="input-save-time-'+ time.id +'>Spara tid</button>\
+                            </div>\
+                            <div class="col-3 form-group">\
+                                <br>\
+                                <button type="submit" class="btn mb-2" id="input-remove-item-'+ time.id +'>Ta bort tid</button>\
+                            </div>\
+                    </div>\
+                    </form>\
+                </div>';
+    }
 }

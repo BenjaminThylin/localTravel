@@ -10,7 +10,7 @@ $(".stats-wrapper").ready(function(){
     soldTicketsSpan.html(soldTickets.length);
     totalIncome.html(getTotalIncome() + "€");
     
-    soldTickets.forEach(function(){
+    soldTickets.forEach(function(ticket){
         statsTableBody.append(
             `<tr>
             <td>`+ ticket.from + `</td>
