@@ -2,6 +2,18 @@
  * ticket object
  */
 class Ticket {
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} date shotrt date string 
+     * @param {string} to 
+     * @param {string} from 
+     * @param {string} departure text representing departure in MT 
+     * @param {string} arrival text representing arrival in MT
+     * @param {number} price 
+     * @param {string} discount 
+     * @param {string} type 
+     */
     constructor(id, date, to, from, departure, arrival, price, discount, type) {
         this.id = id;
         this.date = date;
@@ -125,7 +137,7 @@ var searchData = {
     to:             "",
     departureData:  ""
 };
-var discount = [
+const discount = [
     {
         id: "regular",
         procentage: 1
@@ -147,7 +159,7 @@ var discount = [
         procentage: 0.75
     }
 ];
-var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
+const stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
 /**
  * A collection of shoppingCartItems
  */

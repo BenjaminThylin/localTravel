@@ -10,7 +10,7 @@ $(".stats-wrapper").ready(function(){
     soldTicketsSpan.html(soldTickets.length);
     totalIncome.html(getTotalIncome() + "€");
     
-    soldTickets.forEach(ticket => {
+    soldTickets.forEach(function(){
         statsTableBody.append(
             `<tr>
             <td>`+ ticket.from + `</td>
@@ -26,7 +26,7 @@ $(".stats-wrapper").ready(function(){
 
 function getTotalIncome() {
     let totalIncome = 0;
-    soldTickets.forEach(ticket => {
+    soldTickets.forEach(function(ticket){
         totalIncome += ticket.price;
     });
     return totalIncome;

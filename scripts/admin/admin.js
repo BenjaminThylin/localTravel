@@ -9,9 +9,9 @@ $(document).ready(function(){
         ticketsButton.removeClass("active");
         if (statsButton.hasClass("active")) {
             if (ticketsWrapper.hasClass("show")) {
-                ticketsWrapper.removeClass("show")
+                ticketsWrapper.removeClass("show");
             }
-            statsWrapper.addClass("show")
+            statsWrapper.addClass("show");
         }
     });
     
@@ -20,9 +20,9 @@ $(document).ready(function(){
         statsButton.removeClass("active");
         if (ticketsButton.hasClass("active")) {
             if (statsWrapper.hasClass("show")) {
-                statsWrapper.removeClass("show")
+                statsWrapper.removeClass("show");
             }
-            ticketsWrapper.addClass("show")
+            ticketsWrapper.addClass("show");
         }
-    });
+    }).trigger("click"); //for testing
 });
