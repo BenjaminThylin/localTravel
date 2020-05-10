@@ -125,6 +125,7 @@ function getTicketAlterationTemplate(ticket = null)
         ticket.times.forEach(function(time){
             times += getTicketTimeAlterationElements(time);
         });
+        let days = getTicketDaysElements(ticket.days);
         return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'">\
                             <div class="col-md-12">\
                                 <div class="display-4 mb-2">' + ticket.from + '->' + ticket.to + '</div>\
@@ -134,58 +135,17 @@ function getTicketAlterationTemplate(ticket = null)
                                     Dagar:\
                                 </div>\
                                 <div class="col-12 p-4">\
-                                    <div class="row border-bottom">\
-                                        <div class="col-lg-1 col-md-12">\
-                                            <div class="custom-control custom-checkbox">\
-                                                <input type="checkbox" class="custom-control-input" id="input-edit-monday-' + ticket.id + '">\
-                                                <label class="custom-control-label" for="input-edit-monday">mon</label>\
-                                            </div>\
-                                        </div>\
-                                        <div class="col-lg-1 col-md-12">\
-                                            <div class="custom-control custom-checkbox">\
-                                                <input type="checkbox" class="custom-control-input" id="input-edit-thusday-' + ticket.id + '">\
-                                                <label class="custom-control-label" for="input-edit-thusday">tis</label>\
-                                            </div>\
-                                        </div>\
-                                        <div class="col-lg-1 col-md-12">\
-                                            <div class="custom-control custom-checkbox">\
-                                                <input type="checkbox" class="custom-control-input" id="input-edit-wednesday-' + ticket.id + '">\
-                                                <label class="custom-control-label" for="input-edit-wednesday">ons</label>\
-                                            </div>\
-                                        </div>\
-                                        <div class="col-lg-1 col-md-12">\
-                                            <div class="custom-control custom-checkbox">\
-                                                <input type="checkbox" class="custom-control-input" id="input-edit-thursday-' + ticket.id + '">\
-                                                <label class="custom-control-label" for="input-edit-thursday">tors</label>\
-                                            </div>\
-                                        </div>\
-                                        <div class="col-lg-1 col-md-12">\
-                                            <div class="custom-control custom-checkbox">\
-                                                <input type="checkbox" class="custom-control-input" id="input-edit-friday-' + ticket.id + '">\
-                                                <label class="custom-control-label" for="input-edit-friday">fre</label>\
-                                            </div>\
-                                        </div>\
-                                        <div class="col-lg-1 col-md-12">\
-                                            <div class="custom-control custom-checkbox">\
-                                                <input type="checkbox" class="custom-control-input" id="input-edit-saturday-' + ticket.id + '">\
-                                                <label class="custom-control-label" for="input-edit-saturday">lör</label>\
-                                            </div>\
-                                        </div>\
-                                        <div class="col-lg-1 col-md-12">\
-                                            <div class="custom-control custom-checkbox">\
-                                                <input type="checkbox" class="custom-control-input" id="input-edit-sunday-' + ticket.id + '">\
-                                                <label class="custom-control-label" for="input-edit-sunday">sön</label>\
-                                            </div>\
-                                        </div>\
-                                    </div>\
+                                    <div class="row border-bottom">'
+                                        + days +
+                                    '</div>\
                                 </div>'
                                 + times +
                                 '<div class="col-12 text-center mt-2">\
-                                    <button class="btn ticket-add-to-cart" id="add-to-cart-id-+ data.id +-+ time.departure +" type="button">Spara biljett</button>\
+                                    <button class="btn ticket-add-to-cart" id="input-add-to-timetable-' + ticket.id + '" type="button">Spara biljett</button>\
                                 </div>\
                             </div>\
                             <div class="text-center">\
-                                <button class="btn pricetag" id="" type="button">EDIT</button>\
+                                <button class="btn pricetag" id="input-show-options-' + ticket.id + '" type="button">EDIT</button>\
                             </div>\
                         </div>';
     }
@@ -197,28 +157,43 @@ function getTicketAlterationTemplate(ticket = null)
                     <div class="form-row">\
                             <div class="col-6 form-group">\
                                 <label for="input-time">Avfärdstid</label>\
-                                <input type="text" class="form-control" value="' + ticket.departure + '" id="input-time-'+ time.id +'">\
+                                <input type="text" class="form-control" value="' + time.departure + '" id="input-time-'+ time.id +'">\
                             </div>\
                             <div class="col-6 form-group">\
                                 <label for="input-time">ankomstid</label>\
-                                <input type="text" class="form-control" value="' + ticket.arrival + '" id="input-time-'+ time.id +'">\
+                                <input type="text" class="form-control" value="' + time.arrival + '" id="input-time-'+ time.id +'">\
                             </div>\
                     </div>\
                     <div class="form-row border-bottom">\
                             <div class="col-6 form-group">\
                                 <label for="input-time">price</label>\
-                                <input type="text" class="form-control" value="' + ticket.price + '"id="input-price-'+ time.id +'">\
+                                <input type="text" class="form-control" value="' + time.price + '"id="input-price-'+ time.id +'">\
                             </div>\
                             <div class="col-3 form-group">\
                                 <br>\
-                                <button type="submit" class="btn mb-2" id="input-save-time-'+ time.id +'>Spara tid</button>\
+                                <button type="submit" class="btn mb-2" id="input-save-time-'+ time.id +'">Spara tid</button>\
                             </div>\
                             <div class="col-3 form-group">\
                                 <br>\
-                                <button type="submit" class="btn mb-2" id="input-remove-item-'+ time.id +'>Ta bort tid</button>\
+                                <button type="submit" class="btn mb-2" id="input-remove-item-'+ time.id +'">Ta bort tid</button>\
                             </div>\
                     </div>\
                     </form>\
                 </div>';
+    }
+    function getTicketDaysElements(days)
+    {
+        daysString = ["mon","tis", "ons", "tor", "fre", "lör", "sön"];
+        let output = "";
+        for(let i = 0; i < days.length; i++)
+        {
+            output += '<div class="col-lg-1 col-md-12">\
+                            <div class="custom-control custom-checkbox">\
+                                <input type="checkbox" class="custom-control-input" id="input-edit-day-'+(i+1)+'-id' + ticket.id + '">\
+                                <label class="custom-control-label" for="input-edit-monday">' + daysString[i] + '</label>\
+                            </div>\
+                        </div>'            
+        }
+        return output;
     }
 }

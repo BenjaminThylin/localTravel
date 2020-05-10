@@ -88,73 +88,7 @@ class TimeTalbeItem {
         this.times = times
     }
 }
-var timeTable = [
-    new TimeTalbeItem(
-        1, "Jakobstad", "Vasa",
-        [true,true,true,true,true,true,false],
-        [
-            new Time(1, "05:00", "6:30", 15),
-            new Time(2, "10:00", "11:30", 15),
-            new Time(3, "14:20", "15:50", 16),
-            new Time(4, "21:00", "22:30", 14)
-        ]
-    ),
-    new TimeTalbeItem(
-        2, "Jakobstad", "Nykarleby",
-        [true,true,true,true,true,true,false],
-        [
-            new Time(1, "05:00", "05:20", 7),
-            new Time(2, "10:00", "10:20", 7),
-            new Time(3, "14:20", "14:40", 7),
-            new Time(4, "21:00", "21:20", 7)
-        ]
-    ),
-    new TimeTalbeItem(
-        3, "Vasa", "Jakobstad",
-        [true,true,false,true,true,false,false],
-        [
-            new Time(1, "06:00", "07:30", 25),
-            new Time(2, "16:00", "17:30", 25),
-            new Time(3, "18:00", "19:30", 25),
-            new Time(4, "22:15", "23:45", 25)
-        ]
-    ),
-    new TimeTalbeItem(
-        4, "Vasa", "Karleby",
-        [true,true,true,true,true,true,false],
-        [
-            new Time(1, "08:00", "09:45", 25),
-            new Time(2, "16:00", "17:45", 25),
-            new Time(3, "21:00", "22:45", 25),
-        ]
-    ),
-    new TimeTalbeItem(
-        5, "Vasa", "Åbo",
-        [false,true,false,true,false,true,false],
-        [
-            new Time(1, "08:00", "20:00", 35),
-            new Time(2, "21:00", "09:00", 20),
-        ]
-    ),
-    new TimeTalbeItem(
-        6, "Karleby", "Vasa",
-        [true,true,true,true,true,false,false],
-        [
-            new Time(1, "05:00", "7:25", 22),
-            new Time(2, "09:00", "11:10", 20),
-            new Time(3, "13:30", "15:55", 22),
-        ]
-    ),
-    new TimeTalbeItem(
-        7, "Åbo", "Vasa",
-        [true,true,true,true,true,false,false],
-        [
-            new Time(1, "05:00", "17:00", 32),
-            new Time(2, "11:00", "23:00", 35),
-            new Time(3, "22:00", "10:00", 22),
-        ]
-    )
-];
+var timeTable = [];
 /**
  * Saves provided array to localStorage
  * @param {*} key the name of the local storage item
@@ -173,6 +107,18 @@ function pushToLocalStorage(key, collection, append = true){
     localStorage.setItem(key, JSON.stringify(collection));
 }
 /**
+ * returns an array from localstorage
+ * @param {string} key name of the localstorage item
+ */
+function loadFromLocalStorage(key){
+    let storageString = localStorage.getItem(key)
+    let collection = [];
+    if(storageString !== null && storageString !== undefined)
+        collection = JSON.parse(storageString);
+    
+    return collection;
+}
+/**
  * @param {*} type string representing the type of discount
  */
 function getDiscount(type){
@@ -182,4 +128,83 @@ function getDiscount(type){
             returnVal = disc.procentage;
     });
     return returnVal;
+}
+/**
+ * Inits time table this is for testing purposes
+ */
+function initTimeTable(){
+    collection = loadFromLocalStorage("timeTable");
+    if(collection.length === 0)
+    {
+        collection = [
+            new TimeTalbeItem(
+                1, "Jakobstad", "Vasa",
+                [true,true,true,true,true,true,false],
+                [
+                    new Time(1, "05:00", "6:30", 15),
+                    new Time(2, "10:00", "11:30", 15),
+                    new Time(3, "14:20", "15:50", 16),
+                    new Time(4, "21:00", "22:30", 14)
+                ]
+            ),
+            new TimeTalbeItem(
+                2, "Jakobstad", "Nykarleby",
+                [true,true,true,true,true,true,false],
+                [
+                    new Time(1, "05:00", "05:20", 7),
+                    new Time(2, "10:00", "10:20", 7),
+                    new Time(3, "14:20", "14:40", 7),
+                    new Time(4, "21:00", "21:20", 7)
+                ]
+            ),
+            new TimeTalbeItem(
+                3, "Vasa", "Jakobstad",
+                [true,true,false,true,true,false,false],
+                [
+                    new Time(1, "06:00", "07:30", 25),
+                    new Time(2, "16:00", "17:30", 25),
+                    new Time(3, "18:00", "19:30", 25),
+                    new Time(4, "22:15", "23:45", 25)
+                ]
+            ),
+            new TimeTalbeItem(
+                4, "Vasa", "Karleby",
+                [true,true,true,true,true,true,false],
+                [
+                    new Time(1, "08:00", "09:45", 25),
+                    new Time(2, "16:00", "17:45", 25),
+                    new Time(3, "21:00", "22:45", 25),
+                ]
+            ),
+            new TimeTalbeItem(
+                5, "Vasa", "Åbo",
+                [false,true,false,true,false,true,false],
+                [
+                    new Time(1, "08:00", "20:00", 35),
+                    new Time(2, "21:00", "09:00", 20),
+                ]
+            ),
+            new TimeTalbeItem(
+                6, "Karleby", "Vasa",
+                [true,true,true,true,true,false,false],
+                [
+                    new Time(1, "05:00", "7:25", 22),
+                    new Time(2, "09:00", "11:10", 20),
+                    new Time(3, "13:30", "15:55", 22),
+                ]
+            ),
+            new TimeTalbeItem(
+                7, "Åbo", "Vasa",
+                [true,true,true,true,true,false,false],
+                [
+                    new Time(1, "05:00", "17:00", 32),
+                    new Time(2, "11:00", "23:00", 35),
+                    new Time(3, "22:00", "10:00", 22),
+                ]
+            )
+        ];
+        pushToLocalStorage("timeTable", collection, false);
+    }
+
+    return collection;
 }

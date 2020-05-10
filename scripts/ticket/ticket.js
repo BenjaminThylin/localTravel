@@ -4,6 +4,8 @@
  *      - scripts/templates.js
  */
 $(document).ready(function(){
+    //inits timeTable
+    timeTable = initTimeTable();
     //hides all error outputs
     $("[error]").each(function(){
         $(this).hide();

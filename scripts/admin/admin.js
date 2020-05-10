@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    //inits timeTable
+    timeTable = initTimeTable();
     let statsButton = $("#stats");
     let ticketsButton = $("#tickets");
     let statsWrapper = $(".stats-wrapper");
@@ -25,4 +27,18 @@ $(document).ready(function(){
             ticketsWrapper.addClass("show");
         }
     }).trigger("click"); //for testing
+
+    //sets functionallity for editing tickets
+    timeTable.forEach(function(ticket){
+        ticketsWrapper.append(getTicketAlterationTemplate(ticket));
+        let ticketOptionsElement = $("#ticket-options-" + ticket.id);
+        $("#input-show-options-" + ticket.id).on("click", function(){
+            console.log(ticketOptionsElement);
+            if(ticketOptionsElement.is(":visible"))
+                ticketOptionsElement.hide()
+            else
+                ticketOptionsElement.show();
+        })
+
+    });
 });
