@@ -148,7 +148,6 @@ var discount = [
     }
 ];
 var stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
-var displayedTickets = []; // what is the point of this thing?
 /**
  * A collection of shoppingCartItems
  */

@@ -154,7 +154,6 @@ function populateSearchOutput(results){
                 shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
                 addTicketToCart(newTicket);
             });
-            displayedTickets.push(elementID);
         });
     });
 }
