@@ -1,6 +1,7 @@
 /**
  * returns an option element with passed value and text
- * @param {*} option the value and name of the option
+ * @param {string} option the value and name of the option
+ * @returns {string} string representing html element
  */
 function getOptionTemplate(option)
 {
@@ -9,6 +10,7 @@ function getOptionTemplate(option)
 /**
  * returns a ticket element
  * @param {*} ticket takes a ticket object as data
+ * @returns {string} string representing html element
  */
 function getTicketTemplate(ticket){
     let discountType, ticketType;
@@ -70,6 +72,7 @@ function getTicketTemplate(ticket){
 /**
  * 
  * @param {*} data takes a timeTable object as input 
+ * @returns {string} string representing html element
  */
 function getSearchResultTemplate(data)
 {
@@ -116,17 +119,17 @@ function getSearchResultTemplate(data)
 /**
  * returns alteration form element for a ticket
  * @param {TimeTableItem} ticket null by default, if left as null it will return a empty alteration form for a new ticket 
+ * @returns {string} string representing html element
  */
 function getTicketAlterationTemplate(ticket = null)
 {
-
     if(ticket != null){
         let times = "";
         ticket.times.forEach(function(time){
             times += getTicketTimeAlterationElements(time);
         });
         let days = getTicketDaysElements(ticket.days);
-        return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'">\
+        return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'" name="alter-tickets-element">\
                             <div class="col-md-12">\
                                 <div class="display-4 mb-2">' + ticket.from + '->' + ticket.to + '</div>\
                             </div>\
