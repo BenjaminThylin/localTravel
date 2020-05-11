@@ -71,7 +71,7 @@ class Time{
 /**
  * time table item contains data about availible routes
  */
-class TimeTalbeItem {
+class TimeTableItem {
     /**
      * Creates a timeTable object
      * @param {number} id 
@@ -137,7 +137,7 @@ function initTimeTable(){
     if(collection.length === 0)
     {
         collection = [
-            new TimeTalbeItem(
+            new TimeTableItem(
                 1, "Jakobstad", "Vasa",
                 [true,true,true,true,true,true,false],
                 [
@@ -147,7 +147,7 @@ function initTimeTable(){
                     new Time(4, "21:00", "22:30", 14)
                 ]
             ),
-            new TimeTalbeItem(
+            new TimeTableItem(
                 2, "Jakobstad", "Nykarleby",
                 [true,true,true,true,true,true,false],
                 [
@@ -157,7 +157,7 @@ function initTimeTable(){
                     new Time(4, "21:00", "21:20", 7)
                 ]
             ),
-            new TimeTalbeItem(
+            new TimeTableItem(
                 3, "Vasa", "Jakobstad",
                 [true,true,false,true,true,false,false],
                 [
@@ -167,7 +167,7 @@ function initTimeTable(){
                     new Time(4, "22:15", "23:45", 25)
                 ]
             ),
-            new TimeTalbeItem(
+            new TimeTableItem(
                 4, "Vasa", "Karleby",
                 [true,true,true,true,true,true,false],
                 [
@@ -176,7 +176,7 @@ function initTimeTable(){
                     new Time(3, "21:00", "22:45", 25),
                 ]
             ),
-            new TimeTalbeItem(
+            new TimeTableItem(
                 5, "Vasa", "Åbo",
                 [false,true,false,true,false,true,false],
                 [
@@ -184,7 +184,7 @@ function initTimeTable(){
                     new Time(2, "21:00", "09:00", 20),
                 ]
             ),
-            new TimeTalbeItem(
+            new TimeTableItem(
                 6, "Karleby", "Vasa",
                 [true,true,true,true,true,false,false],
                 [
@@ -193,7 +193,7 @@ function initTimeTable(){
                     new Time(3, "13:30", "15:55", 22),
                 ]
             ),
-            new TimeTalbeItem(
+            new TimeTableItem(
                 7, "Åbo", "Vasa",
                 [true,true,true,true,true,false,false],
                 [

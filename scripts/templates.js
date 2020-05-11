@@ -115,7 +115,7 @@ function getSearchResultTemplate(data)
 }
 /**
  * returns alteration form element for a ticket
- * @param {TimeTalbeItem} ticket null by default, if left as null it will return a empty alteration form for a new ticket 
+ * @param {TimeTableItem} ticket null by default, if left as null it will return a empty alteration form for a new ticket 
  */
 function getTicketAlterationTemplate(ticket = null)
 {

@@ -1,2 +1,2 @@
-var timeTalbe = [];
+var timeTable = [];
 var soldTickets = [];
