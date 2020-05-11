@@ -56,20 +56,19 @@ class Ticket {
 class Time{
     /**
      * Creates a Time object
-     * @param {number} id
      * @param {string} departure a string representing the departure time in MT
      * @param {string} arrival a string representing the arrival  time in MT
      * @param {number} price default price for this item
      */
-    constructor(id, departure, arrival, price){
-        this.id = id;
+    constructor(departure, arrival, price){
+        this.id = null;
         this.departure = departure;
         this.arrival = arrival;
         this.price = price;
     }
 }
 /**
- * time table item contains data about availible routes
+ * time table item contains data about availible routes and methods that can manipulate it
  */
 class TimeTableItem {
     /**
@@ -85,7 +84,54 @@ class TimeTableItem {
         this.from = from;
         this.to = to;
         this.days = days;
-        this.times = times
+        this.times = [];
+        for(let i = 0; i < times.length; i++)
+            this.addTime(times[i]);
+    }
+    /**
+     * Removes specified time
+     * @param {Time} time time object to remove 
+     */
+    removeTime(time){
+        for(let i = 0; i < this.times.length; i++)
+        {
+            if(time.id === this.times[i].id)
+            {
+                this.times.splice(i, 1);
+                break;
+            }
+        }
+    }
+    /**
+     * adds time to the times array
+     * @param {Time} time 
+     */
+    addTime(time){
+        //finds the biggest id in times
+        let biggest = 0;
+        this.times.forEach(function(t){
+            if(t.id > biggest)
+                biggest = t.id;
+        });
+        biggest++;
+        time.id = biggest;
+        this.times.push(time);
+    }
+    /**
+     * edits a specific time in the timeTable object
+     * @param {number} id 
+     * @param {string} departure departure time in MT
+     * @param {string} arrival arrival time in MT
+     * @param {number} price 
+     */
+    editTime(id, departure, arrival, price){
+        this.times.forEach(function(time){
+            if(time.id === id){
+                time.departure = departure;
+                time.arrival = arrival;
+                time.price = price;
+            }
+        });
     }
 }
 var timeTable = [];
@@ -130,10 +176,11 @@ function getDiscount(type){
     return returnVal;
 }
 /**
- * Inits time table !THIS IS FOR TESTING PURPOSES!
+ * Inits time table
  */
 function initTimeTable(){
     collection = loadFromLocalStorage("timeTable");
+    // !THIS IS FOR TESTING PURPOSES!
     if(collection.length === 0)
     {
         collection = [
@@ -141,70 +188,81 @@ function initTimeTable(){
                 1, "Jakobstad", "Vasa",
                 [true,true,true,true,true,true,false],
                 [
-                    new Time(1, "05:00", "6:30", 15),
-                    new Time(2, "10:00", "11:30", 15),
-                    new Time(3, "14:20", "15:50", 16),
-                    new Time(4, "21:00", "22:30", 14)
+                    new Time("05:00", "6:30", 15),
+                    new Time("10:00", "11:30", 15),
+                    new Time("14:20", "15:50", 16),
+                    new Time("21:00", "22:30", 14)
                 ]
             ),
             new TimeTableItem(
                 2, "Jakobstad", "Nykarleby",
                 [true,true,true,true,true,true,false],
                 [
-                    new Time(1, "05:00", "05:20", 7),
-                    new Time(2, "10:00", "10:20", 7),
-                    new Time(3, "14:20", "14:40", 7),
-                    new Time(4, "21:00", "21:20", 7)
+                    new Time("05:00", "05:20", 7),
+                    new Time("10:00", "10:20", 7),
+                    new Time("14:20", "14:40", 7),
+                    new Time("21:00", "21:20", 7)
                 ]
             ),
             new TimeTableItem(
                 3, "Vasa", "Jakobstad",
                 [true,true,false,true,true,false,false],
                 [
-                    new Time(1, "06:00", "07:30", 25),
-                    new Time(2, "16:00", "17:30", 25),
-                    new Time(3, "18:00", "19:30", 25),
-                    new Time(4, "22:15", "23:45", 25)
+                    new Time("06:00", "07:30", 25),
+                    new Time("16:00", "17:30", 25),
+                    new Time("18:00", "19:30", 25),
+                    new Time("22:15", "23:45", 25)
                 ]
             ),
             new TimeTableItem(
                 4, "Vasa", "Karleby",
                 [true,true,true,true,true,true,false],
                 [
-                    new Time(1, "08:00", "09:45", 25),
-                    new Time(2, "16:00", "17:45", 25),
-                    new Time(3, "21:00", "22:45", 25),
+                    new Time("08:00", "09:45", 25),
+                    new Time("16:00", "17:45", 25),
+                    new Time("21:00", "22:45", 25),
                 ]
             ),
             new TimeTableItem(
                 5, "Vasa", "Åbo",
                 [false,true,false,true,false,true,false],
                 [
-                    new Time(1, "08:00", "20:00", 35),
-                    new Time(2, "21:00", "09:00", 20),
+                    new Time("08:00", "20:00", 35),
+                    new Time("21:00", "09:00", 20),
                 ]
             ),
             new TimeTableItem(
                 6, "Karleby", "Vasa",
                 [true,true,true,true,true,false,false],
                 [
-                    new Time(1, "05:00", "7:25", 22),
-                    new Time(2, "09:00", "11:10", 20),
-                    new Time(3, "13:30", "15:55", 22),
+                    new Time("05:00", "7:25", 22),
+                    new Time("09:00", "11:10", 20),
+                    new Time("13:30", "15:55", 22),
                 ]
             ),
             new TimeTableItem(
                 7, "Åbo", "Vasa",
                 [true,true,true,true,true,false,false],
                 [
-                    new Time(1, "05:00", "17:00", 32),
-                    new Time(2, "11:00", "23:00", 35),
-                    new Time(3, "22:00", "10:00", 22),
+                    new Time("05:00", "17:00", 32),
+                    new Time("11:00", "23:00", 35),
+                    new Time("22:00", "10:00", 22),
                 ]
             )
         ];
         pushToLocalStorage("timeTable", collection, false);
     }
-
+    else //because JSON.stringify axes methods since they are not pure data we have to reinstantiate the TimeTable ojbects when reading them from localstorage
+    {
+        let tempCollection = [];
+        collection.forEach(function(route){
+            let newTimes = [];
+            route.times.forEach(function(time){
+                newTimes.push(new Time(time.departure,time.arrival,time.price));
+            });
+            tempCollection.push(new TimeTableItem(route.id, route.from, route.to, route.days, newTimes));
+        });
+        collection = tempCollection;
+    }
     return collection;
 }

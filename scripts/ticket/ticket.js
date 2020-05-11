@@ -49,8 +49,8 @@ $(document).ready(function(){
         if(!paymentSuccessElement.is(":visible"))
             paymentSuccessElement.show();
     });
-    //hides output-payment-success element when body is clicked
-    $("#payment-success-confirm").on("click", function(){
+    //hides output-payment-success element when ok is clicked
+    $("#payment-success-confirm").click(function(){
         if(paymentSuccessElement.is(":visible"))
         {
             paymentSuccessElement.hide();

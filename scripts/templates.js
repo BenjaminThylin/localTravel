@@ -106,7 +106,7 @@ function getSearchResultTemplate(data)
                         </div>\
                         <br>\
                         <div class="col-md-2">\
-                            <button class="btn ticket-add-to-cart" id="add-to-cart-id-'+ data.id +'-'+ time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
+                            <button class="btn" id="add-to-cart-id-'+ data.id +'-'+ time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
                         </div>\
                     </div>\
                     <div class="text-center">\
@@ -126,7 +126,7 @@ function getTicketAlterationTemplate(ticket = null)
     if(ticket != null){
         let times = "";
         ticket.times.forEach(function(time){
-            times += getTicketTimeAlterationElements(time);
+            times += getTicketTimeAlterationTemplate(time);
         });
         let days = getTicketDaysElements(ticket.days);
         return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'" name="alter-tickets-element">\
@@ -140,11 +140,16 @@ function getTicketAlterationTemplate(ticket = null)
                                 <div class="col-12 p-4">\
                                     <div class="row border-bottom">'
                                         + days +
-                                    '</div>\
-                                </div>'
+                                        '<div class="col-lg-1 col-md-12">\
+                                            <input class="btn" id="input-save-days-' + ticket.id + '" type="button" value="spara">\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                                <div id="ticket-times-'+ ticket.id +'">'
                                 + times +
-                                '<div class="col-12 text-center mt-2">\
-                                    <input class="btn ticket-add-to-cart" id="input-add-to-timetable-' + ticket.id + '" type="button" value="Spara biljett">\
+                                '</div>\
+                                <div class="col-12 text-center mt-2">\
+                                    <input class="btn" id="input-add-time-to-timetable-' + ticket.id + '" type="button" value="lägg till tid">\
                                 </div>\
                             </div>\
                             <div class="text-center">\
@@ -153,50 +158,55 @@ function getTicketAlterationTemplate(ticket = null)
                         </div>';
     }
 
-    function getTicketTimeAlterationElements(time)
-    {
-        return '<div class="col-12">\
-                    <form>\
-                    <div class="form-row">\
-                            <div class="col-6 form-group">\
-                                <label for="input-time">Avfärdstid</label>\
-                                <input type="text" class="form-control" value="' + time.departure + '" id="input-time-'+ time.id +'">\
-                            </div>\
-                            <div class="col-6 form-group">\
-                                <label for="input-time">ankomstid</label>\
-                                <input type="text" class="form-control" value="' + time.arrival + '" id="input-time-'+ time.id +'">\
-                            </div>\
-                    </div>\
-                    <div class="form-row border-bottom">\
-                            <div class="col-6 form-group">\
-                                <label for="input-time">price</label>\
-                                <input type="text" class="form-control" value="' + time.price + '"id="input-price-'+ time.id +'">\
-                            </div>\
-                            <div class="col-3 form-group">\
-                                <br>\
-                                <input class="btn mb-2" id="input-save-time-'+ time.id +'" type="button" value="Spara tid">\
-                            </div>\
-                            <div class="col-3 form-group">\
-                                <br>\
-                                <input class="btn mb-2" id="input-remove-item-'+ time.id +'" type="button" value="Ta bort tid"></button>\
-                            </div>\
-                    </div>\
-                    </form>\
-                </div>';
-    }
     function getTicketDaysElements(days)
     {
         daysString = ["mon","tis", "ons", "tor", "fre", "lör", "sön"];
+        let checked = "";
         let output = "";
-        for(let i = 0; i < days.length; i++)
+        for(let i = 0; i < 7; i++)
         {
+            checked = (days[i]) ? "checked" : "";
             output += '<div class="col-lg-1 col-md-12">\
-                            <div class="custom-control custom-checkbox">\
-                                <input type="checkbox" class="custom-control-input" id="input-edit-day-'+(i+1)+'-id' + ticket.id + '">\
-                                <label class="custom-control-label" for="input-edit-monday">' + daysString[i] + '</label>\
-                            </div>\
+                            <input type="checkbox" id="input-edit-day-'+ i +'-id-' + ticket.id + '" ' + checked + '>\
+                            <label for="input-edit-day-'+ i +'-id' + ticket.id + '">' + daysString[i] + '</label>\
                         </div>'            
         }
         return output;
     }
+}
+/**
+ * returns a time alteration element
+ * @param {Time} time a time object 
+ * @returns {string} string representing html element
+ */
+function getTicketTimeAlterationTemplate(time)
+{
+    return '<div class="col-12" id="time-option-id-' + time.id + '">\
+                <form>\
+                <div class="form-row">\
+                        <div class="col-6 form-group">\
+                            <label for="input-time">Avfärdstid</label>\
+                            <input type="text" class="form-control" value="' + time.departure + '" id="input-departure-time-'+ time.id +'">\
+                        </div>\
+                        <div class="col-6 form-group">\
+                            <label for="input-time">ankomstid</label>\
+                            <input type="text" class="form-control" value="' + time.arrival + '" id="input-arrival-time-'+ time.id +'">\
+                        </div>\
+                </div>\
+                <div class="form-row border-bottom">\
+                        <div class="col-6 form-group">\
+                            <label for="input-time">price</label>\
+                            <input type="text" class="form-control" value="' + time.price + '"id="input-price-'+ time.id +'">\
+                        </div>\
+                        <div class="col-3 form-group">\
+                            <br>\
+                            <input class="btn mb-2" id="input-save-time-'+ time.id +'" type="button" value="Spara tid">\
+                        </div>\
+                        <div class="col-3 form-group">\
+                            <br>\
+                            <input class="btn mb-2" id="input-remove-item-'+ time.id +'" type="button" value="Ta bort tid"></button>\
+                        </div>\
+                </div>\
+                </form>\
+            </div>';
 }

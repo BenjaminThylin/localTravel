@@ -13,6 +13,12 @@ $(".tickets-wrapper").ready(function(){
             .focusout(function(){
                 appendTickets(getValidTickets(fromInput.val()), ticketsWrapper);
             });
+    //save success confiramtion
+    let successElement = $("#output-save-success");
+    $("#update-success-confirm").click(function(){
+        if(successElement.is(":visible"))
+            successElement.hide();
+    });
 });
 /**
  * Gets an array of valid tickets 
@@ -43,13 +49,71 @@ function appendTickets(tickets, outputElement)
     //populates element with tickets
     tickets.forEach(function(ticket){
         outputElement.append(getTicketAlterationTemplate(ticket));
+        let successElement = $("#output-save-success");
+        // sets functionallity for ticket alteration form
+        let timesOptionsWrapper = $("#ticket-times-" +ticket.id)
         let ticketOptionsElement = $("#ticket-options-" + ticket.id);
         $("#input-show-options-" + ticket.id).click(function(){
-            console.log(ticketOptionsElement);
             if(ticketOptionsElement.is(":visible"))
                 ticketOptionsElement.hide()
             else
                 ticketOptionsElement.show();
-        })
+        });
+        $("#input-add-time-to-timetable-" + ticket.id).click(function(){
+            let newTime = new Time("00:00", "23:00", 10);
+            ticket.addTime(newTime);
+            timesOptionsWrapper.append(getTicketTimeAlterationTemplate(newTime));
+            setTimeFunctionallity(newTime, ticket);
+        });
+        $("#input-save-days-" + ticket.id).click(function(){
+            let newDays = [];
+            for(let i = 0; i < 7; i++){
+                if($('#input-edit-day-'+ i +'-id-' + ticket.id).is(":checked"))
+                    newDays[i] = true;
+                else
+                    newDays[i] = false;
+            }
+            ticket.days = newDays;
+            pushToLocalStorage("timeTable", timeTable, false);
+            if(!successElement.is(":visible"))
+                successElement.show();
+        });
+        //sets functionallity for ticket time alteration
+        for(let i = 0; i < ticket.times.length; i++)
+            setTimeFunctionallity(ticket.times[i], ticket);
     });
+    /**
+     * sets functionallity for editing specific time for a route
+     * @param {Time} time  
+     * @param {TimeTableItem} ticket
+     */
+    function setTimeFunctionallity(time, ticket)
+    {
+        let successElement = $("#output-save-success");
+        let timeOptionElement = $("#time-option-id-" + time.id);
+        let departureTime = $("#input-departure-time-" + time.id);
+        let arrivaltime = $("#input-arrival-time-" + time.id);
+        let price = $("#input-price-" + time.id);
+
+        $("#input-remove-item-" + time.id).click(function(){
+            console.log(ticket);
+            ticket.removeTime(time);
+            timeOptionElement.remove();
+            pushToLocalStorage("timeTable", timeTable, false);
+            if(!successElement.is(":visible"))
+                successElement.show();
+        });
+        $("#input-save-time-" + time.id).click(function(){
+            ticket.editTime(
+                parseInt(time.id), 
+                departureTime.val(), 
+                arrivaltime.val(), 
+                Number(price.val())
+            );
+            pushToLocalStorage("timeTable", timeTable, false);    
+            if(!successElement.is(":visible"))
+                successElement.show();
+        });
+    }
 }
+

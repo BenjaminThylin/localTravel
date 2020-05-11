@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log("document inti");
     //inits timeTable
     timeTable = initTimeTable();
     let statsButton = $("#stats");
