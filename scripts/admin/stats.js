@@ -1,4 +1,4 @@
-$(".stats-wrapper").ready(function(){
+$(document).ready(function(){
     let soldTicketsSpan = $("#totalSoldTickets");
     let statsTableBody = $("#statsTableBody");
     let totalIncome = $("#totalIncome");
@@ -21,6 +21,10 @@ $(".stats-wrapper").ready(function(){
             <td>` + ticket.price + `</td>
             </tr>`
         )
+    });
+    $("#statistics-empty").click(function() {
+        localStorage.clear("boughtTickets");
+        sessionStorage.clear();
     });
 });
 

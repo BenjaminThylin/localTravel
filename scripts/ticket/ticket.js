@@ -34,6 +34,15 @@ $(document).ready(function(){
             cartElement.hide();
         }
     });
+    $("#empty-shopping-cart").click(function() {
+        emptyCart();//empties the shoppingcart variable
+        $("#shopping-cart").empty();//empties the shoppingcart frontend
+        $("#shopping-cart").append(
+            '<div class="col-12 text-center mt-2">\
+                <button class="btn mb-3" id="input-go-to-payment">Betala</button>\
+            </div>');
+        $("#output-payment-cost").text("Totalpris: 0€");
+    });
     $("#input-payment-regret").on("click",function(){
         if(!cartElement.is(":visible")){
             paymentElement.hide();
@@ -43,8 +52,7 @@ $(document).ready(function(){
     let paymentSuccessElement = $("#output-payment-success");
     $("#input-payment-confirm").on("click", function(){
         pushToLocalStorage("boughtTickets", shoppingCart.cart);
-        shoppingCart.clear() // emptys the current shopping cart
-        sessionStorage.clear("shoppingCart");
+        emptyCart();
         initCart();
         if(!paymentSuccessElement.is(":visible"))
             paymentSuccessElement.show();
@@ -155,6 +163,11 @@ function populateSearchOutput(results){
                 shoppingCart.push(newTicket);
                 shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
                 addTicketToCart(newTicket);
+                //shows and hides the ticket add to cart confirmation
+                $("#ticket-add-confirm").show();
+                setTimeout(function() {
+                    $("#ticket-add-confirm").hide();
+                }, 700);
             });
         });
     });
@@ -167,7 +180,7 @@ function addTicketToCart(ticket){
     let paymentCostElement = $("#output-payment-cost"); 
     paymentCostElement.html("Totalpris: " + shoppingCart.totalCost + " €");
     $("#shopping-cart").prepend(getTicketTemplate(ticket));
-        //removes a ticketf
+        //removes a ticket
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
             shoppingCart.remove(ticket);
             shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
@@ -225,4 +238,11 @@ function initCart(){
     shoppingCart.cart.forEach(function(ticket){
         addTicketToCart(ticket);
     });
+}
+/**
+ * empties the shopping cart and clears sessionstorage
+ */
+function emptyCart(){
+    shoppingCart.clear();
+    sessionStorage.clear("shoppingCart");
 }

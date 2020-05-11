@@ -73,7 +73,12 @@
             <h1>Tidtabell:</h1>
         </div>
         <div class="row">
-            <h1>Köpkorg</h1>
+            <div class="col-md-6">
+                <h1>Köpkorg</h1>
+            </div>
+            <div class="col-md-6 text-right">
+                <button class="btn" id="empty-shopping-cart">Töm köpkorg</button>
+            </div>
         </div>
         <div id="shopping-cart">
             <div class="col-12 text-center mt-2">
@@ -100,6 +105,11 @@
     </div>
     <div class="container-fluid footer">
         <p>&copy LocalTravel</p>
+    </div>
+    <div class="dimmer" id="ticket-add-confirm">
+        <div class="alert alert-success text-center display-4">
+            Biljett tillagd!
+        </div>
     </div>
     <div class="dimmer" id="output-payment-success">
         <div class="alert alert-success text-center display-4">
