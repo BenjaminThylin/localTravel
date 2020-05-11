@@ -24,6 +24,7 @@
     <script src="scripts/admin/admin_data.js"></script>
     <script src="scripts/admin/admin.js"></script>
     <script src="scripts/admin/stats.js"></script>
+    <script src="scripts/admin/update_ticket.js"></script>
 </head>
 
 <body>
@@ -65,8 +66,19 @@
                 <button class="btn" id="statistics-empty" >Töm statistik</button>
             </div>
             <div class="tickets-wrapper">
-                    <h2 class="display-4">Uppdatera biljetter</h2>
-                    <h4>Välj biljett:</h4>
+                    <h2 class="display-3">Uppdatera biljetter</h2>
+                    <p class="display-4">Välj biljett:</p>
+                    <form>
+                        <div class="form-row">
+                            <div class="col-md-12 col-lg-3 form-group">
+                                    <label for="input-from">Välj avgångsort:</label>
+                            </div>
+                            <div class="col-md-12 col-lg-9 form-group">
+                                    <select class="form-control" id="input-from">
+                                    <select>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>

@@ -130,7 +130,7 @@ function getDiscount(type){
     return returnVal;
 }
 /**
- * Inits time table this is for testing purposes
+ * Inits time table !THIS IS FOR TESTING PURPOSES!
  */
 function initTimeTable(){
     collection = loadFromLocalStorage("timeTable");
