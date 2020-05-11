@@ -61,7 +61,7 @@ function getTicketTemplate(ticket){
                 <div>Pris: ' + ticket.price + '</div>\
             </div>\
             <div class="col-md-5 text-right">\
-                <button class="btn" id="remove-ticket-' + ticket.id + '" type="button">Ta bort</button>\
+                <input class="btn" id="remove-ticket-' + ticket.id + '" type="button" value="Ta bort">\
             </div>\
         </div>\
     </div>';
@@ -141,11 +141,11 @@ function getTicketAlterationTemplate(ticket = null)
                                 </div>'
                                 + times +
                                 '<div class="col-12 text-center mt-2">\
-                                    <button class="btn ticket-add-to-cart" id="input-add-to-timetable-' + ticket.id + '" type="button">Spara biljett</button>\
+                                    <input class="btn ticket-add-to-cart" id="input-add-to-timetable-' + ticket.id + '" type="button" value="Spara biljett">\
                                 </div>\
                             </div>\
                             <div class="text-center">\
-                                <button class="btn pricetag" id="input-show-options-' + ticket.id + '" type="button">EDIT</button>\
+                                <input class="btn pricetag" id="input-show-options-' + ticket.id + '" type="button" value="EDIT">\
                             </div>\
                         </div>';
     }
@@ -171,11 +171,11 @@ function getTicketAlterationTemplate(ticket = null)
                             </div>\
                             <div class="col-3 form-group">\
                                 <br>\
-                                <button type="submit" class="btn mb-2" id="input-save-time-'+ time.id +'">Spara tid</button>\
+                                <input class="btn mb-2" id="input-save-time-'+ time.id +'" type="button" value="Spara tid">\
                             </div>\
                             <div class="col-3 form-group">\
                                 <br>\
-                                <button type="submit" class="btn mb-2" id="input-remove-item-'+ time.id +'">Ta bort tid</button>\
+                                <input class="btn mb-2" id="input-remove-item-'+ time.id +'" type="button" value="Ta bort tid"></button>\
                             </div>\
                     </div>\
                     </form>\
