@@ -33,9 +33,7 @@
     <div class="container-fluid header">
         <h1>Local Travel</h1>
         <div class="text-right">
-            <a href="admin.html">
-                <button class="btn">Till admin sidan</button>
-            </a>
+            <button class="btn" id="admin-button">Till admin sidan</button>
             <button class="btn" id="shopping-cart-menu-button">köpkårg</button>
         </div>
     </div>
@@ -128,6 +126,30 @@
             <path d="M1 4h14v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4zm7-2.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
         </svg>
         <div class="cart-count">
+        </div>
+    </div>
+    <div class="login-dimmer" id="login-form">
+        <div class="login-form-container alert alert-success text-center display-4">
+            <h2>Logga in till admin panelen</h2>
+            <form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <label class="login-input" for="input-from">Användarnamn:</label>
+                            <input type="text" id="login-form-username" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container-fluid">
+                            <label class="login-input" for="input-from">Lösenord:</label>
+                            <input type="password" id="login-form-password" class="form-control">
+                            <p id="login-form-info" class="m-0 ml-1 p-1 text-danger">Fyll i vad som helst i fälten</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <button class="btn" id="login-form-login">Logga in</button>
+            <button class="btn" id="login-form-cancel">Avbryt</button>
         </div>
     </div>
 </body>
