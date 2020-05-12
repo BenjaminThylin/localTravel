@@ -3,6 +3,7 @@
     --secondary-color: #2F2FA2;
     --tertiary-color: #553D67;
     --white-color: #978E93;
+    --light-color: #f4f0f7;
     --black-color: #0A0A0A;
 }
 
@@ -68,4 +69,28 @@ input[type="date"]::-webkit-inner-spin-button{
     width: 100%;
     height: 100%;
     z-index: 100;
+}
+.cart {
+    position: fixed;
+    max-width: 2rem;
+    max-height: 2rem;
+    top: 10%;
+    left: 1rem;
+    transition: 0.3s;
+}
+    .cart:hover{
+        max-width: 3rem;
+        max-width: 3rem;
+    }
+.cart-count {
+    position: relative;
+    max-width: 1rem;
+    min-width: 1rem;
+    background-color: var(--tertiary-color);
+    border-radius: 0.5rem;
+    left: 1rem;
+    top: -3rem;
+    z-index: 150;
+    text-align: center;
+    color: var(--light-color);
 }

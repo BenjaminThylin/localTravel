@@ -35,11 +35,12 @@
             <a href="admin.html">
                 <button class="btn">Till admin sidan</button>
             </a>
+            <button class="btn" id="shopping-cart-menu-button">köpkårg</button>
         </div>
     </div>
     <br>
     <div class="container" id="body-container">
-        <div class="row">
+        <div class="row" id="search-input-container">
             <form>
                 <div class="form-group">
                     <div class="row">
@@ -72,17 +73,19 @@
         <div class="row" id="output-search-results">
             <h1>Tidtabell:</h1>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h1>Köpkorg</h1>
+        <div id="shopping-cart-container" class="no-display">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Köpkorg</h1>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn" id="empty-shopping-cart">Töm köpkorg</button>
+                </div>
             </div>
-            <div class="col-md-6 text-right">
-                <button class="btn" id="empty-shopping-cart">Töm köpkorg</button>
-            </div>
-        </div>
-        <div id="shopping-cart">
-            <div class="col-12 text-center mt-2">
-                <button class="btn mb-3" id="input-go-to-payment">Betala</button>
+            <div id="shopping-cart">
+                <div class="col-12 text-center mt-2">
+                    <button class="btn mb-3" id="input-go-to-payment">Betala</button>
+                </div>
             </div>
         </div>
         <div class="form-group no-display" id="payment-details">
@@ -116,6 +119,13 @@
             Betalning godkänd!
             <br>
             <button class="btn" id="payment-success-confirm">Ok</button>
+        </div>
+    </div>
+    <div class="cart">
+        <svg class="bi bi-bag-fill" width="100%" height="100%" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 4h14v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4zm7-2.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
+        </svg>
+        <div class="cart-count">
         </div>
     </div>
 </body>

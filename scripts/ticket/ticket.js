@@ -15,6 +15,7 @@ $(document).ready(function(){
     //populates the cart with sessionStorage data
     shoppingCart.set(loadFromSessionStorage("shoppingCart")); 
     initCart();
+    updateCartCount();
     //populates to and from with valid stops
     let dataFrom = $("#data-from");
     let dataTo = $("#data-to");
@@ -34,15 +35,31 @@ $(document).ready(function(){
             cartElement.hide();
         }
     });
+    //sets shopping cart functionallity
     $("#empty-shopping-cart").click(function() {
         emptyCart();//empties the shoppingcart variable
-        $("#shopping-cart").empty();//empties the shoppingcart frontend
-        $("#shopping-cart").append(
+        cartElement.empty();//empties the shoppingcart frontend
+        $cartElement.append(
             '<div class="col-12 text-center mt-2">\
                 <button class="btn mb-3" id="input-go-to-payment">Betala</button>\
             </div>');
         $("#output-payment-cost").text("Totalpris: 0€");
+        updateCartCount();
     });
+    let cartContainer = $("#shopping-cart-container");
+    $(".cart, #shopping-cart-menu-button").click(function(){
+        if(!cartContainer.is(":visible"))        {
+            cartContainer.show();
+            $("#output-search-results").hide();
+            $("#search-input-container").hide();
+        }
+        else{
+            cartContainer.hide();
+            $("#output-search-results").show();
+            $("#search-input-container").show();
+        }
+    });
+
     $("#input-payment-regret").on("click",function(){
         if(!cartElement.is(":visible")){
             paymentElement.hide();
@@ -163,6 +180,7 @@ function populateSearchOutput(results){
                 shoppingCart.push(newTicket);
                 shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
                 addTicketToCart(newTicket);
+                updateCartCount();
                 //shows and hides the ticket add to cart confirmation
                 $("#ticket-add-confirm").show();
                 setTimeout(function() {
@@ -186,6 +204,7 @@ function addTicketToCart(ticket){
             shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
             paymentCostElement.html("Totalpris: " + shoppingCart.totalCost + " €");
             $(document.getElementById("ticket-id-" + ticket.id)).remove();
+            updateCartCount();
         });
 }
 function setDateRestrictions(dateInput){
@@ -245,4 +264,10 @@ function initCart(){
 function emptyCart(){
     shoppingCart.clear();
     sessionStorage.clear("shoppingCart");
+}
+/**
+ * updates the cart count icon
+ */
+function updateCartCount(){
+    $(".cart-count").html(shoppingCart.cart.length);
 }
