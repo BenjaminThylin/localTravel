@@ -141,6 +141,40 @@ $(document).ready(function(){
             getSearchResults();
         }
     }).trigger("focusout");
+
+    $("#admin-button").click(function(){
+        let loginForm = $("#login-form");
+        let loginFormLogin = $("#login-form-login");
+        let loginFormCancel = $("#login-form-cancel");
+        let loginUsername = $("#login-form-username");
+        let loginPassword = $("#login-form-password");
+        let loginFormInfo = $("#login-form-info");
+        if(!(loginForm.is(":visible"))) {
+            loginForm.show();
+        }
+        loginFormLogin.click(function(){
+            let href = "admin.html"
+            if (loginUsername.val() != "" && loginPassword.val() != "") {
+                window.location.href = href;
+                loginFormInfo.removeClass("show");
+            } else {
+                loginFormInfo.addClass("show");
+            }
+        });
+        loginFormCancel.click(function(){
+            if(loginForm.is(":visible")) {
+                loginForm.hide();
+                loginFormInfo.removeClass("show");
+            }
+        });
+        $(loginForm).click(function(e) {
+            //if clicked outside of the login container the form dissappears
+            if (e.target.id == "login-form") {
+                loginForm.hide();
+                loginFormInfo.removeClass("show");
+            }
+          });
+    });
 });
 function getSearchResults(){
     // TODO: some way of stopping unnecessary searches of old data
