@@ -68,6 +68,15 @@ var shoppingCart = {
         this.cart = [];
         this._index = 0;
         this.totalCost = 0;
+    },
+    /**
+     * sets the payment method of the tickets
+     * @param {string} method the name of the payment method
+     */
+    setPaymentMethod: function(method){
+        this.cart.forEach(function(ticket){
+            ticket.paymentMethod = method;
+        });
     }
 }
 

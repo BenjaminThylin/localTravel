@@ -19,6 +19,7 @@ $(document).ready(function(){
             <td>` + ticket.departure + `</td>
             <td>` + ticket.type + `</td>
             <td>` + ticket.price + `</td>
+            <td>` + ticket.paymentMethod + `</td>
             </tr>`
         )
     });

@@ -48,6 +48,7 @@ class Ticket {
         this.price = price;
         this.discount = discount;
         this.type = type;
+        this.paymentMethod = null;
     }
 }
 /**

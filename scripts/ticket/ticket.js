@@ -59,7 +59,7 @@ $(document).ready(function(){
             $("#search-input-container").show();
         }
     });
-
+    //sets payment confirmation functionallity
     $("#input-payment-regret").on("click",function(){
         if(!cartElement.is(":visible")){
             paymentElement.hide();
@@ -67,12 +67,18 @@ $(document).ready(function(){
         }
     });
     let paymentSuccessElement = $("#output-payment-success");
-    $("#input-payment-confirm").on("click", function(){
+    $("#input-payment-confirm").click(function(){
+        //sets payment option
+        $('input[name="input-payment-option"]').each(function(){
+            if($(this).is(":checked"))
+                shoppingCart.setPaymentMethod($(this).val());
+        });
         pushToLocalStorage("boughtTickets", shoppingCart.cart);
         emptyCart();
         initCart();
         if(!paymentSuccessElement.is(":visible"))
             paymentSuccessElement.show();
+        updateCartCount();
     });
     //hides output-payment-success element when ok is clicked
     $("#payment-success-confirm").click(function(){
