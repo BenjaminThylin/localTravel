@@ -30,10 +30,12 @@ $(document).ready(function(){
     let paymentElement = $("#payment-details"); 
     let cartElement = $("#shopping-cart");
     $("#input-go-to-payment").on("click", function(){
-        if(!paymentElement.is(":visible")){
-            paymentElement.show();
-            cartElement.hide();
-        }
+        paymentElement.slideToggle(150);
+        cartElement.slideToggle(150);
+        // if(!paymentElement.is(":visible")){
+        //     paymentElement.show();
+        //     cartElement.hide();
+        // }
     });
     //sets shopping cart functionallity
     $("#empty-shopping-cart").click(function() {
@@ -48,23 +50,28 @@ $(document).ready(function(){
     });
     let cartContainer = $("#shopping-cart-container");
     $(".cart, #shopping-cart-menu-button").click(function(){
-        if(!cartContainer.is(":visible"))        {
-            cartContainer.show();
-            $("#output-search-results").hide();
-            $("#search-input-container").hide();
-        }
-        else{
-            cartContainer.hide();
-            $("#output-search-results").show();
-            $("#search-input-container").show();
-        }
+        cartContainer.slideToggle(150);
+        $("#output-search-results").slideToggle(150);
+        $("#search-input-container").slideToggle(150);
+        // if(!cartContainer.is(":visible")){
+        //     cartContainer.show();
+        //     $("#output-search-results").hide();
+        //     $("#search-input-container").hide();
+        // }
+        // else{
+        //     cartContainer.hide();
+        //     $("#output-search-results").show();
+        //     $("#search-input-container").show();
+        // }
     });
     //sets payment confirmation functionallity
     $("#input-payment-regret").on("click",function(){
-        if(!cartElement.is(":visible")){
-            paymentElement.hide();
-            cartElement.show();
-        }
+        paymentElement.slideToggle(150);
+        cartElement.slideToggle(150);
+        // if(!cartElement.is(":visible")){
+        //     paymentElement.hide();
+        //     cartElement.show();
+        // }
     });
     let paymentSuccessElement = $("#output-payment-success");
     $("#input-payment-confirm").click(function(){
@@ -209,7 +216,9 @@ function addTicketToCart(ticket){
             shoppingCart.remove(ticket);
             shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
             paymentCostElement.html("Totalpris: " + shoppingCart.totalCost + " €");
-            $(document.getElementById("ticket-id-" + ticket.id)).remove();
+            $(document.getElementById("ticket-id-" + ticket.id)).slideToggle(150, function(){
+                $(this).remove();
+            });
             updateCartCount();
         });
 }
