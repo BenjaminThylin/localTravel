@@ -24,12 +24,10 @@ $(document).ready(function(){
         dataFrom.append(optionElement);
         dataTo.append(optionElement);
     });
-    $("#input-from").val(stops[0]);
-    $("#input-to").val(stops[1]);
     //sets functionality for payment form
     let paymentElement = $("#payment-details"); 
     let cartElement = $("#shopping-cart");
-    $("#input-go-to-payment").on("click", function(){
+    $("#input-go-to-payment").click(function(){
         paymentElement.slideToggle(150);
         cartElement.slideToggle(150);
         // if(!paymentElement.is(":visible")){
@@ -41,7 +39,7 @@ $(document).ready(function(){
     $("#empty-shopping-cart").click(function() {
         emptyCart();//empties the shoppingcart variable
         cartElement.empty();//empties the shoppingcart frontend
-        $cartElement.append(
+        cartElement.append(
             '<div class="col-12 text-center mt-2">\
                 <button class="btn mb-3" id="input-go-to-payment">Betala</button>\
             </div>');
@@ -65,7 +63,7 @@ $(document).ready(function(){
         // }
     });
     //sets payment confirmation functionallity
-    $("#input-payment-regret").on("click",function(){
+    $("#input-payment-regret").click(function(){
         paymentElement.slideToggle(150);
         cartElement.slideToggle(150);
         // if(!cartElement.is(":visible")){
@@ -97,7 +95,7 @@ $(document).ready(function(){
         }
     });
     //makes sure that from and to inputs cant be the same
-    $("#input-from").on("change", function(){
+    $("#input-from").change(function(){
         let toInput = $("#input-to");
         if($(this).val() == toInput.val())
         {
@@ -122,7 +120,7 @@ $(document).ready(function(){
             getSearchResults();
         }
     }).trigger("change").trigger("focusout");
-    $("#input-to").on("focusout", function(){ //checks that the to station exists
+    $("#input-to").focusout(function(){ //checks that the to station exists
         let error = $("#error-to");
         if($(this).val() == $("#input-from").val())
         {
@@ -183,7 +181,7 @@ function populateSearchOutput(results){
                     options.show();
             });
             //sets functionallity for adding new tickets to cart
-            $(document.getElementById("add-to-cart-id-" + elementID)).on("click",function(){
+            $(document.getElementById("add-to-cart-id-" + elementID)).click(function(){
                 let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
                 let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
                 let departureDate = $("#input-departure-date").val();
@@ -227,7 +225,7 @@ function setDateRestrictions(dateInput){
     dateInput.attr("min", getShortDate(date))
             .attr("value", getShortDate(date));
 
-    dateInput.on("focusout", function(){
+    dateInput.focusout(function(){
         let error = $("#error-date")
         let selectedDate = new Date($(this).val().toString());
         let dateLimit = new Date();
