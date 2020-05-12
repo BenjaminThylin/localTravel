@@ -80,7 +80,7 @@ function getSearchResultTemplate(data)
     data.times.forEach(function(time){
         output += '<div class="col-md-12 m-4 border" id="search-item-' + data.id + '-' + time.departure + '">\
                     <div class="col-md-12">\
-                        <div class="display-4 mb-2">'+ data.from +' --> '+ data.to +'</div>\
+                    <div class="mt-2 mb-2"><span>Från: </span><h3 class="d-inline"> ' + data.from + '</h3><span class="ml-5"> Till:</span><h3 class="d-inline"> ' + data.to + '</h3></div>\
                     </div>\
                     <div class="col-md-12">\
                         <div class="display-5 mb-2">'+ time.departure +' --> ' + time.arrival + '</div>\
@@ -109,8 +109,8 @@ function getSearchResultTemplate(data)
                             <button class="btn" id="add-to-cart-id-'+ data.id +'-'+ time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
                         </div>\
                     </div>\
-                    <div class="text-center">\
-                        <button class="btn pricetag" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">'+ time.price +'€</button>\
+                    <div class="text-center p-3">\
+                        <button class="btn btn-dark pricetag" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">'+ time.price +'€</button>\
                     </div>\
                 </div>';
     });
@@ -131,7 +131,7 @@ function getTicketAlterationTemplate(ticket = null)
         let days = getTicketDaysElements(ticket.days);
         return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'" name="alter-tickets-element">\
                             <div class="col-md-12">\
-                                <div class="display-4 mb-2">' + ticket.from + '->' + ticket.to + '</div>\
+                                <div class="mt-2 mb-2"><span>Från: </span><h3 class="d-inline"> ' + ticket.from + '</h3><span class="ml-5"> Till:</span><h3 class="d-inline"> ' + ticket.to + '</h3></div>\
                             </div>\
                             <div id="ticket-options-' + ticket.id + '" class="form-group row no-display">\
                                 <div class="col-12 font-weight-bold">\
@@ -152,8 +152,8 @@ function getTicketAlterationTemplate(ticket = null)
                                     <input class="btn" id="input-add-time-to-timetable-' + ticket.id + '" type="button" value="lägg till tid">\
                                 </div>\
                             </div>\
-                            <div class="text-center">\
-                                <input class="btn pricetag" id="input-show-options-' + ticket.id + '" type="button" value="EDIT">\
+                            <div class="text-right p-3">\
+                                <input class="btn btn-dark pricetag" id="input-show-options-' + ticket.id + '" type="button" value="EDIT">\
                             </div>\
                         </div>';
     }
