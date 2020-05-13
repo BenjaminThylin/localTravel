@@ -118,15 +118,15 @@ function getSearchResultTemplate(data)
 }
 /**
  * returns alteration form element for a ticket
- * @param {TimeTableItem} ticket null by default, if left as null it will return a empty alteration form for a new ticket 
+ * @param {TimeTableItem} ticket if set as null it will return a empty alteration form for a new route 
  * @returns {string} string representing html element
  */
-function getTicketAlterationTemplate(ticket = null)
+function getTicketAlterationTemplate(ticket)
 {
     if(ticket != null){
         let times = "";
         ticket.times.forEach(function(time){
-            times += getTicketTimeAlterationTemplate(time);
+            times += getTicketTimeAlterationTemplate(ticket,time);
         });
         let days = getTicketDaysElements(ticket.days);
         return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'" name="alter-tickets-element">\
@@ -156,6 +156,8 @@ function getTicketAlterationTemplate(ticket = null)
                                 <input class="btn btn-dark pricetag" id="input-show-options-' + ticket.id + '" type="button" value="EDIT">\
                             </div>\
                         </div>';
+    }else{
+        //TODO: Return of empty alteration form not implemented
     }
 
     function getTicketDaysElements(days)
@@ -176,35 +178,39 @@ function getTicketAlterationTemplate(ticket = null)
 }
 /**
  * returns a time alteration element
+ * @param {TimeTableItem} ticket the parent ticket of the time element
  * @param {Time} time a time object 
+ * @param {bool} noDisplay, set as false by default, if set to true will set the elements display to none
  * @returns {string} string representing html element
  */
-function getTicketTimeAlterationTemplate(time)
+function getTicketTimeAlterationTemplate(ticket, time, noDisplay = false)
 {
-    return '<div class="col-12" id="time-option-id-' + time.id + '">\
+    console.log("id=time-option-time-id-" + time.id + "-ticket-id-" + ticket.id);
+    let display = (noDisplay) ? " no-display" : "";
+    return '<div class="col-12'+ display +'" id="time-option-time-id-' + time.id + '-ticket-id-' + ticket.id + '">\
                 <form>\
                 <div class="form-row">\
                         <div class="col-6 form-group">\
                             <label for="input-time">Avfärdstid</label>\
-                            <input type="text" class="form-control" value="' + time.departure + '" id="input-departure-time-'+ time.id +'">\
+                            <input type="text" class="form-control" value="' + time.departure + '" id="input-departure-time-'+ time.id + '-ticket-id-"' + ticket.id + '">\
                         </div>\
                         <div class="col-6 form-group">\
                             <label for="input-time">ankomstid</label>\
-                            <input type="text" class="form-control" value="' + time.arrival + '" id="input-arrival-time-'+ time.id +'">\
+                            <input type="text" class="form-control" value="' + time.arrival + '" id="input-arrival-time-'+ time.id + '-ticket-id-"' + ticket.id + '">\
                         </div>\
                 </div>\
                 <div class="form-row border-bottom">\
                         <div class="col-6 form-group">\
                             <label for="input-time">price</label>\
-                            <input type="text" class="form-control" value="' + time.price + '"id="input-price-'+ time.id +'">\
+                            <input type="text" class="form-control" value="' + time.price + '"id="input-price-'+ time.id + '-ticket-id-"' + ticket.id + '">\
                         </div>\
                         <div class="col-3 form-group">\
                             <br>\
-                            <input class="btn mb-2" id="input-save-time-'+ time.id +'" type="button" value="Spara tid">\
+                            <input class="btn mb-2" id="input-save-time-'+ time.id + '-ticket-id-"' + ticket.id + '" type="button" value="Spara tid">\
                         </div>\
                         <div class="col-3 form-group">\
                             <br>\
-                            <input class="btn mb-2" id="input-remove-item-'+ time.id +'" type="button" value="Ta bort tid"></button>\
+                            <input class="btn mb-2" id="input-remove-item-'+ time.id + '-ticket-id-"' + ticket.id + '" type="button" value="Ta bort tid"></button>\
                         </div>\
                 </div>\
                 </form>\

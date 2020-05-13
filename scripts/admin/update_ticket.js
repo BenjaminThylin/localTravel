@@ -51,19 +51,16 @@ function appendTickets(tickets, outputElement)
         outputElement.append(getTicketAlterationTemplate(ticket));
         let successElement = $("#output-save-success");
         // sets functionallity for ticket alteration form
-        let timesOptionsWrapper = $("#ticket-times-" +ticket.id)
+        let timesOptionsWrapper = $("#ticket-times-" + ticket.id)
         let ticketOptionsElement = $("#ticket-options-" + ticket.id);
         $("#input-show-options-" + ticket.id).click(function(){
-            if(ticketOptionsElement.is(":visible"))
-                ticketOptionsElement.hide()
-            else
-                ticketOptionsElement.show();
+            ticketOptionsElement.slideToggle(150);
         });
         $("#input-add-time-to-timetable-" + ticket.id).click(function(){
             let newTime = new Time("00:00", "23:00", 10);
             ticket.addTime(newTime);
-            timesOptionsWrapper.append(getTicketTimeAlterationTemplate(newTime));
-            setTimeFunctionallity(newTime, ticket);
+            timesOptionsWrapper.append(getTicketTimeAlterationTemplate(ticket, newTime, true));
+            setTimeFunctionallity(newTime, ticket, true);
         });
         $("#input-save-days-" + ticket.id).click(function(){
             let newDays = [];
@@ -86,16 +83,21 @@ function appendTickets(tickets, outputElement)
      * sets functionallity for editing specific time for a route
      * @param {Time} time  
      * @param {TimeTableItem} ticket
+     * @param {bool} toggle set to false as default, if set to true executes .slideToggle on the element
      */
-    function setTimeFunctionallity(time, ticket)
+    function setTimeFunctionallity(time, ticket, toggle = false)
     {
         let successElement = $("#output-save-success");
-        let timeOptionElement = $("#time-option-id-" + time.id);
-        let departureTime = $("#input-departure-time-" + time.id);
-        let arrivaltime = $("#input-arrival-time-" + time.id);
-        let price = $("#input-price-" + time.id);
-
-        $("#input-remove-item-" + time.id).click(function(){
+        let timeOptionElement = $("#time-option-time-id-" + time.id + "-ticket-id-" + ticket.id);
+        let departureTime = $("#input-departure-time-" + time.id + "-ticket-id-" + ticket.id);
+        let arrivaltime = $("#input-arrival-time-" + time.id + "-ticket-id-" + ticket.id);
+        let price = $("#input-price-" + time.id + "-ticket-id-" + ticket.id);
+        //displays element if hidden
+        if(toggle){
+            console.log("#time-option-time-id-" + time.id + "-ticket-id-" + ticket.id);
+            timeOptionElement.slideDown(150);
+        }
+        $("#input-remove-item-" + time.id + "-ticket-id-" + ticket.id).click(function(){
             console.log(ticket);
             ticket.removeTime(time);
             timeOptionElement.remove();
@@ -103,7 +105,7 @@ function appendTickets(tickets, outputElement)
             if(!successElement.is(":visible"))
                 successElement.show();
         });
-        $("#input-save-time-" + time.id).click(function(){
+        $("#input-save-time-" + time.id + "ticket-id-" + ticket.id).click(function(){
             ticket.editTime(
                 parseInt(time.id), 
                 departureTime.val(), 

@@ -5,7 +5,6 @@ $(document).ready(function(){
     let ticketsButton = $("#tickets");
     let statsWrapper = $(".stats-wrapper");
     let ticketsWrapper = $(".tickets-wrapper");
-    console.log(ticketsWrapper) ;
     statsButton.click(function() {
         statsButton.addClass("active");
         ticketsButton.removeClass("active");

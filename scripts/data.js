@@ -254,7 +254,7 @@ function initTimeTable(){
         pushToLocalStorage("timeTable", collection, false);
     }
     else //because JSON.stringify axes methods since they are not pure data we have to reinstantiate the TimeTable ojbects when reading them from localstorage
-    {
+    {   //this could potentially cause problems on some browser wendors as JSON.stringify could be implemented in such a way that insted of ignoring methods it throws an error
         let tempCollection = [];
         collection.forEach(function(route){
             let newTimes = [];
