@@ -80,7 +80,7 @@ function getSearchResultTemplate(data)
     data.times.forEach(function(time){
         output += '<div class="col-md-12 m-4 border" id="search-item-' + data.id + '-' + time.departure + '">\
                     <div class="col-md-12">\
-                    <div class="mt-2 mb-2"><span>Från: </span><h3 class="d-inline"> ' + data.from + '</h3><span class="ml-5"> Till:</span><h3 class="d-inline"> ' + data.to + '</h3></div>\
+                    <div class="mt-2 mb-2"><span><h3 class="d-inline">Från: </span> ' + data.from + '</h3><span class="ml-5"><h3 class="d-inline">Till:</span> ' + data.to + '</h3><span class="ml-5"><h3 class="d-inline">Pris:</span> ' + time.price + '</div>\
                     </div>\
                     <div class="col-md-12">\
                         <div class="display-5 mb-2">'+ time.departure +' --> ' + time.arrival + '</div>\
@@ -110,7 +110,7 @@ function getSearchResultTemplate(data)
                         </div>\
                     </div>\
                     <div class="text-center p-3">\
-                        <button class="btn btn-dark pricetag" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">'+ time.price +'€</button>\
+                        <button class="btn btn-dark pricetag" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">&darr;</button>\
                     </div>\
                 </div>';
     });

@@ -33,45 +33,57 @@
         <h1>Local Travel</h1>
         <div class="text-right">
             <button class="btn" id="admin-button">Till admin sidan</button>
-            <button class="btn" id="shopping-cart-menu-button">köpkorg</button>
         </div>
     </div>
     <br>
-    <div class="container" id="body-container">
+    <div class="container">
         <div class="row" id="search-input-container">
-            <form>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md">
-                            <label for="input-from">Från:</label>
-                            <input type="text" class="form-control" id="input-from" list="data-from">
-                            <div id="error-from" class="text-danger" error>Välj en tillgänglig hållplats</div>
-                            <datalist id="data-from">
-                            </datalist>
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="input-from">Från:</label>
+                                <input type="text" class="form-control" id="input-from" list="data-from">
+                                <div id="error-from" class="text-danger" error>Välj en tillgänglig hållplats</div>
+                                <datalist id="data-from">
+                                </datalist>
+                            </div>
+                            <div class="col-md">
+                                <label for="input-to">Till:</label>
+                                <input type="text" class="form-control" id="input-to" list="data-to">
+                                <div id="error-to" class="text-danger" error>Kan inte vara samma som avgångsplats</div>
+                                <datalist id="data-to">
+                                </datalist>
+                            </div>
                         </div>
-                        <div class="col-md">
-                            <label for="input-to">Till:</label>
-                            <input type="text" class="form-control" id="input-to" list="data-to">
-                            <div id="error-to" class="text-danger" error>Kan inte vara samma som avgångsplats</div>
-                            <datalist id="data-to">
-                            </datalist>
+                        <br>
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="input-departure-date">Avgångsdag</label>
+                                <input class="form-control" type="date" id="input-departure-date" required="required">
+                                <div id="error-date" class="text-danger" error>Fel datum</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <button class="btn mt-4" id="search-tickets">Sök biljetter</button>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md">
-                            <label for="input-departure-date">Avgångsdag</label>
-                            <input class="form-control" type="date" id="input-departure-date" required="required">
-                            <div id="error-date" class="text-danger" error>Fel datum</div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="col-md-8 text-right">
+                <button class="btn navigation-button" id="shopping-cart-menu-button">Till köpkorgen &rarr;</button>
+            </div>
         </div>  
         <div class="row" id="output-search-results">
             <h1>Tidtabell:</h1>
         </div>
-        <div id="shopping-cart-container" class="no-display">
+        <div id="shopping-cart-container" class="row no-display">
+            <div class="row">
+                <button class="btn navigation-button" id="shopping-cart-back-button">&larr; Tillbaka</button>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <h1>Köpkorg</h1>

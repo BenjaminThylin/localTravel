@@ -1,8 +1,7 @@
 :root {
     --primary-color: rgb(235, 117, 6);
-    --secondary-color: #2F2FA2;
+    --secondary-color: rgb(47, 162, 118);
     --tertiary-color: #553D67;
-    --white-color: #978E93;
     --light-color: #f4f0f7;
     --black-color: #0A0A0A;
 }
@@ -105,17 +104,17 @@ input[type="date"]::-webkit-inner-spin-button{
     max-width: 3rem;
     max-width: 3rem;
 }
-    .cart-animate-shake{
-        animation-name: shake;
-        animation-duration: 0.5s;
-    }
-    @keyframes shake{
-        0% {left: 1rem;}
-        20% {left: 1.5rem;}
-        40% {left: 1rem;}
-        60% {left: 1.5rem;}
-        100% {left: 1rem;}
-    }
+.cart-animate-shake{
+    animation-name: shake;
+    animation-duration: 0.5s;
+}
+@keyframes shake{
+    0% {left: 1rem;}
+    20% {left: 1.5rem;}
+    40% {left: 1rem;}
+    60% {left: 1.5rem;}
+    100% {left: 1rem;}
+}
 .cart-count {
     position: relative;
     max-width: 1rem;
@@ -127,4 +126,12 @@ input[type="date"]::-webkit-inner-spin-button{
     z-index: 150;
     text-align: center;
     color: var(--light-color);
+}
+.navigation-button {
+    color: var(--primary-color);
+    background-color: white;
+    font-weight: bold;
+}
+#admin-button {
+    background-color: var(--secondary-color);
 }

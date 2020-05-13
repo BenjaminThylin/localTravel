@@ -42,11 +42,11 @@ $(document).ready(function(){
         $("#output-payment-cost").text("Totalpris: 0€");
         updateCartCount();
     });
-    let cartContainer = $("#shopping-cart-container");
     $(".cart, #shopping-cart-menu-button").click(function(){
-        cartContainer.slideToggle(150);
-        $("#output-search-results").slideToggle(150);
-        $("#search-input-container").slideToggle(150);
+        toggleCart();
+    });
+    $("#shopping-cart-back-button").click(function() {
+        toggleCart();
     });
     //sets payment confirmation functionallity
     $("#input-payment-regret").click(function(){
@@ -123,6 +123,9 @@ $(document).ready(function(){
             getSearchResults();
         }
     }).trigger("focusout");
+    $("#search-tickets").click(function() {
+        getSearchResults();
+    });
 
     $("#admin-button").click(function(){
         let loginForm = $("#login-form");
@@ -155,15 +158,15 @@ $(document).ready(function(){
                 loginForm.hide();
                 loginFormInfo.removeClass("show");
             }
-          });
+        });
     });
 });
 function getSearchResults(){
     // TODO: some way of stopping unnecessary searches of old data
     // if(oldSearchData === null || oldSearchData != searchData){// checks if any search params changed
-        if(searchData.dateIsValid === true &&
-            searchData.toIsValid === true &&
-            searchData.fromIsValid === true)
+        if(searchData.dateIsValid &&
+            searchData.toIsValid &&
+            searchData.fromIsValid)
             {
                 let searchResults = [];
                 timeTable.forEach(function(item){
@@ -258,7 +261,7 @@ function setDateRestrictions(dateInput){
             error.hide();
             searchData.departureData = $(this).val();
             searchData.dateIsValid = true;
-            getSearchResults();
+            //getSearchResults();
         }
     }).trigger("focusout");
 }
@@ -302,4 +305,13 @@ function updateCartCount(){ // this is slow should be cashed
     $(".cart").addClass("cart-animate-shake").on("animationend", function(){
         $(this).removeClass("cart-animate-shake");
     });
+}
+/**
+ * toggles shopping cart
+ */
+function toggleCart(){
+    $("#shopping-cart-container").slideToggle(150);
+    $("#output-search-results").slideToggle(150);
+    $("#search-input-container").slideToggle(150);
+    $("#shopping-cart-menu-button").toggle();
 }
