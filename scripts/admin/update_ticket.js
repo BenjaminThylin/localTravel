@@ -94,7 +94,6 @@ function appendTickets(tickets, outputElement)
         let price = $("#input-price-" + time.id + "-ticket-id-" + ticket.id);
         //displays element if hidden
         if(toggle){
-            console.log("#time-option-time-id-" + time.id + "-ticket-id-" + ticket.id);
             timeOptionElement.slideDown(150);
         }
         $("#input-remove-item-" + time.id + "-ticket-id-" + ticket.id).click(function(){
