@@ -105,6 +105,17 @@ input[type="date"]::-webkit-inner-spin-button{
     max-width: 3rem;
     max-width: 3rem;
 }
+    .cart-animate-shake{
+        animation-name: shake;
+        animation-duration: 0.5s;
+    }
+    @keyframes shake{
+        0% {left: 1rem;}
+        20% {left: 1.5rem;}
+        40% {left: 1rem;}
+        60% {left: 1.5rem;}
+        100% {left: 1rem;}
+    }
 .cart-count {
     position: relative;
     max-width: 1rem;

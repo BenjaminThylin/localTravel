@@ -315,6 +315,9 @@ function emptyCart(){
 /**
  * updates the cart count icon
  */
-function updateCartCount(){
+function updateCartCount(){ // this is slow should be cashed
     $(".cart-count").html(shoppingCart.cart.length);
+    $(".cart").addClass("cart-animate-shake").on("animationend", function(){
+        $(this).removeClass("cart-animate-shake");
+    });
 }
