@@ -195,11 +195,8 @@ function populateSearchOutput(results){
         ticket.times.forEach(function(time){
             let elementID = ticket.id + "-" + time.departure; 
             $(document.getElementById("ticket-info-id-" + elementID)).on("click", function(){ // sets the hide and unhide button for ticket details
-                let options = $(document.getElementById("input-ticket-options-id-" + elementID));
-                if(options.is(":visible"))
-                    options.hide();
-                else
-                    options.show();
+                $(document.getElementById("input-ticket-options-id-" + elementID)).slideToggle(150);
+                $(this).toggleClass("rotate-180");
             });
             //sets functionallity for adding new tickets to cart
             $(document.getElementById("add-to-cart-id-" + elementID)).click(function(){

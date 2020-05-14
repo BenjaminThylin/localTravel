@@ -110,7 +110,7 @@ function getSearchResultTemplate(data)
                         </div>\
                     </div>\
                     <div class="text-center p-3">\
-                        <button class="btn btn-dark pricetag" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">&darr;</button>\
+                        <button class="btn btn-dark pricetag rotate" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">&darr;</button>\
                     </div>\
                 </div>';
     });

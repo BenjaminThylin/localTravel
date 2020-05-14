@@ -115,6 +115,13 @@ input[type="date"]::-webkit-inner-spin-button{
     60% {left: 1.5rem;}
     100% {left: 1rem;}
 }
+.rotate{
+    transform-origin: center;
+    transition: transform 0.150s linear;
+}
+    .rotate-180{
+        transform: rotate(180deg);
+    }
 .cart-count {
     position: relative;
     max-width: 1rem;
