@@ -76,9 +76,10 @@ $(document).ready(function(){
             cartElement.show();
         }
     });
+    let toInput = $("#input-to");
+    let fromInput = $("#input-from");
     //makes sure that from and to inputs cant be the same
-    $("#input-from").change(function(){
-        let toInput = $("#input-to");
+    fromInput.change(function(){
         if($(this).val() == toInput.val())
         {
             let nextValidStop;
@@ -101,9 +102,9 @@ $(document).ready(function(){
             searchData.from = $(this).val();
         }
     }).trigger("change").trigger("focusout");
-    $("#input-to").focusout(function(){ //checks that the to station exists
+    toInput.focusout(function(){ //checks that the to station exists
         let error = $("#error-to");
-        if($(this).val() == $("#input-from").val())
+        if($(this).val() == fromInput.val())
         {
             $(this).val("");
             error.show();
@@ -122,6 +123,8 @@ $(document).ready(function(){
         }
     }).trigger("focusout");
     $("#search-tickets").click(function() {
+        toInput.trigger("focusout");
+        fromInput.trigger("focusout");
         getSearchResults();
     });
 
