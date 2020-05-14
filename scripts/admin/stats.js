@@ -20,15 +20,44 @@ function populateStatsTable(data){
     totalIncome.html(getTotalIncome() + "€");
     statsTableBody.html("");
     data.forEach(function(ticket){
+        let paymentMethod, type;
+        switch (ticket.paymentMethod) {
+            case "cash":
+                paymentMethod = "Kontant";
+                break;
+            case "cashapp":
+                paymentMethod = "Betalapp";
+                break;
+            case "visa":
+                paymentMethod = "Visa";
+                break;
+            default:
+                paymentMethod = "Annat";
+                break;
+        }
+        switch (ticket.type) {
+            case "once":
+                type = "Engångsbiljett";
+                break;
+            case "10-times":
+                type = "10-gångskort";
+                break;
+            case "month":
+                type = "Månadskort";
+                break;
+            default:
+                type = "Annan biljett";
+                break;
+        }
         statsTableBody.append(
             `<tr>
             <td>`+ ticket.from + `</td>
             <td>`+ ticket.to + `</td>
             <td>` + ticket.date + `</td>
             <td>` + ticket.departure + `</td>
-            <td>` + ticket.type + `</td>
+            <td>` + type + `</td>
             <td>` + ticket.price + `</td>
-            <td>` + ticket.paymentMethod + `</td>
+            <td>` + paymentMethod + `</td>
             </tr>`
         )
     });

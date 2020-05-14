@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="style/style.css">
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -92,30 +88,30 @@
                     <h1>Köpkorg</h1>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button class="btn" id="empty-shopping-cart">Töm köpkorg</button>
+                    <button class="btn btn-dark" id="empty-shopping-cart">Töm köpkorg</button>
                 </div>
             </div>
             <div id="shopping-cart">
                 <div class="col-12 text-center mt-2">
-                    <button class="btn mb-3" id="input-go-to-payment">Betala</button>
+                    <button class="btn btn-dark mb-3" id="input-go-to-payment">Betala</button>
                 </div>
             </div>
         </div>
         <div class="form-group no-display" id="payment-details">
             <div class="custom-control custom-radio">
-                <input type="radio" id="payment-radio1" name="input-payment-option" value="Cash" class="custom-control-input" checked>
+                <input type="radio" id="payment-radio1" name="input-payment-option" value="cash" class="custom-control-input" checked>
                 <label class="custom-control-label" for="payment-radio1">Kontant</label>
             </div>    
             <div class="custom-control custom-radio">
-                <input type="radio" id="payment-radio2" name="input-payment-option" value="Cashapp" class="custom-control-input">
+                <input type="radio" id="payment-radio2" name="input-payment-option" value="cashapp" class="custom-control-input">
                 <label class="custom-control-label" for="payment-radio2">Cashapp</label>
             </div>
             <div class="custom-control custom-radio">
                 <input type="radio" id="payment-radio3" name="input-payment-option" value="visa" class="custom-control-input">
                 <label class="custom-control-label" for="payment-radio3">Visa</label>
             </div>
-            <button class="btn" id="input-payment-regret">Ångra</button>
-            <button class="btn" id="input-payment-confirm">Bekräfta</button>
+            <button class="btn btn-dark" id="input-payment-regret">Ångra</button>
+            <button class="btn btn-dark" id="input-payment-confirm">Bekräfta</button>
             <h4 id="output-payment-cost"></h4>
         </div>
     </div>
@@ -131,7 +127,7 @@
         <div class="alert alert-success text-center display-4">
             Betalning godkänd!
             <br>
-            <button class="btn" id="payment-success-confirm">Ok</button>
+            <button class="btn btn-dark" id="payment-success-confirm">Ok</button>
         </div>
     </div>
     <div class="login-dimmer" id="login-form">

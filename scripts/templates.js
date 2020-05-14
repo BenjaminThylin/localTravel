@@ -63,7 +63,7 @@ function getTicketTemplate(ticket){
                 <div>Pris: ' + ticket.price + '</div>\
             </div>\
             <div class="col-md-5 text-right">\
-                <input class="btn" id="remove-ticket-' + ticket.id + '" type="button" value="Ta bort">\
+                <input class="btn btn-dark" id="remove-ticket-' + ticket.id + '" type="button" value="Ta bort">\
             </div>\
         </div>\
     </div>';
@@ -106,11 +106,11 @@ function getSearchResultTemplate(data)
                         </div>\
                         <br>\
                         <div class="col-md-2">\
-                            <button class="btn" id="add-to-cart-id-'+ data.id +'-'+ time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
+                            <button class="btn btn-dark" id="add-to-cart-id-'+ data.id +'-'+ time.departure +'" type="button">Lägg till biljett i köpkorg</button>\
                         </div>\
                     </div>\
                     <div class="text-center p-3">\
-                        <button class="btn btn-dark pricetag rotate" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">&darr;</button>\
+                        <button class="btn btn-dark pl-4 pr-4 rotate" id="ticket-info-id-'+ data.id +'-'+ time.departure +'" type="button">&darr;</button>\
                     </div>\
                 </div>';
     });
@@ -149,11 +149,11 @@ function getTicketAlterationTemplate(ticket)
                                 + times +
                                 '</div>\
                                 <div class="col-12 text-center mt-2">\
-                                    <input class="btn" id="input-add-time-to-timetable-' + ticket.id + '" type="button" value="lägg till tid">\
+                                    <input class="btn btn-dark" id="input-add-time-to-timetable-' + ticket.id + '" type="button" value="lägg till tid">\
                                 </div>\
                             </div>\
                             <div class="text-right p-3">\
-                                <input class="btn btn-dark pricetag" id="input-show-options-' + ticket.id + '" type="button" value="EDIT">\
+                                <input class="btn btn-dark" id="input-show-options-' + ticket.id + '" type="button" value="EDIT">\
                             </div>\
                         </div>';
     }else{
