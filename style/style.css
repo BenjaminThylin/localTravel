@@ -122,3 +122,6 @@ input[type="date"]::-webkit-inner-spin-button{
     stroke: var(--primary-color);
     fill: var(--primary-color);
 }
+#statistics-empty {
+    color: var(--primary-color);
+}

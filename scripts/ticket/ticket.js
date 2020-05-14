@@ -190,7 +190,7 @@ function populateSearchOutput(results){
         searchOutput.html('\
             <div class="row" id="output-search-results">\
                 <h1>Tidtabell:</h1>\
-                <div class="col-12"><h2>Inga biljetter hitades hittades</h2></div>\
+                <div class="col-12"><h2>Inga biljetter hittades</h2></div>\
             </div>'
         );
     }
