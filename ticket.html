@@ -74,7 +74,10 @@
                 </form>
             </div>
             <div class="col-md-8 text-right">
-                <button class="btn navigation-button" id="shopping-cart-menu-button">Till köpkorgen &rarr;</button>
+                <div style="padding: 5px">
+                    <button class="btn navigation-button" id="shopping-cart-menu-button">Till köpkorgen &rarr;</button>
+                    <div class="cart-count">1</div>
+                </div>
             </div>
         </div>  
         <div class="row" id="output-search-results">
@@ -129,14 +132,6 @@
             Betalning godkänd!
             <br>
             <button class="btn" id="payment-success-confirm">Ok</button>
-        </div>
-    </div>
-    <div class="cart">
-        <!-- SOURCE: https://icons.getbootstrap.com/icons/bag-fill/ -->
-        <svg class="bi bi-bag-fill primary-stroke" width="100%" height="100%" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 4h14v10a2 2 0 01-2 2H3a2 2 0 01-2-2V4zm7-2.5A2.5 2.5 0 005.5 4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z"/>
-        </svg>
-        <div class="cart-count">
         </div>
     </div>
     <div class="login-dimmer" id="login-form">

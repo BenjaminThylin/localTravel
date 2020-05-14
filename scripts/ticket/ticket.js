@@ -5,7 +5,8 @@
  *      - scripts/templates.js
  */
 $(document).ready(function(){
-    console.log("")
+    //populates earch results
+    populateSearchOutput([]);
     //inits timeTable
     timeTable = initTimeTable();
     //hides all error outputs
@@ -15,7 +16,8 @@ $(document).ready(function(){
     //stops selection of old dates
     setDateRestrictions($("#input-departure-date"));
     //populates the cart with sessionStorage data
-    shoppingCart.set(loadFromSessionStorage("shoppingCart")); 
+    shoppingCart.set(loadFromSessionStorage("shoppingCart"));
+    paymentActive(shoppingCart.cart.length);
     initCart();
     updateCartCount();
     //populates to and from with valid stops
@@ -36,15 +38,11 @@ $(document).ready(function(){
     //sets shopping cart functionallity
     $("#empty-shopping-cart").click(function() {
         emptyCart();//empties the shoppingcart variable
-        cartElement.empty();//empties the shoppingcart frontend
-        cartElement.append(
-            '<div class="col-12 text-center mt-2">\
-                <button class="btn mb-3" id="input-go-to-payment">Betala</button>\
-            </div>');
+        cartElement.children("div[name='cart-item']").remove();//empties the shoppingcart frontend
         $("#output-payment-cost").text("Totalpris: 0€");
         updateCartCount();
     });
-    $(".cart, #shopping-cart-menu-button").click(function(){
+    $("#shopping-cart-menu-button").click(function(){
         toggleCart();
     });
     $("#shopping-cart-back-button").click(function() {
@@ -182,42 +180,56 @@ function getSearchResults(){
             }
     // }
 }
-
+/**
+ * Populates output-search-results element with given data
+ * @param {TimeTableItem} results 
+ */
 function populateSearchOutput(results){
     let searchOutput = $("#output-search-results");
-    searchOutput.html('\
-        <div class="row" id="output-search-results">\
-            <h1>Tidtabell:</h1>\
-        </div>'
-    );
-    results.forEach(function(ticket){
-        searchOutput.append(getSearchResultTemplate(ticket));
-        ticket.times.forEach(function(time){
-            let elementID = ticket.id + "-" + time.departure; 
-            $(document.getElementById("ticket-info-id-" + elementID)).on("click", function(){ // sets the hide and unhide button for ticket details
-                $(document.getElementById("input-ticket-options-id-" + elementID)).slideToggle(150);
-                $(this).toggleClass("rotate-180");
-            });
-            //sets functionallity for adding new tickets to cart
-            $(document.getElementById("add-to-cart-id-" + elementID)).click(function(){
-                let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
-                let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
-                let departureDate = $("#input-departure-date").val();
-                let ticketId = elementID + "-" + departureDate + "-" + shoppingCart.index();
-                let price = time.price * getDiscount(discountType);
-                let newTicket = new Ticket(ticketId, departureDate, ticket.to, ticket.from, time.departure, time.arrival, price, discountType, ticketType);
-                shoppingCart.push(newTicket);
-                shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
-                addTicketToCart(newTicket);
-                updateCartCount();
-                //shows and hides the ticket add to cart confirmation
-                $("#ticket-add-confirm").show();
-                setTimeout(function() {
-                    $("#ticket-add-confirm").hide();
-                }, 700);
+    if(results.length === 0){
+        searchOutput.html('\
+            <div class="row" id="output-search-results">\
+                <h1>Tidtabell:</h1>\
+                <div class="col-12"><h2>Inga biljetter hitades hittades</h2></div>\
+            </div>'
+        );
+    }
+    else{
+        searchOutput.html('\
+            <div class="row" id="output-search-results">\
+                <h1>Tidtabell:</h1>\
+            </div>'
+        );
+        results.forEach(function(ticket){
+            searchOutput.append(getSearchResultTemplate(ticket));
+            ticket.times.forEach(function(time){
+                let elementID = ticket.id + "-" + time.departure; 
+                $(document.getElementById("ticket-info-id-" + elementID)).on("click", function(){ // sets the hide and unhide button for ticket details
+                    $(document.getElementById("input-ticket-options-id-" + elementID)).slideToggle(150);
+                    $(this).toggleClass("rotate-180");
+                });
+                //sets functionallity for adding new tickets to cart
+                $(document.getElementById("add-to-cart-id-" + elementID)).click(function(){
+                    let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
+                    let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
+                    let departureDate = $("#input-departure-date").val();
+                    let ticketId = elementID + "-" + departureDate + "-" + shoppingCart.index();
+                    let price = time.price * getDiscount(discountType);
+                    let newTicket = new Ticket(ticketId, departureDate, ticket.to, ticket.from, time.departure, time.arrival, price, discountType, ticketType);
+                    shoppingCart.push(newTicket);
+                    shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
+                    paymentActive(shoppingCart.cart.length);
+                    addTicketToCart(newTicket);
+                    updateCartCount();
+                    //shows and hides the ticket add to cart confirmation
+                    $("#ticket-add-confirm").show();
+                    setTimeout(function() {
+                        $("#ticket-add-confirm").hide();
+                    }, 700);
+                });
             });
         });
-    });
+    }
 }
 /**
  * creates and appends a ticket element to the shoppingcart
@@ -231,6 +243,7 @@ function addTicketToCart(ticket){
         $(document.getElementById("remove-ticket-" + ticket.id)).click(function(){
             shoppingCart.remove(ticket);
             shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
+            paymentActive(shoppingCart.cart.length);
             paymentCostElement.html("Totalpris: " + shoppingCart.totalCost + " €");
             $(document.getElementById("ticket-id-" + ticket.id)).slideToggle(150, function(){
                 $(this).remove();
@@ -260,7 +273,6 @@ function setDateRestrictions(dateInput){
             error.hide();
             searchData.departureData = $(this).val();
             searchData.dateIsValid = true;
-            //getSearchResults();
         }
     }).trigger("focusout");
 }
@@ -295,15 +307,13 @@ function initCart(){
 function emptyCart(){
     shoppingCart.clear();
     sessionStorage.clear("shoppingCart");
+    paymentActive(shoppingCart.cart.length);
 }
 /**
  * updates the cart count icon
  */
 function updateCartCount(){ // this is slow should be cashed
     $(".cart-count").html(shoppingCart.cart.length);
-    $(".cart").addClass("cart-animate-shake").on("animationend", function(){
-        $(this).removeClass("cart-animate-shake");
-    });
 }
 /**
  * toggles shopping cart
@@ -313,4 +323,20 @@ function toggleCart(){
     $("#output-search-results").slideToggle(150);
     $("#search-input-container").slideToggle(150);
     $("#shopping-cart-menu-button").toggle();
+}
+/**
+ * Sets the payment button to either active or inactive
+ * @param {number} count the length of the shopping cart
+ */
+function paymentActive(count){
+    let paymentButton = $("#input-go-to-payment");
+    console.log(count);
+    if(count !== 0){
+        if(paymentButton.prop("disabled"))
+            paymentButton.prop({disabled:false});
+    }
+    else{
+        if(!paymentButton.prop("disabled"))
+            paymentButton.prop({disabled:true});
+    }
 }

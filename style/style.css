@@ -51,7 +51,7 @@ input[type="date"]::-webkit-inner-spin-button{
 .dimmer {
     display: none;
     background-color: var(--black-color);
-    opacity: 0.9;
+    opacity: 0.95;
     position: fixed;
     padding-left: auto;
     padding-right: auto;
@@ -92,41 +92,17 @@ input[type="date"]::-webkit-inner-spin-button{
     font-weight: 600;
     transition: 0.1s all;
 }
-.cart {
-    position: fixed;
-    display: inline;
-    max-width: 2rem;
-    max-height: 2rem;
-    top: 11.5rem;
-    right: 2rem;
-    transition: 0.3s;
-}
-.cart:hover{
-    max-width: 3rem;
-    max-width: 3rem;
-}
-.cart-animate-shake{
-    animation-name: shake;
-    animation-duration: 0.5s;
-}
-    @keyframes shake{
-        0% {right: 2rem;}
-        20% {right: 1.5rem;}
-        40% {right: 2rem;}
-        60% {right: 1.5rem;}
-        100% {right: 2rem;}
-    }
 .cart-count {
     position: relative;
     max-width: 1rem;
     min-width: 1rem;
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
     border-radius: 0.5rem;
-    left: 1rem;
-    top: -3rem;
-    z-index: 150;
+    right: -100%;
+    top: -2.5rem;
+    z-index: 90;
     text-align: center;
-    color: var(--light-color);
+    color: var(--black-color);
 }
 .rotate{
     transform-origin: center;
