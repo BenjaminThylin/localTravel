@@ -25,5 +25,5 @@ $(document).ready(function(){
             }
             ticketsWrapper.addClass("show");
         }
-    }).trigger("click"); //for testing
+    });
 });

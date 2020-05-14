@@ -1,16 +1,25 @@
 $(document).ready(function(){
+    
+    let storageString = localStorage.getItem("boughtTickets");
+    if(storageString !== null && storageString !== undefined)
+        soldTickets = JSON.parse(storageString);
+        
+    populateStatsTable(soldTickets);
+
+    $("#statistics-empty").click(function() {
+        soldTickets = [];
+        localStorage.removeItem("boughtTickets");
+        populateStatsTable(soldTickets);
+    });
+});
+function populateStatsTable(data){
     let soldTicketsSpan = $("#totalSoldTickets");
     let statsTableBody = $("#statsTableBody");
     let totalIncome = $("#totalIncome");
-    //#region for testing
-    let storageString = localStorage.getItem("boughtTickets");
-    if(storageString !== null && storageString !== undefined)
-        soldTickets = soldTickets.concat(JSON.parse(storageString));
-    //#endregion
-    soldTicketsSpan.html(soldTickets.length);
+    soldTicketsSpan.html(data.length);
     totalIncome.html(getTotalIncome() + "€");
-    
-    soldTickets.forEach(function(ticket){
+    statsTableBody.html("");
+    data.forEach(function(ticket){
         statsTableBody.append(
             `<tr>
             <td>`+ ticket.from + `</td>
@@ -23,12 +32,7 @@ $(document).ready(function(){
             </tr>`
         )
     });
-    $("#statistics-empty").click(function() {
-        localStorage.clear("boughtTickets");
-        sessionStorage.clear();
-    });
-});
-
+}
 function getTotalIncome() {
     let totalIncome = 0;
     soldTickets.forEach(function(ticket){
