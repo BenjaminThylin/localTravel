@@ -1,9 +1,11 @@
 /*
  *  This files refrenses data defined in 
- *      - scripts/ticket_data.js
+ *      - scripts/ticket/ticket_data.js
+ *      - scirpts/data.js
  *      - scripts/templates.js
  */
 $(document).ready(function(){
+    console.log("")
     //inits timeTable
     timeTable = initTimeTable();
     //hides all error outputs
