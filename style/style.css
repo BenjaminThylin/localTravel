@@ -118,9 +118,3 @@ font-weight: bold;
     stroke: var(--primary-color);
     fill: var(--primary-color);
 }
-#statistics-empty {
-    color: var(--primary-color);
-}
-#search-tickets {
-    color: var(--primary-color);
-}
