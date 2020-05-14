@@ -99,7 +99,6 @@ $(document).ready(function(){
             error.hide();
             searchData.fromIsValid = true;
             searchData.from = $(this).val();
-            getSearchResults();
         }
     }).trigger("change").trigger("focusout");
     $("#input-to").focusout(function(){ //checks that the to station exists
@@ -120,7 +119,6 @@ $(document).ready(function(){
             error.hide();
             searchData.toIsValid = true;
             searchData.to = $(this).val();
-            getSearchResults();
         }
     }).trigger("focusout");
     $("#search-tickets").click(function() {
