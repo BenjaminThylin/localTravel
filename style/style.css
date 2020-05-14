@@ -94,10 +94,11 @@ input[type="date"]::-webkit-inner-spin-button{
 }
 .cart {
     position: fixed;
+    display: inline;
     max-width: 2rem;
     max-height: 2rem;
-    top: 10%;
-    left: 1rem;
+    top: 11.5rem;
+    right: 2rem;
     transition: 0.3s;
 }
 .cart:hover{
@@ -108,19 +109,12 @@ input[type="date"]::-webkit-inner-spin-button{
     animation-name: shake;
     animation-duration: 0.5s;
 }
-@keyframes shake{
-    0% {left: 1rem;}
-    20% {left: 1.5rem;}
-    40% {left: 1rem;}
-    60% {left: 1.5rem;}
-    100% {left: 1rem;}
-}
-.rotate{
-    transform-origin: center;
-    transition: transform 0.150s linear;
-}
-    .rotate-180{
-        transform: rotate(180deg);
+    @keyframes shake{
+        0% {right: 2rem;}
+        20% {right: 1.5rem;}
+        40% {right: 2rem;}
+        60% {right: 1.5rem;}
+        100% {right: 2rem;}
     }
 .cart-count {
     position: relative;
@@ -134,11 +128,21 @@ input[type="date"]::-webkit-inner-spin-button{
     text-align: center;
     color: var(--light-color);
 }
-.navigation-button {
+.rotate{
+    transform-origin: center;
+    transition: transform 0.150s linear;
+}
+    .rotate-180{
+        transform: rotate(180deg);
+    }.navigation-button {
     color: var(--primary-color);
     background-color: white;
     font-weight: bold;
 }
 #admin-button {
     background-color: var(--secondary-color);
+}
+.primary-stroke{
+    stroke: var(--primary-color);
+    fill: var(--primary-color);
 }
