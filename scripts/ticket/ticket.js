@@ -20,14 +20,6 @@ $(document).ready(function(){
     paymentActive(shoppingCart.cart.length);
     initCart();
     updateCartCount();
-    //populates to and from with valid stops
-    let dataFrom = $("#data-from");
-    let dataTo = $("#data-to");
-    stops.forEach(function(stop){
-        let optionElement = getOptionTemplate(stop);
-        dataFrom.append(optionElement);
-        dataTo.append(optionElement);
-    });
     //sets functionality for payment form
     let paymentElement = $("#payment-details"); 
     let cartElement = $("#shopping-cart");
@@ -76,10 +68,19 @@ $(document).ready(function(){
             cartElement.show();
         }
     });
+    //populates to and from with valid stops
+    let dataFrom = $("#data-from");
+    let dataTo = $("#data-to");
+    stops.forEach(function(stop){
+        let optionElement = getOptionTemplate(stop);
+        dataFrom.append(optionElement);
+        dataTo.append(optionElement);
+    });
+    //makes sure that from and to inputs cant be the same
     let toInput = $("#input-to");
     let fromInput = $("#input-from");
-    //makes sure that from and to inputs cant be the same
-    fromInput.change(function(){
+    fromInput.focusout(function(){ //checks that the station exists
+        //makes sure that from and to inputs cant be the same
         if($(this).val() == toInput.val())
         {
             let nextValidStop;
@@ -88,43 +89,43 @@ $(document).ready(function(){
             else
                 nextValidStop = stops.indexOf($(this).val()) + 1;
             toInput.val(stops[nextValidStop]);
+            toInput.trigger("focusout");
         }
         hideDataOption($("#data-to option"), $(this).val());
-    }).on("focusout", function(){ //checks that the station exists
+
         let error = $("#error-from");
         if(!stops.includes($(this).val())){
-            error.show();
+            error.slideDown();
             searchData.fromIsValid = false;
         }
         else{
-            error.hide();
+            error.slideUp();
             searchData.fromIsValid = true;
             searchData.from = $(this).val();
         }
-    }).trigger("change").trigger("focusout");
+    }).trigger("focusout");
     toInput.focusout(function(){ //checks that the to station exists
         let error = $("#error-to");
         if($(this).val() == fromInput.val())
         {
             $(this).val("");
-            error.show();
+            error.slideDown();
             searchData.toIsValid = false;
         }
         else if(!stops.includes($(this).val()))
         {
             $(this).val("");
-            error.show();
+            error.slideDown();
             searchData.toIsValid = false;
         }
         else{
-            error.hide();
+            error.slideUp();
             searchData.toIsValid = true;
             searchData.to = $(this).val();
         }
     }).trigger("focusout");
     $("#search-tickets").click(function() {
-        toInput.trigger("focusout");
-        fromInput.trigger("focusout");
+        console.log("clicked");
         getSearchResults();
     });
 
@@ -165,6 +166,7 @@ $(document).ready(function(){
 function getSearchResults(){
     // TODO: some way of stopping unnecessary searches of old data
     // if(oldSearchData === null || oldSearchData != searchData){// checks if any search params changed
+        console.log(searchData);
         if(searchData.dateIsValid &&
             searchData.toIsValid &&
             searchData.fromIsValid)
@@ -331,7 +333,6 @@ function toggleCart(){
  */
 function paymentActive(count){
     let paymentButton = $("#input-go-to-payment");
-    console.log(count);
     if(count !== 0){
         if(paymentButton.prop("disabled"))
             paymentButton.prop({disabled:false});
