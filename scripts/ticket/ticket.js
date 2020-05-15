@@ -106,14 +106,16 @@ $(document).ready(function(){
     }).trigger("focusout");
     toInput.focusout(function(){ //checks that the to station exists
         let error = $("#error-to");
-        if($(this).val() == fromInput.val())
-        {
+        if($(this).val() == "") {
+            error.slideUp();
+            searchData.toIsValid = false;
+        }
+        else if($(this).val() == fromInput.val()) {
             $(this).val("");
             error.slideDown();
             searchData.toIsValid = false;
         }
-        else if(!stops.includes($(this).val()))
-        {
+        else if(!stops.includes($(this).val())) {
             $(this).val("");
             error.slideDown();
             searchData.toIsValid = false;

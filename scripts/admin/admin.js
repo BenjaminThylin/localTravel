@@ -1,3 +1,6 @@
+var timeTable = [];
+var soldTickets = [];
+
 $(document).ready(function(){
     //inits timeTable
     timeTable = initTimeTable();
