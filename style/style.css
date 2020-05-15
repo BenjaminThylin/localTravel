@@ -10,6 +10,10 @@ input[type="date"]::-webkit-inner-spin-button{
     -webkit-appearance: none;
 }
 
+#ticket-container {
+    min-height: 40rem;
+}
+
 .header {
     background-color: var(--primary-color);
     height: 10rem;
