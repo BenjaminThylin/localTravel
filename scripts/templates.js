@@ -78,9 +78,9 @@ function getSearchResultTemplate(data)
 {
     let output = "";
     data.times.forEach(function(time){
-        output += '<div class="col-md-12 m-4 border" id="search-item-' + data.id + '-' + time.departure + '">\
+        output += '<div class="col-md-12 m-4 border search-item-container" id="search-item-' + data.id + '-' + time.departure + '">\
                     <div class="col-md-12">\
-                    <div class="mt-2 mb-2"><span><h3 class="d-inline">Från: </span> ' + data.from + '</h3><span class="ml-5"><h3 class="d-inline">Till:</span> ' + data.to + '</h3><span class="ml-5"><h3 class="d-inline">Pris:</span> ' + time.price + '€</div>\
+                    <div class="mt-2 mb-2"><span><h3 class="d-inline">Från: </span> ' + data.from + '</h3><span class="ml-5"><h3 class="d-inline">Till:</span> ' + data.to + '</h3><span class="ml-5"><h3 id="search-item-price-id-'+ data.id +'-'+ time.departure +'" class="d-inline">Pris:</span> ' + time.price + '€</div>\
                     </div>\
                     <div class="col-md-12">\
                         <div class="display-5 mb-2">'+ time.departure +' --> ' + time.arrival + '</div>\

@@ -20,6 +20,20 @@ const discount = [
         procentage: 0.75
     }
 ];
+const ticketType = [
+    {
+        id: "once",
+        multiplyer: 1
+    },
+    {
+        id: "month",
+        multiplyer: 12
+    },
+    {
+        id: "10-times",
+        multiplyer: 9
+    }
+];
 const stops = ["Vasa", "Jakobstad", "Nykarleby", "Karleby", "Åbo"];
 
 /**
@@ -173,6 +187,17 @@ function getDiscount(type){
     discount.forEach(function(disc){
         if(disc.id == type)
             returnVal = disc.procentage;
+    });
+    return returnVal;
+}
+/**
+ * @param {*} type string representing the type of ticket
+ */
+function getTicketTypePrice(type){
+    let returnVal = 1;
+    ticketType.forEach(function(tt){
+        if(tt.id == type)
+            returnVal = tt.multiplyer;
     });
     return returnVal;
 }
