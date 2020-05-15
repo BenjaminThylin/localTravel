@@ -127,7 +127,6 @@ $(document).ready(function(){
         }
     }).trigger("focusout");
     $("#search-tickets").click(function() {
-        console.log("clicked");
         getSearchResults();
     });
 
@@ -169,20 +168,22 @@ function getSearchResults(){
     // TODO: some way of stopping unnecessary searches of old data
     // if(oldSearchData === null || oldSearchData != searchData){// checks if any search params changed
         console.log(searchData);
-        if(searchData.dateIsValid &&
-            searchData.toIsValid &&
-            searchData.fromIsValid)
-            {
-                let searchResults = [];
-                timeTable.forEach(function(item){
-                    if(item.from == searchData.from && item.to == searchData.to){
-                        let departureDate = new Date(searchData.departureData);
-                        if(item.days[departureDate.getDay() - 1])//check if buss active on that week day
-                            searchResults.push(item);
-                    }
-                });
-                populateSearchOutput(searchResults);
-            }
+        let error = $("#error-button");
+        if(searchData.dateIsValid && searchData.toIsValid && searchData.fromIsValid) {
+            error.slideUp();
+            let searchResults = [];
+            timeTable.forEach(function(item){
+                if(item.from == searchData.from && item.to == searchData.to) {
+                    let departureDate = new Date(searchData.departureData);
+                    if(item.days[departureDate.getDay() - 1])//check if buss active on that week day
+                        searchResults.push(item);
+                }
+            });
+            populateSearchOutput(searchResults);
+        }
+        else {
+            error.slideDown();
+        }
     // }
 }
 /**
