@@ -211,13 +211,27 @@ function populateSearchOutput(results){
                     $(document.getElementById("input-ticket-options-id-" + elementID)).slideToggle(150);
                     $(this).toggleClass("rotate-180");
                 });
+                $(document.getElementById("ticket-type-" + elementID)).change(function(){ // Updates the price when changing ticket type
+                    let ticketType = $(this).children("option:selected").val();
+                    let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
+                    let price = (time.price * getDiscount(discountType)) * getTicketTypePrice(ticketType);
+                    let priceTag = $(document.getElementById("search-item-price-id-" + elementID));
+                    priceTag.html("Pris: " + price + "€");
+                });
+                $(document.getElementById("discount-type-" + elementID)).change(function(){ // Updates the price when changing ticket discount type
+                    let discountType = $(this).children("option:selected").val();
+                    let ticketType = $(document.getElementById("ticket-type-"+ elementID)).val();
+                    let price = (time.price * getDiscount(discountType)) * getTicketTypePrice(ticketType);
+                    let priceTag = $(document.getElementById("search-item-price-id-" + elementID));
+                    priceTag.html("Pris: " + price + "€");
+                });
                 //sets functionallity for adding new tickets to cart
                 $(document.getElementById("add-to-cart-id-" + elementID)).click(function(){
                     let discountType = $(document.getElementById("discount-type-"+ elementID)).val();
                     let ticketType = $(document.getElementById("ticket-type-" + elementID)).val();
                     let departureDate = $("#input-departure-date").val();
                     let ticketId = elementID + "-" + departureDate + "-" + shoppingCart.index();
-                    let price = time.price * getDiscount(discountType);
+                    let price = (time.price * getDiscount(discountType)) * getTicketTypePrice(ticketType);
                     let newTicket = new Ticket(ticketId, departureDate, ticket.to, ticket.from, time.departure, time.arrival, price, discountType, ticketType);
                     shoppingCart.push(newTicket);
                     shoppingCart.set(pushToSessionStorage("shoppingCart", shoppingCart.cart, false));
