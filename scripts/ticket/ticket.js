@@ -81,7 +81,7 @@ $(document).ready(function(){
     let fromInput = $("#input-from");
     fromInput.focusout(function(){ //checks that the station exists
         //makes sure that from and to inputs cant be the same
-        if($(this).val() == toInput.val())
+        if(($(this).val() == toInput.val()) && ($(this).val() != ""))
         {
             let nextValidStop;
             if(stops.indexOf($(this).val()) + 1 == stops.length)
