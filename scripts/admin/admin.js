@@ -3,30 +3,35 @@ var soldTickets = [];
 
 $(document).ready(function(){
     //inits timeTable
+    loadStats();
     timeTable = initTimeTable();
-    let statsButton = $("#stats");
-    let ticketsButton = $("#tickets");
-    let statsWrapper = $(".stats-wrapper");
-    let ticketsWrapper = $(".tickets-wrapper");
-    statsButton.click(function() {
-        statsButton.addClass("active");
-        ticketsButton.removeClass("active");
-        if (statsButton.hasClass("active")) {
-            if (ticketsWrapper.hasClass("show")) {
-                ticketsWrapper.removeClass("show");
-            }
-            statsWrapper.addClass("show");
-        }
+    $("#stats").click(function() {
+        loadStats();
     });
     
-    ticketsButton.click(function() {
-        ticketsButton.addClass("active");
-        statsButton.removeClass("active");
-        if (ticketsButton.hasClass("active")) {
-            if (statsWrapper.hasClass("show")) {
-                statsWrapper.removeClass("show");
-            }
-            ticketsWrapper.addClass("show");
-        }
+    $("#tickets").click(function() {
+        loadUpdateTickets();
     });
 });
+
+function loadStats() {
+    $("#stats").addClass("active");
+    $("#tickets").removeClass("active");
+    if ($("#stats").hasClass("active")) {
+        if ($(".tickets-wrapper").hasClass("show")) {
+            $(".tickets-wrapper").removeClass("show");
+        }
+        $(".stats-wrapper").addClass("show");
+    }
+}
+
+function loadUpdateTickets() {
+    $("#tickets").addClass("active");
+    $("#stats").removeClass("active");
+    if ($("#tickets").hasClass("active")) {
+        if ($(".stats-wrapper").hasClass("show")) {
+            $(".stats-wrapper").removeClass("show");
+        }
+        $(".tickets-wrapper").addClass("show");
+    }
+}
