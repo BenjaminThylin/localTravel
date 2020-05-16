@@ -99,7 +99,6 @@ input[type="date"]::-webkit-inner-spin-button{
     color: var(--black-color);
     font-family: sans-serif;
 }
-
 .sidebar-header {
     padding: 1rem 1rem;
     font-weight: 700;
@@ -107,7 +106,6 @@ input[type="date"]::-webkit-inner-spin-button{
 .no-display{
     display: none;
 }
-
 .footer {
     background-color: var(--primary-color);
     height: 10rem;
@@ -115,7 +113,6 @@ input[type="date"]::-webkit-inner-spin-button{
     color: var(--black-color);
     font-family: sans-serif;
 }
-
 .show {
     display: block !important;
     opacity: 1 !important;
@@ -187,7 +184,8 @@ input[type="date"]::-webkit-inner-spin-button{
 }
 .rotate-180{
     transform: rotate(180deg);
-}.navigation-button {
+}
+.navigation-button {
 color: var(--primary-color);
 background-color: white;
 font-weight: bold;
