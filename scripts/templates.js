@@ -1,3 +1,25 @@
+/*
+ * this file references data definied in 
+ *      -scripts/data.js
+ */
+/**
+ * returns a ticket type element
+ * @param {string} type 
+ * @param {number} count 
+ * @returns {string} string represting html elemnt
+ */
+function getTicketTypeStatElement(type, count){
+    return '<h6>'+ getTicketTypeName(type) +':<span id="ticket-type-stat-'+type+'"> '+ count +'</span> st</h6>';
+}
+/**
+ * returns a discount stat element
+ * @param {string} type
+ * @param {number} count
+ * @returns {string} string representing html element
+ */
+function getDiscountStatElement(type, count){
+    return '<h6>'+ getDiscountName(type) +':<span id="discount-stat-'+type+'"> '+ count +'</span> st</h6>';
+}
 /**
  * returns an option element with passed value and text
  * @param {string} option the value and name of the option
@@ -14,34 +36,8 @@ function getOptionTemplate(option)
  */
 function getTicketTemplate(ticket){
     let discountType, ticketType;
-    switch (ticket.type) {
-        case "once":
-            ticketType = "Engångsbiljett";
-            break;
-        case "10-times":
-            ticketType = "10-gångskort";
-            break;
-        case "month":
-            ticketType = "Månadskort";
-            break;
-    }
-    switch (ticket.discount) {
-        case "regular":
-            discountType = "Vuxen";
-            break;
-        case "child":
-            discountType = "Barn";
-            break;
-        case "student":
-            discountType = "Studerande";
-            break;
-        case "senior":
-            discountType = "Pensionär";
-            break;
-        case "unemployed":
-            discountType = "Arbetslös";
-            break;
-    }
+    ticketType = getTicketTypeName(ticket.type);
+    discountType = getDiscountName(ticket.discount);
     return '\
     <div class="border p-2 mb-2" id="ticket-id-' + ticket.id + '" name="cart-item">\
         <div class="row">\

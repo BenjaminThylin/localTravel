@@ -18,7 +18,6 @@
     <!--page scripts-->    
     <script src="scripts/data.js"></script>
     <script src="scripts/templates.js"></script>
-    <script src="scripts/admin/admin_data.js"></script>
     <script src="scripts/admin/admin.js"></script>
     <script src="scripts/admin/stats.js"></script>
     <script src="scripts/admin/update_ticket.js"></script>
@@ -50,6 +49,14 @@
                 <h2 class="display-4">Statistik</h2>
                 <h4>Antal sålda biljetter: <span id="totalSoldTickets"></span></h4>
                 <h4>Total inkomst: <span id="totalIncome"></span></h4>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 border" id="discount-count">
+                        <h5>Rabatt typer:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-12 border" id="ticket-types-count">
+                        <h5>Biljett typer:</h5>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

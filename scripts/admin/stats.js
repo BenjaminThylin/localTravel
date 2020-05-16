@@ -1,9 +1,39 @@
 $(document).ready(function(){
-    
-    let storageString = localStorage.getItem("boughtTickets");
+    let storageString = localStorage.getItem("boughtTickets"); //loads sold tickets stats
     if(storageString !== null && storageString !== undefined)
         soldTickets = JSON.parse(storageString);
-        
+    //populates discount stats element
+    let discountStatsElement = $("#discount-count");
+    let discountStats = {};
+    discount.forEach(function(type){ // inits discountStats
+        discountStats[type.id] = 0;
+    });
+    soldTickets.forEach(function(ticket){ //displays stats regarding discount types 
+        discount.forEach(function(type){
+            if(type.id == ticket.discount){ //checks if discount type exists
+                discountStats[ticket.discount]++;
+            }
+        });
+    });
+    discount.forEach(function(type){
+        discountStatsElement.append(getDiscountStatElement(type.id, discountStats[type.id]));
+    });
+    //populate ticket type stats element
+    let ticketTypeElement = $("#ticket-types-count")
+    let ticketTypeStats = {};
+    ticketType.forEach(function(type){// inits ticketTypeStats
+        ticketTypeStats[type.id] = 0;
+    });
+    soldTickets.forEach(function(ticket){
+        ticketType.forEach(function(type){
+            if(type.id == ticket.type){//checks if ticketType exists
+                ticketTypeStats[ticket.type]++;
+            }
+        });
+    });
+    ticketType.forEach(function(type){
+        ticketTypeElement.append(getTicketTypeStatElement(type.id, ticketTypeStats[type.id]));
+    });
     populateStatsTable(soldTickets);
 
     $("#statistics-empty").click(function() {

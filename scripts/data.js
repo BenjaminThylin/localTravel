@@ -292,3 +292,49 @@ function initTimeTable(){
     }
     return collection;
 }
+/**
+ * returns a swedish name for discount name
+ * @param {string} name english definition
+ * @returns {string} the swedish name for specified discount type 
+ */
+function getDiscountName(name){
+    let discountType = "";
+    switch (name) {
+        case "regular":
+            discountType = "Vuxen";
+            break;
+        case "child":
+            discountType = "Barn";
+            break;
+        case "student":
+            discountType = "Studerande";
+            break;
+        case "senior":
+            discountType = "Pensionär";
+            break;
+        case "unemployed":
+            discountType = "Arbetslös";
+            break;
+    }
+    return discountType;
+}
+/**
+ * returns a swedish name for ticketType
+ * @param {string} name english definition
+ * @returns {string} the swedish name for specified ticketType 
+ */
+function getTicketTypeName(name){
+    let ticketType = "";
+    switch (name) {
+        case "once":
+            ticketType = "Engångsbiljett";
+            break;
+        case "10-times":
+            ticketType = "10-gångskort";
+            break;
+        case "month":
+            ticketType = "Månadskort";
+            break;
+    }
+    return ticketType;
+}
