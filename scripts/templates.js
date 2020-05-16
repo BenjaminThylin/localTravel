@@ -129,9 +129,9 @@ function getTicketAlterationTemplate(ticket)
             times += getTicketTimeAlterationTemplate(ticket,time);
         });
         let days = getTicketDaysElements(ticket.days);
-        return '<div class="col-md-12 m-4 border" id="ticket-'+ ticket.id +'" name="alter-tickets-element">\
+        return '<div class="col-md-12 m-4 border search-update-item" id="ticket-'+ ticket.id +'" name="alter-tickets-element">\
                             <div class="col-md-12">\
-                                <div class="mt-2 mb-2"><span>Från: </span><h3 class="d-inline"> ' + ticket.from + '</h3><span class="ml-5"> Till:</span><h3 class="d-inline"> ' + ticket.to + '</h3></div>\
+                                <div class="mt-2 mb-2"><span>Från: </span><h3 class="d-inline"> ' + ticket.from + '</h3><span class="ml-5 search-update-to"> Till:</span><h3 class="d-inline"> ' + ticket.to + '</h3></div>\
                             </div>\
                             <div id="ticket-options-' + ticket.id + '" class="form-group row no-display">\
                                 <div class="col-12 font-weight-bold">\
@@ -203,11 +203,11 @@ function getTicketTimeAlterationTemplate(ticket, time, noDisplay = false)
                             <label for="input-time">price</label>\
                             <input type="text" class="form-control" value="' + time.price + '"id="input-price-'+ time.id + '-ticket-id-' + ticket.id + '">\
                         </div>\
-                        <div class="col-3 form-group">\
+                        <div class="col-sm-3 form-group">\
                             <br>\
                             <input class="btn mb-2" id="input-save-time-'+ time.id + '-ticket-id-' + ticket.id + '" type="button" value="Spara tid">\
                         </div>\
-                        <div class="col-3 form-group">\
+                        <div class="col-sm-3 form-group">\
                             <br>\
                             <input class="btn mb-2" id="input-remove-item-'+ time.id + '-ticket-id-' + ticket.id + '" type="button" value="Ta bort tid"></button>\
                         </div>\

@@ -26,7 +26,7 @@
 
 <body>
 
-    <div class="wrapper d-flex">
+    <div class="wrapper d-lg-flex">
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header display-1">
@@ -50,27 +50,28 @@
                 <h2 class="display-4">Statistik</h2>
                 <h4>Antal sålda biljetter: <span id="totalSoldTickets"></span></h4>
                 <h4>Total inkomst: <span id="totalIncome"></span></h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Från</th><th scope="col">Till</th><th scope="col">Avgångsdatum</th><th scope="col">Avgångstid</th><th scope="col">Biljett typ</th><th scope="col">Pris</th><th scope="col">Betalnings metod</th>
-                        </tr>
-                    </thead>
-                    <tbody id="statsTableBody">
-                        
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Från</th><th scope="col">Till</th><th scope="col">Avgångsdatum</th><th scope="col">Avgångstid</th><th scope="col">Biljett typ</th><th scope="col">Pris</th><th scope="col">Betalnings metod</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statsTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
                 <button class="btn btn-dark" id="statistics-empty" >Töm statistik</button>
             </div>
             <div class="no-display tickets-wrapper">
-                    <h2 class="display-3">Uppdatera biljetter</h2>
-                    <p class="display-4">Välj biljett:</p>
+                    <h1>Uppdatera biljetter</h1>
                     <form>
                         <div class="form-row">
-                            <div class="col-md-12 col-lg-3 form-group">
+                            <div class="col-12 form-group update-search-input">
                                     <label for="input-from">Välj avgångsort:</label>
                             </div>
-                            <div class="col-md-12 col-lg-9 form-group">
+                            <div class="col-12 form-group">
                                     <select class="form-control" id="input-from">
                                     <select>
                             </div>

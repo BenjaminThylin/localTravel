@@ -1,3 +1,72 @@
+@media only screen and (max-width: 1100px) {
+    #sidebar {
+        padding: 0 0.5rem !important;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #sidebar {
+        min-height: max-content !important;
+        width: 100vw !important;
+    }
+    #sidebar > ul {
+        width: max-content;
+        margin: 0;
+        padding: 0 0 0.5rem 0;
+    }
+    #sidebar > ul > li {
+        display: table-cell;
+    }
+    #sidebar > ul > li > button {
+        padding: .375rem 1.25rem;
+    }
+    #sidebar > ul > li > a {
+        padding: .375rem 1.25rem;
+    }
+    #sidebar > ul > li:not(:last-child) {
+        border-right: 2px solid var(--black-color);
+    }
+    .search-update-item {
+        margin: .5rem !important;
+        margin-left: 0 !important;
+    }
+    .search-update-item {
+        margin: .5rem !important;
+        margin-left: 0 !important;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
+    .search-update-item > div{
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
+    .search-update-item h3{
+        font-size: 1.25rem;
+    }
+    .search-update-item .search-update-to{
+        margin-left: 1.5rem !important; 
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #sidebar > ul > li {
+        display: table-row;
+        border: none;
+    }
+    .display-4 .display-3{
+        font-size: 2.5rem !important;
+    }
+    h4 {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #sidebar {
+        padding: 0 0.5rem !important;
+    }
+}
+
 :root {
     --primary-color: rgb(235, 117, 6);
     --secondary-color: rgb(47, 162, 118);
@@ -50,6 +119,10 @@ input[type="date"]::-webkit-inner-spin-button{
 .show {
     display: block !important;
     opacity: 1 !important;
+}
+.update-search-input {
+    margin-top: 1rem;
+    margin-bottom: 0;
 }
 .dimmer {
     display: none;
