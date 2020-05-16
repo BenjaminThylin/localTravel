@@ -100,12 +100,13 @@ input[type="date"]::-webkit-inner-spin-button{
     max-width: 1rem;
     min-width: 1rem;
     background-color: var(--primary-color);
-    border-radius: 0.5rem;
-    right: -100%;
-    top: -2.5rem;
+    border-radius: 0.2rem;
     z-index: 90;
     text-align: center;
     color: var(--black-color);
+}
+#shopping-cart-menu-button:hover > .cart-count {
+    background-color: var(--light-color);
 }
 .rotate{
     transform-origin: center;
