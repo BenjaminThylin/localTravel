@@ -1,161 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv-fi">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ticket</title>
 
-    <title>Ticket</title>
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="style/style.css">
+        <!-- jQuery CDN - minified version -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <!-- page scripts -->
+        <script src="scripts/data.js"></script>
+        <script src="scripts/ticket/ticket_data.js"></script>
+        <script src="scripts/templates.js"></script>
+        <script src="scripts/ticket/ticket.js"></script>
+    </head>
 
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="style/style.css">
-</head>
-
-<body>
-    <!-- jQuery CDN - minified version -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <!-- page scripts -->
-    <script src="scripts/data.js"></script>
-    <script src="scripts/ticket/ticket_data.js"></script>
-    <script src="scripts/templates.js"></script>
-    <script src="scripts/ticket/ticket.js"></script>
-
-    <div class="container-fluid header">
-        <h1>Local Travel</h1>
-        <div class="text-right">
-            <button class="btn btn-dark" id="admin-button">Till admin sidan</button>
+    <body>
+        <div class="container-fluid header">
+            <h1>Local Travel</h1>
+            <div class="text-right">
+                <button class="btn btn-dark" id="admin-button">Till admin sidan</button>
+            </div>
         </div>
-    </div>
-    <br>
-    <div id="ticket-container" class="container">
-        <div class="row" id="search-input-container">
-            <div class="col-md-4">
+        <br>
+        <div id="ticket-container" class="container">
+            <div class="row" id="search-input-container">
+                <div class="col-md-4">
+                    <form>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="input-from">Från:</label>
+                                    <input type="text" class="form-control" id="input-from" list="data-from">
+                                    <div id="error-from" class="text-danger" error>Välj en tillgänglig hållplats</div>
+                                    <datalist id="data-from">
+                                    </datalist>
+                                </div>
+                                <div class="col-md">
+                                    <label for="input-to">Till:</label>
+                                    <input type="text" class="form-control" id="input-to" list="data-to">
+                                    <div id="error-to" class="text-danger" error>Kan inte vara samma som avgångsplats</div>
+                                    <datalist id="data-to">
+                                    </datalist>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="input-departure-date">Avgångsdag</label>
+                                    <input class="form-control" type="date" id="input-departure-date" required="required">
+                                    <div id="error-date" class="text-danger" error>Fel datum</div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md">
+                                    <input type="button" class="btn btn-dark" id="search-tickets" value="Sök biljetter">
+                                </div>
+                                <div class="col-md">
+                                    <div id="error-button" class="text-danger" error>Fyll i alla fält</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-8 text-right">
+                    <div style="padding: 5px">
+                        <button class="btn btn-dark navigation-button" id="shopping-cart-menu-button">Till köpkorgen &rarr;<span class="cart-count ml-2 p-1">1</span></button>
+                    </div>
+                </div>
+            </div>  
+            <div class="row" id="output-search-results">
+                <h1>Tidtabell:</h1>
+            </div>
+            <div id="shopping-cart-container" class="row no-display">
+                <div class="row">
+                    <button class="btn btn-dark navigation-button mb-2" id="shopping-cart-back-button">&larr; Tillbaka</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Köpkorg</h1>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="btn btn-dark" id="empty-shopping-cart">Töm köpkorg</button>
+                    </div>
+                </div>
+                <div id="shopping-cart">
+                    <div class="col-12 text-center mt-2">
+                        <button class="btn btn-dark mb-3" id="input-go-to-payment">Betala</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group no-display" id="payment-details">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="payment-radio1" name="input-payment-option" value="cash" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="payment-radio1">Kontant</label>
+                </div>    
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="payment-radio2" name="input-payment-option" value="cashapp" class="custom-control-input">
+                    <label class="custom-control-label" for="payment-radio2">Cashapp</label>
+                </div>
+                <div class="custom-control custom-radio mb-2">
+                    <input type="radio" id="payment-radio3" name="input-payment-option" value="visa" class="custom-control-input">
+                    <label class="custom-control-label" for="payment-radio3">Visa</label>
+                </div>
+                <button class="btn btn-dark" id="input-payment-regret">Ångra</button>
+                <button class="btn btn-dark" id="input-payment-confirm">Bekräfta</button>
+                <h4 class="mt-2" id="output-payment-cost"></h4>
+            </div>
+        </div>
+        <div class="container-fluid footer">
+            <p>&copy LocalTravel</p>
+        </div>
+        <div class="dimmer" id="ticket-add-confirm">
+            <div class="alert alert-success text-center display-4">
+                Biljett tillagd!
+            </div>
+        </div>
+        <div class="dimmer" id="output-payment-success">
+            <div class="alert alert-success text-center display-4">
+                Betalning godkänd!
+                <br>
+                <button class="btn btn-dark" id="payment-success-confirm">Ok</button>
+            </div>
+        </div>
+        <div class="login-dimmer" id="login-form">
+            <div class="login-form-container alert alert-success text-center display-4">
+                <h2>Logga in till admin panelen</h2>
                 <form>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md">
-                                <label for="input-from">Från:</label>
-                                <input type="text" class="form-control" id="input-from" list="data-from">
-                                <div id="error-from" class="text-danger" error>Välj en tillgänglig hållplats</div>
-                                <datalist id="data-from">
-                                </datalist>
-                            </div>
-                            <div class="col-md">
-                                <label for="input-to">Till:</label>
-                                <input type="text" class="form-control" id="input-to" list="data-to">
-                                <div id="error-to" class="text-danger" error>Kan inte vara samma som avgångsplats</div>
-                                <datalist id="data-to">
-                                </datalist>
+                            <div class="container-fluid">
+                                <label class="login-input" for="input-from">Användarnamn:</label>
+                                <input type="text" id="login-form-username" class="form-control">
                             </div>
                         </div>
-                        <br>
                         <div class="row">
-                            <div class="col-md">
-                                <label for="input-departure-date">Avgångsdag</label>
-                                <input class="form-control" type="date" id="input-departure-date" required="required">
-                                <div id="error-date" class="text-danger" error>Fel datum</div>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md">
-                                <input type="button" class="btn btn-dark" id="search-tickets" value="Sök biljetter">
-                            </div>
-                            <div class="col-md">
-                                <div id="error-button" class="text-danger" error>Fyll i alla fält</div>
+                            <div class="container-fluid">
+                                <label class="login-input" for="input-from">Lösenord:</label>
+                                <input type="password" id="login-form-password" class="form-control">
+                                <p id="login-form-info" class="m-0 ml-1 p-1 text-danger">Fyll i vad som helst i fälten</p>
                             </div>
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="col-md-8 text-right">
-                <div style="padding: 5px">
-                    <button class="btn btn-dark navigation-button" id="shopping-cart-menu-button">Till köpkorgen &rarr;<span class="cart-count ml-2 p-1">1</span></button>
-                </div>
-            </div>
-        </div>  
-        <div class="row" id="output-search-results">
-            <h1>Tidtabell:</h1>
-        </div>
-        <div id="shopping-cart-container" class="row no-display">
-            <div class="row">
-                <button class="btn btn-dark navigation-button mb-2" id="shopping-cart-back-button">&larr; Tillbaka</button>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>Köpkorg</h1>
-                </div>
-                <div class="col-md-6 text-right">
-                    <button class="btn btn-dark" id="empty-shopping-cart">Töm köpkorg</button>
-                </div>
-            </div>
-            <div id="shopping-cart">
-                <div class="col-12 text-center mt-2">
-                    <button class="btn btn-dark mb-3" id="input-go-to-payment">Betala</button>
-                </div>
+                <button class="btn" id="login-form-login">Logga in</button>
+                <button class="btn" id="login-form-cancel">Avbryt</button>
             </div>
         </div>
-        <div class="form-group no-display" id="payment-details">
-            <div class="custom-control custom-radio">
-                <input type="radio" id="payment-radio1" name="input-payment-option" value="cash" class="custom-control-input" checked>
-                <label class="custom-control-label" for="payment-radio1">Kontant</label>
-            </div>    
-            <div class="custom-control custom-radio">
-                <input type="radio" id="payment-radio2" name="input-payment-option" value="cashapp" class="custom-control-input">
-                <label class="custom-control-label" for="payment-radio2">Cashapp</label>
-            </div>
-            <div class="custom-control custom-radio mb-2">
-                <input type="radio" id="payment-radio3" name="input-payment-option" value="visa" class="custom-control-input">
-                <label class="custom-control-label" for="payment-radio3">Visa</label>
-            </div>
-            <button class="btn btn-dark" id="input-payment-regret">Ångra</button>
-            <button class="btn btn-dark" id="input-payment-confirm">Bekräfta</button>
-            <h4 class="mt-2" id="output-payment-cost"></h4>
-        </div>
-    </div>
-    <div class="container-fluid footer">
-        <p>&copy LocalTravel</p>
-    </div>
-    <div class="dimmer" id="ticket-add-confirm">
-        <div class="alert alert-success text-center display-4">
-            Biljett tillagd!
-        </div>
-    </div>
-    <div class="dimmer" id="output-payment-success">
-        <div class="alert alert-success text-center display-4">
-            Betalning godkänd!
-            <br>
-            <button class="btn btn-dark" id="payment-success-confirm">Ok</button>
-        </div>
-    </div>
-    <div class="login-dimmer" id="login-form">
-        <div class="login-form-container alert alert-success text-center display-4">
-            <h2>Logga in till admin panelen</h2>
-            <form>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="container-fluid">
-                            <label class="login-input" for="input-from">Användarnamn:</label>
-                            <input type="text" id="login-form-username" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container-fluid">
-                            <label class="login-input" for="input-from">Lösenord:</label>
-                            <input type="password" id="login-form-password" class="form-control">
-                            <p id="login-form-info" class="m-0 ml-1 p-1 text-danger">Fyll i vad som helst i fälten</p>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <button class="btn" id="login-form-login">Logga in</button>
-            <button class="btn" id="login-form-cancel">Avbryt</button>
-        </div>
-    </div>
-</body>
-
+    </body>
 </html>
