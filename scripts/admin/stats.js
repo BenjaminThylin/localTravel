@@ -1,3 +1,9 @@
+/*
+ *  This files refrenses data defined in 
+ *      - scirpts/data.js
+ *      - scripts/templates.js
+ *      - scripts/admin/admin.js
+ */
 $(document).ready(function(){
     let storageString = localStorage.getItem("boughtTickets"); //loads sold tickets stats
     if(storageString !== null && storageString !== undefined)

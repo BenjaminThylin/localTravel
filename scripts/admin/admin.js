@@ -1,9 +1,12 @@
+/*
+ *  This files refrenses data defined in 
+ *      - scirpts/data.js
+ */
 var timeTable = [];
 var soldTickets = [];
-
 $(document).ready(function(){
-    //inits timeTable
     loadStats();
+    //inits timeTable
     timeTable = initTimeTable();
     $("#stats").click(function() {
         loadStats();

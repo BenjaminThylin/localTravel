@@ -1,3 +1,9 @@
+/*
+ *  This files refrenses data defined in 
+ *      - scirpts/data.js
+ *      - scripts/templates.js
+ *      - scripts/admin/admin.js
+ */
 //sets functionallity for editing tickets
 $(".tickets-wrapper").ready(function(){
     let ticketsWrapper = $(".tickets-wrapper");
