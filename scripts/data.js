@@ -212,7 +212,7 @@ function initTimeTable(){
         collection = [
             new TimeTableItem(
                 1, "Jakobstad", "Vasa",
-                [true,true,true,true,true,true,false],
+                [true,true,true,true,true,true,true],
                 [
                     new Time("05:00", "6:30", 15),
                     new Time("10:00", "11:30", 15),
@@ -222,7 +222,7 @@ function initTimeTable(){
             ),
             new TimeTableItem(
                 2, "Jakobstad", "Nykarleby",
-                [true,true,true,true,true,true,false],
+                [true,true,true,true,true,true,true],
                 [
                     new Time("05:00", "05:20", 7),
                     new Time("10:00", "10:20", 7),
@@ -232,7 +232,7 @@ function initTimeTable(){
             ),
             new TimeTableItem(
                 3, "Vasa", "Jakobstad",
-                [true,true,false,true,true,false,false],
+                [true,true,true,true,true,true,true],
                 [
                     new Time("06:00", "07:30", 25),
                     new Time("16:00", "17:30", 25),
@@ -242,7 +242,7 @@ function initTimeTable(){
             ),
             new TimeTableItem(
                 4, "Vasa", "Karleby",
-                [true,true,true,true,true,true,false],
+                [true,true,true,true,true,true,true],
                 [
                     new Time("08:00", "09:45", 25),
                     new Time("16:00", "17:45", 25),
@@ -251,7 +251,7 @@ function initTimeTable(){
             ),
             new TimeTableItem(
                 5, "Vasa", "Åbo",
-                [false,true,false,true,false,true,false],
+                [true,true,true,true,true,true,true],
                 [
                     new Time("08:00", "20:00", 35),
                     new Time("21:00", "09:00", 20),
@@ -259,7 +259,7 @@ function initTimeTable(){
             ),
             new TimeTableItem(
                 6, "Karleby", "Vasa",
-                [true,true,true,true,true,false,false],
+                [true,true,true,true,true,true,true],
                 [
                     new Time("05:00", "7:25", 22),
                     new Time("09:00", "11:10", 20),
@@ -268,7 +268,7 @@ function initTimeTable(){
             ),
             new TimeTableItem(
                 7, "Åbo", "Vasa",
-                [true,true,true,true,true,false,false],
+                [true,true,true,true,true,true,true],
                 [
                     new Time("05:00", "17:00", 32),
                     new Time("11:00", "23:00", 35),
